@@ -1,4 +1,4 @@
-function ItemButton() {
+function ItemButton(props) {
 	return (
 		<button
 			className={props.className}
