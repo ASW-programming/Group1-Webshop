@@ -1,14 +1,12 @@
-const ItemButton = (prop) => {
+const ItemButton = (props) => {
 	return (
-		<div>
-			<button
-				className={prop.className}
-				id={prop.id}
-				type={prop.type}
-				onClick={prop.onClick}>
-				{prop.text}
-			</button>
-		</div>
+		<button
+			className={props.className}
+			id={props.id}
+			type={props.type}
+			onClick={props.onClick}>
+			{props.text}
+		</button>
 	);
 };
 
