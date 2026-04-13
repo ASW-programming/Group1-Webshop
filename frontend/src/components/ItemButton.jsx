@@ -1,4 +1,4 @@
-const ItemButton = (props) => {
+function ItemButton() {
 	return (
 		<button
 			className={props.className}
@@ -8,6 +8,6 @@ const ItemButton = (props) => {
 			{props.text}
 		</button>
 	);
-};
+}
 
 export default ItemButton;
