@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const admin = require('firebase-admin');
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const serviceAccount = {
     type: process.env.FIREBASE_TYPE,
