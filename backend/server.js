@@ -177,7 +177,7 @@ app.route('/api/orders')
                 id: docRef.id,
                 customer: orders.customer,
                 items: orders.items,
-                pris: orders.pris,
+                price: orders.price,
                 createdAt: admin.firestore.FieldValue.serverTimestamp(),
             }
 
