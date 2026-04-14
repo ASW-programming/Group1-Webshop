@@ -170,7 +170,7 @@ app.route('/api/orders')
             const docRef = await db.collection('orders').add({
                 customer: orders.customer,
                 items: orders.items,
-                pris: orders.pris
+                price: orders.price
             })
 
             const newOrder = {
@@ -178,7 +178,7 @@ app.route('/api/orders')
                 customer: orders.customer,
                 items: orders.items,
                 pris: orders.pris,
-                createdAt: admin.firestore.FieldValue.serverTimeStamp(),
+                createdAt: admin.firestore.FieldValue.serverTimestamp(),
             }
 
             res.status(200).json({
