@@ -4,26 +4,28 @@ import HamburgerMenu from "./HamburgerMenu"
 
 function ItemHeader(props) {
     return (
-        <header>
-            <div>
-                <h1>Adams Gains</h1>
+        <header className="header">
+            <div className="headerTitle">
+                <h1>Webshop</h1>
             </div>
 
-            <div>
-                <div>
-                    <HamburgerMenu/>
+            <div className="headerNav">
+                <div className="headerMenu">
+                    <HamburgerMenu
+                        categories={props.categories}
+                        onCategorySelect={props.onCategorySelect}
+                    />
                 </div>
 
-                <div>
-                    <span className="search-icon">🔍</span>
+                <div className="headerSearch">
                     <ItemInput placeholder="Sök..."/>
+                    <span className="searchIcon">🔍</span>
                 </div>
 
-                <div>
+                <div className="headerCart">
                     <ItemButton text="🛒"/>
                 </div>
             </div>
-
         </header>
     )
 }

@@ -6,9 +6,6 @@ function ItemInput(props) {
             type={props.type}
             placeholder={props.placeholder}
             onChange={props.onChange}
-            {...(props.type === "checkbox"
-                ? { checkbox: props.checked }
-                : { value: props.value })}
         />
     )
 }
