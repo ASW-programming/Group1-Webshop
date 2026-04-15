@@ -1,6 +1,6 @@
-const BASE_URL = "http://localhost:3000"; // Backend adressen.
+const BASE_URL = "http://localhost:3000"; // Backend adress.
 
-// ---- GET Hämtar alla produkter eller EN ----
+// ---- GET fetches all products or one----
 export const getProducts = async (id = null) => {
 	const validId =
 		typeof id === "string" || typeof id === "number" ? id : null;
@@ -14,7 +14,7 @@ export const getProducts = async (id = null) => {
 	});
 
 	if (!response.ok) {
-		throw new Error(`Could't get the products.`);
+		throw new Error(`Couldn't get the products.`);
 	}
 
 	return response.json();
