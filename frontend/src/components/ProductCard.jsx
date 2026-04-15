@@ -145,7 +145,6 @@ function ProductCard() {
 
 	return (
 		<div>
-			<ItemButton text="Öppna" onClick={() => setOpen(true)} />
 			<div
 				style={{
 					display: "flex",
