@@ -49,7 +49,7 @@ function ProductCard() {
 
 			{open && selectedProduct && (
 				<div className="productOverlay" onClick={() => setOpen(false)}>
-					{/* Om man trycker i rutan så stängs inte fönstret */}
+					{/* If you press inside the square it does not close */}
 					<div
 						className="productModal"
 						onClick={(e) => e.stopPropagation()}>
