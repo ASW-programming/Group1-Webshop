@@ -1,5 +1,12 @@
+import ProductCard from "./components/ProductCard";
+import "./App.css";
+
 function App() {
-	return <div></div>;
+	return (
+		<div>
+			<ProductCard />
+		</div>
+	);
 }
 
 export default App;

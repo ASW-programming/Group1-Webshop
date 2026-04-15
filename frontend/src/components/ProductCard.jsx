@@ -16,59 +16,30 @@ function ProductCard() {
 	if (isLoading) return <p>Loading products...</p>;
 	if (isError) return <p>Something went wrong!</p>;
 
+	// Searches for where id from object is the same as id from useState
 	const selectedProduct = products.find((u) => u.id === productID);
-
-	const styles = {
-		overlay: {
-			position: "fixed",
-			inset: 0,
-			background: "rgba(0,0,0,0.5)",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			zIndex: 1000,
-		},
-		modal: {
-			background: "white",
-			padding: "2rem",
-			borderRadius: "8px",
-			minWidth: "300px",
-		},
-	};
 
 	return (
 		<div>
-			<div
-				style={{
-					display: "flex",
-					gap: "10px",
-					flexWrap: "wrap",
-					width: "75%",
-				}}>
+			<div className="productList">
 				{products.map((u) => (
 					<li
 						key={u.id}
-						style={{ border: "solid black 1px" }}
+						className="productListElement"
 						onClick={() => {
 							setOpen(true);
 							setProductID(u.id);
 						}}>
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-								maxWidth: "150px",
-							}}>
+						<div className="productInformation">
 							<img
-								src={u.imageUrl}
-								style={{
-									width: "100px",
-									height: "100px",
-								}}></img>
-							<span style={{ fontWeight: "bold" }}>{u.name}</span>
-							<span>{u.category}</span>
-							<span>{`${u.price} kr`}</span>
-							<span style={{ whiteSpace: "pre-line" }}>
+								className="productImage"
+								src={u.imageUrl}></img>
+							<span className="productName">{u.name}</span>
+							<span className="productCategory">
+								{u.category}
+							</span>
+							<span className="productPrice">{`${u.price} kr`}</span>
+							<span className="productDescription">
 								{u.description.slice(0, 30)}
 							</span>
 						</div>
@@ -77,28 +48,25 @@ function ProductCard() {
 			</div>
 
 			{open && selectedProduct && (
-				<div style={styles.overlay} onClick={() => setOpen(false)}>
+				<div className="productOverlay" onClick={() => setOpen(false)}>
 					{/* Om man trycker i rutan så stängs inte fönstret */}
 					<div
-						style={styles.modal}
+						className="productModal"
 						onClick={(e) => e.stopPropagation()}>
-						<div
-							style={{
-								display: "flex",
-								flexDirection: "column",
-							}}>
+						<div className="productExpanded">
 							<img
-								src={selectedProduct.imageUrl}
-								style={{
-									width: "100px",
-									height: "100px",
-								}}></img>
-							<span style={{ fontWeight: "bold" }}>
-								{selectedProduct.name}
-							</span>
-							<span>{selectedProduct.category}</span>
-							<span>{`${selectedProduct.price} kr`}</span>
-							<span style={{ whiteSpace: "pre-line" }}>
+								className="productImage"
+								src={selectedProduct.imageUrl}></img>
+							<div className="productNameCategory">
+								<span className="productName">
+									{selectedProduct.name}
+								</span>
+								<span className="productCategory">
+									{selectedProduct.category}
+								</span>
+							</div>
+							<span className="productPrice">{`${selectedProduct.price} kr`}</span>
+							<span className="productDescription">
 								{selectedProduct.description}
 							</span>
 						</div>
