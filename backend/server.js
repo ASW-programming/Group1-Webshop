@@ -81,8 +81,8 @@ app.post('/api/addProduct', async (req, res) => {
         const productData = req.body
 
         // Enkel validering
-        if (!productData.name || !productData.price) {
-            return res.status(400).json({ error: 'Namn och pris är obligatoriska fält.' })
+        if (!productData.name || !productData.price || !productData.category || !productData.description || !productData.imageUrl || !productData.stock) {
+            return res.status(400).json({ error: 'Namn, pris, kategori, beskrivning, bild-URL och lager är obligatoriska fält.' })
         }
 
         // Lägg till i Firestore-kollektionen 'products'
