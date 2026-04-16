@@ -2,11 +2,7 @@ import ProductCard from "./components/ProductCard";
 import "./App.css";
 
 function App() {
-	return (
-		<div>
-			<ProductCard />
-		</div>
-	);
+	return <div></div>;
 }
 
 export default App;

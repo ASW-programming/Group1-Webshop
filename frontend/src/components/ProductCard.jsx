@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ItemButton from "./ItemButton";
 import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
@@ -14,10 +14,6 @@ function ProductCard() {
 		isLoading,
 		isError,
 	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
-
-	useEffect(() => {
-		console.log(addToCart);
-	}, [addToCart]);
 
 	const updateQuantity = (product, amount) => {
 		setDisplayQuantity((prev) => {
