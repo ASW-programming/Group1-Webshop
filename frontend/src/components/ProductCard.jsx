@@ -3,17 +3,17 @@ import ItemButton from "./ItemButton";
 import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
 
-function ProductCard() {
+function ProductCard(props) {
 	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
 	const [addToCart, setAddToCart] = useState([]);
 	const [displayQuantity, setDisplayQuantity] = useState({});
 
-	const {
-		data: products,
-		isLoading,
-		isError,
-	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
+	// const {
+	// 	data: products,
+	// 	isLoading,
+	// 	isError,
+	// } = useQuery({ queryKey: ["products"], queryFn: getProducts });
 
 	const updateQuantity = (product, amount) => {
 		setDisplayQuantity((prev) => {
@@ -41,16 +41,13 @@ function ProductCard() {
 		}, 1000);
 	};
 
-	if (isLoading) return <p>Loading products...</p>;
-	if (isError) return <p>Something went wrong!</p>;
-
 	// Searches for where id from object is the same as id from useState
-	const selectedProduct = products.find((u) => u.id === productID);
+	const selectedProduct = props.products.find((u) => u.id === productID);
 
 	return (
 		<div>
 			<div className="productList">
-				{products.map((u) => (
+				{props.products.map((u) => (
 					<li
 						key={u.id}
 						className="productListElement"
