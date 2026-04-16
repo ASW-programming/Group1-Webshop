@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
@@ -6,12 +6,37 @@ import { useQuery } from "@tanstack/react-query";
 function ProductCard() {
 	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
+	const [addToCart, setAddToCart] = useState([]);
 
 	const {
 		data: products,
 		isLoading,
 		isError,
 	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
+
+	useEffect(() => {
+		console.log(addToCart);
+	}, [addToCart]);
+
+	const updateQuantity = (product, amount) => {
+		const existingProduct = addToCart.find((p) => p.id === product.id);
+		const newQuantity = (existingProduct?.quantity ?? 0) + amount;
+
+		if (newQuantity <= 0) {
+			setAddToCart((prev) => prev.filter((p) => p.id !== product.id));
+		} else if (existingProduct) {
+			setAddToCart((prev) =>
+				prev.map((p) =>
+					p.id === product.id ? { ...p, quantity: newQuantity } : p,
+				),
+			);
+		} else {
+			setAddToCart((prev) => [
+				...prev,
+				{ ...product, quantity: newQuantity },
+			]);
+		}
+	};
 
 	if (isLoading) return <p>Loading products...</p>;
 	if (isError) return <p>Something went wrong!</p>;
@@ -42,6 +67,26 @@ function ProductCard() {
 							<span className="productDescription">
 								{u.description.slice(0, 30)}
 							</span>
+						</div>
+						<div className="cartButtons">
+							<ItemButton
+								text="-"
+								onClick={(e) => {
+									e.stopPropagation();
+									updateQuantity(u, -1);
+								}}
+							/>
+							<p>
+								{addToCart.find((p) => p.id === u.id)
+									?.quantity ?? 0}
+							</p>
+							<ItemButton
+								text="+"
+								onClick={(e) => {
+									e.stopPropagation();
+									updateQuantity(u, +1);
+								}}
+							/>
 						</div>
 					</li>
 				))}
