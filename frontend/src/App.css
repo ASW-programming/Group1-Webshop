@@ -72,3 +72,11 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.cartButtons {
+	background-color: gray;
+	display: inline-flex; /* krymper till innehållets bredd */
+	gap: 1rem;
+	padding: 6px;
+	border-radius: 5%;
+}

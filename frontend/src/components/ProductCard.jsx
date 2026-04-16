@@ -6,12 +6,40 @@ import { useQuery } from "@tanstack/react-query";
 function ProductCard() {
 	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
+	const [addToCart, setAddToCart] = useState([]);
+	const [displayQuantity, setDisplayQuantity] = useState({});
 
 	const {
 		data: products,
 		isLoading,
 		isError,
 	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
+
+	const updateQuantity = (product, amount) => {
+		setDisplayQuantity((prev) => {
+			const newQty = (prev[product.id] ?? 0) + amount;
+			return { ...prev, [product.id]: Math.max(0, newQty) };
+		});
+
+		setTimeout(() => {
+			setAddToCart((prev) => {
+				const existingProduct = prev.find((p) => p.id === product.id);
+				const newQuantity = (existingProduct?.quantity ?? 0) + amount;
+
+				if (newQuantity <= 0) {
+					return prev.filter((p) => p.id !== product.id);
+				} else if (existingProduct) {
+					return prev.map((p) =>
+						p.id === product.id
+							? { ...p, quantity: newQuantity }
+							: p,
+					);
+				} else {
+					return [...prev, { ...product, quantity: newQuantity }];
+				}
+			});
+		}, 1000);
+	};
 
 	if (isLoading) return <p>Loading products...</p>;
 	if (isError) return <p>Something went wrong!</p>;
@@ -42,6 +70,23 @@ function ProductCard() {
 							<span className="productDescription">
 								{u.description.slice(0, 30)}
 							</span>
+						</div>
+						<div className="cartButtons">
+							<ItemButton
+								text="-"
+								onClick={(e) => {
+									e.stopPropagation();
+									updateQuantity(u, -1);
+								}}
+							/>
+							<p>{displayQuantity[u.id] ?? 0}</p>
+							<ItemButton
+								text="+"
+								onClick={(e) => {
+									e.stopPropagation();
+									updateQuantity(u, +1);
+								}}
+							/>
 						</div>
 					</li>
 				))}
