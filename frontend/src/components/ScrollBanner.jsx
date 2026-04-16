@@ -1,0 +1,82 @@
+import { useState, useEffect, useRef } from "react"
+import ItemButton from "./ItemButton"
+
+const ScrollBanner = ({ slides = [] }) => {
+
+    const [current, setCurrent] = useState(0)
+    const intervalRef = useRef(null)
+
+    // Start / Restart timer.
+    const startTimer = () => {
+        clearInterval(intervalRef.current)
+
+        intervalRef.current = setInterval(() => {
+            setCurrent((prev) =>
+                prev === slides.length - 1 ? 0 : prev + 1
+            )
+        }, 4000)
+    }
+
+    // Next.
+    const nextSlide = () => {
+        setCurrent((prev) =>
+            prev === slides.length - 1 ? 0 : prev + 1 // Is it last (?) Go back to the first one (0) else go to next (+1).
+        )
+
+        startTimer() // Reset timer.
+
+    }
+
+    // Prev.
+    const prevSlide = () => {
+        setCurrent((prev) =>
+            prev === 0 ? slides.length - 1 : prev - 1
+        )
+
+        startTimer() // Reset timer.
+
+    }
+
+    // Start timer when component loads.
+    useEffect(() => {
+
+        if (slides.length === 0) return
+
+        startTimer()
+
+        return () => clearInterval(intervalRef.current)
+    }, [slides.length])
+
+    if (slides.length === 0) {
+        return <div>No images found</div>
+    }
+
+    const slide = slides[current]
+
+    return (
+        <div className="scrollBanner">
+
+            <ItemButton onClick={prevSlide} text="←" />
+
+            <img src={slide.image} alt="banner" className="banner-image" />
+
+            <div className="text">
+                {slide.title && <h2>{slide.title}</h2>}
+                {slide.subtitle && <p>{slide.subtitle}</p>}
+
+                {slide.buttonText && (
+                    <ItemButton
+                        onClick={slide.onClick}
+                        text={slide.buttonText}
+                    />
+                )}
+            </div>
+
+            <ItemButton onClick={nextSlide} text="→" />
+
+        </div>
+    )
+
+}
+
+export default ScrollBanner
