@@ -7,6 +7,7 @@ function ProductCard() {
 	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
 	const [addToCart, setAddToCart] = useState([]);
+	const [displayQuantity, setDisplayQuantity] = useState({});
 
 	const {
 		data: products,
@@ -19,23 +20,29 @@ function ProductCard() {
 	}, [addToCart]);
 
 	const updateQuantity = (product, amount) => {
-		const existingProduct = addToCart.find((p) => p.id === product.id);
-		const newQuantity = (existingProduct?.quantity ?? 0) + amount;
+		setDisplayQuantity((prev) => {
+			const newQty = (prev[product.id] ?? 0) + amount;
+			return { ...prev, [product.id]: Math.max(0, newQty) };
+		});
 
-		if (newQuantity <= 0) {
-			setAddToCart((prev) => prev.filter((p) => p.id !== product.id));
-		} else if (existingProduct) {
-			setAddToCart((prev) =>
-				prev.map((p) =>
-					p.id === product.id ? { ...p, quantity: newQuantity } : p,
-				),
-			);
-		} else {
-			setAddToCart((prev) => [
-				...prev,
-				{ ...product, quantity: newQuantity },
-			]);
-		}
+		setTimeout(() => {
+			setAddToCart((prev) => {
+				const existingProduct = prev.find((p) => p.id === product.id);
+				const newQuantity = (existingProduct?.quantity ?? 0) + amount;
+
+				if (newQuantity <= 0) {
+					return prev.filter((p) => p.id !== product.id);
+				} else if (existingProduct) {
+					return prev.map((p) =>
+						p.id === product.id
+							? { ...p, quantity: newQuantity }
+							: p,
+					);
+				} else {
+					return [...prev, { ...product, quantity: newQuantity }];
+				}
+			});
+		}, 1000);
 	};
 
 	if (isLoading) return <p>Loading products...</p>;
@@ -76,10 +83,7 @@ function ProductCard() {
 									updateQuantity(u, -1);
 								}}
 							/>
-							<p>
-								{addToCart.find((p) => p.id === u.id)
-									?.quantity ?? 0}
-							</p>
+							<p>{displayQuantity[u.id] ?? 0}</p>
 							<ItemButton
 								text="+"
 								onClick={(e) => {
