@@ -1,36 +1,50 @@
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import ItemButton from "./ItemButton"
 
 const ScrollBanner = ({ slides = [] }) => {
 
     const [current, setCurrent] = useState(0)
+    const intervalRef = useRef(null)
 
-    // Next img.
-    const nextSlide = () => {
-        setCurrent((prevImg) =>
-            prevImg === slides.length - 1 ? 0 : prevImg + 1 // Is it last (?) Go back to the first one (0) else go to next (+1)
-        )
-    }
+    // Start / Restart timer.
+    const startTimer = () => {
+        clearInterval(intervalRef.current)
 
-    // Prev img.
-    const prevSlide = () => {
-        setCurrent((prevImg) =>
-            prevImg === 0 ? slides.length - 1 : prevImg - 1
-        )
-    }
-
-    useEffect(() => {
-
-        // Checking if it's the last img if not go to next img or start over again. ()
-        const interval = setInterval(() => {
+        intervalRef.current = setInterval(() => {
             setCurrent((prev) =>
                 prev === slides.length - 1 ? 0 : prev + 1
             )
         }, 4000)
+    }
 
-        return () => clearInterval(interval) // Stop timer
+    // Next.
+    const nextSlide = () => {
+        setCurrent((prev) =>
+            prev === slides.length - 1 ? 0 : prev + 1 // Is it last (?) Go back to the first one (0) else go to next (+1).
+        )
 
+        startTimer() // Reset timer.
+
+    }
+
+    // Prev.
+    const prevSlide = () => {
+        setCurrent((prev) =>
+            prev === 0 ? slides.length - 1 : prev - 1
+        )
+
+        startTimer() // Reset timer.
+
+    }
+
+    // Start timer when component loads.
+    useEffect(() => {
+
+        if (slides.length === 0) return
+
+        startTimer()
+
+        return () => clearInterval(intervalRef.current)
     }, [slides.length])
 
     if (slides.length === 0) {
