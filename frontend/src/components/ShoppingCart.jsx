@@ -1,15 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 
-function ShoppingCart({ addedProducts, updateQuantity }) {
+function ShoppingCart() {
     const [isOpen, setIsOpen] = useState(false);
+
+    const [addedProducts, setAddedProducts] = useState(() => {
+        const saved = localStorage.getItem('shoppingCart');
+        return saved ? JSON.parse(saved) : [];
+    })
+
+    useEffect(() => {
+        localStorage.setItem('shoppingCart', JSON.stringify(addedProducts))
+    }, [addedProducts]);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
 
+    const updateQuantity = (productId, newQuantity) => {
+        if (newQuantity <= 0) {
+            setAddedProducts(addedProducts.filter(p => p.id !== productId))
+        } else {
+            setAddedProducts(addedProducts.map(product =>
+                product.id === productId
+                ? {...product, quantity: newQuantity} : product
+            ))
+        }
+    }
+
     const totalPrice = addedProducts?.map(product => product.price * product.quantity)
         .reduce((sum, productTotal) => sum + productTotal, 0) || 0;
+
+
 
     return (
         <div>
