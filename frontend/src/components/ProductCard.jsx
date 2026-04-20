@@ -1,56 +1,50 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ItemButton from "./ItemButton";
 import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
 
-function ProductCard() {
+function ProductCard(props) {
 	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
-	const [addToCart, setAddToCart] = useState([]);
-	const [displayQuantity, setDisplayQuantity] = useState({});
-
-	const {
-		data: products,
-		isLoading,
-		isError,
-	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
-
-	const updateQuantity = (product, amount) => {
-		setDisplayQuantity((prev) => {
-			const newQty = (prev[product.id] ?? 0) + amount;
-			return { ...prev, [product.id]: Math.max(0, newQty) };
-		});
-
-		setTimeout(() => {
-			setAddToCart((prev) => {
-				const existingProduct = prev.find((p) => p.id === product.id);
-				const newQuantity = (existingProduct?.quantity ?? 0) + amount;
-
-				if (newQuantity <= 0) {
-					return prev.filter((p) => p.id !== product.id);
-				} else if (existingProduct) {
-					return prev.map((p) =>
-						p.id === product.id
-							? { ...p, quantity: newQuantity }
-							: p,
-					);
-				} else {
-					return [...prev, { ...product, quantity: newQuantity }];
-				}
-			});
-		}, 1000);
-	};
-
-	if (isLoading) return <p>Loading products...</p>;
-	if (isError) return <p>Something went wrong!</p>;
+	const [localQuantity, setLocalQuantity] = useState({});
+	const timerRef = useRef({});
+	const pendingAmount = useRef({});
 
 	// Searches for where id from object is the same as id from useState
-	const selectedProduct = products.find((u) => u.id === productID);
+	const selectedProduct = props.products.find((u) => u.id === productID);
+
+	// Show in real time number of added products and after 1 second send to shopping cart.
+	const handleQuantityChange = (product, amount) => {
+		// Instant feedback
+		setLocalQuantity((prev) => {
+			const newQty = (prev[product.id] ?? 0) + amount;
+			if (newQty <= 0) {
+				const updated = { ...prev };
+				delete updated[product.id];
+				return updated;
+			}
+			return { ...prev, [product.id]: newQty };
+		});
+
+		// Keep track of total amount of items
+		pendingAmount.current[product.id] =
+			(pendingAmount.current[product.id] ?? 0) + amount;
+
+		// Clear timer
+		clearTimeout(timerRef.current[product.id]);
+
+		// New timer with new total
+		timerRef.current[product.id] = setTimeout(() => {
+			props.onAddProduct(product, pendingAmount.current[product.id]);
+			// Reset after data send
+			pendingAmount.current[product.id] = 0;
+		}, 1000);
+	};
 
 	return (
 		<div>
 			<div className="productList">
-				{products.map((u) => (
+				{props.products.map((u) => (
 					<li
 						key={u.id}
 						className="productListElement"
@@ -71,21 +65,19 @@ function ProductCard() {
 								{u.description.slice(0, 30)}
 							</span>
 						</div>
-						<div className="cartButtons">
+						<div
+							className="cartButtons"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}>
 							<ItemButton
 								text="-"
-								onClick={(e) => {
-									e.stopPropagation();
-									updateQuantity(u, -1);
-								}}
+								onClick={() => handleQuantityChange(u, -1)}
 							/>
-							<p>{displayQuantity[u.id] ?? 0}</p>
+							<p>{localQuantity[u.id] ?? 0}</p>
 							<ItemButton
 								text="+"
-								onClick={(e) => {
-									e.stopPropagation();
-									updateQuantity(u, +1);
-								}}
+								onClick={() => handleQuantityChange(u, 1)}
 							/>
 						</div>
 					</li>
