@@ -4,12 +4,15 @@ import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
 
 function LandingComponent() {
+	// Fetches products from DB.
 	const {
-		data: products,
+		// Defines products as an empty array.
+		data: products = [],
 		isLoading,
 		isError,
 	} = useQuery({ queryKey: ["products"], queryFn: getProducts });
 
+	// Maps out categories. Removes duplicates and converts back into array.
 	const categories = [...new Set(products.map((p) => p.category))];
 
 	if (isLoading) return <p>Loading products...</p>;

@@ -75,8 +75,19 @@
 
 .cartButtons {
 	background-color: gray;
-	display: inline-flex; /* krymper till innehållets bredd */
+	display: inline-flex;
 	gap: 1rem;
 	padding: 6px;
 	border-radius: 5%;
+}
+
+.headerNav {
+	display: flex;
+	justify-content: space-between;
+}
+
+.category-item:hover {
+	cursor: pointer;
+	border: solid black 1px;
+	background-color: aquamarine;
 }
