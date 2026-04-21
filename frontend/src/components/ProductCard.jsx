@@ -2,16 +2,16 @@ import { useState, useRef } from "react";
 import ItemButton from "./ItemButton";
 import { getProducts } from "../utils/calls.js";
 import { useQuery } from "@tanstack/react-query";
+import { priceInfo } from "../utils/priceSetter.jsx";
+import { Link } from "react-router-dom";
+
 
 function ProductCard(props) {
-	const [open, setOpen] = useState(false);
 	const [productID, setProductID] = useState("");
 	const [localQuantity, setLocalQuantity] = useState({});
 	const timerRef = useRef({});
 	const pendingAmount = useRef({});
 
-	// Searches for where id from object is the same as id from useState
-	const selectedProduct = props.products.find((u) => u.id === productID);
 
 	// Show in real time number of added products and after 1 second send to shopping cart.
 	const handleQuantityChange = (product, amount) => {
@@ -41,17 +41,17 @@ function ProductCard(props) {
 		}, 1000);
 	};
 
+
+	
 	return (
-		<div>
+			
 			<div className="productList">
 				{props.products.map((u) => (
 					<li
 						key={u.id}
 						className="productListElement"
-						onClick={() => {
-							setOpen(true);
-							setProductID(u.id);
-						}}>
+						>
+						<Link to={`/product/${u.id}`}>
 						<div className="productInformation">
 							<img
 								className="productImage"
@@ -60,11 +60,12 @@ function ProductCard(props) {
 							<span className="productCategory">
 								{u.category}
 							</span>
-							<span className="productPrice">{`${u.price} kr`}</span>
+							<span className="productPrice">{priceInfo(u)}</span>
 							<span className="productDescription">
 								{u.description.slice(0, 30)}
 							</span>
 						</div>
+						</Link>
 						<div
 							className="cartButtons"
 							onClick={(e) => {
@@ -83,40 +84,7 @@ function ProductCard(props) {
 					</li>
 				))}
 			</div>
-
-			{open && selectedProduct && (
-				<div className="productOverlay" onClick={() => setOpen(false)}>
-					{/* If you press inside the square it does not close */}
-					<div
-						className="productModal"
-						onClick={(e) => e.stopPropagation()}>
-						<div className="productExpanded">
-							<img
-								className="productImage"
-								src={selectedProduct.imageUrl}></img>
-							<div className="productNameCategory">
-								<span className="productName">
-									{selectedProduct.name}
-								</span>
-								<span className="productCategory">
-									{selectedProduct.category}
-								</span>
-							</div>
-							<span className="productPrice">{`${selectedProduct.price} kr`}</span>
-							<span className="productDescription">
-								{selectedProduct.description}
-							</span>
-						</div>
-
-						<ItemButton
-							text="Close"
-							onClick={() => setOpen(false)}
-						/>
-					</div>
-				</div>
-			)}
-		</div>
-	);
-}
+			
+	)}
 
 export default ProductCard;
