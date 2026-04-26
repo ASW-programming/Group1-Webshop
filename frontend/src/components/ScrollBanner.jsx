@@ -22,9 +22,7 @@ const ScrollBanner = ({ slides = [] }) => {
         setCurrent((prev) =>
             prev === slides.length - 1 ? 0 : prev + 1 // Is it last (?) Go back to the first one (0) else go to next (+1).
         )
-
         startTimer() // Reset timer.
-
     }
 
     // Prev.
@@ -32,9 +30,7 @@ const ScrollBanner = ({ slides = [] }) => {
         setCurrent((prev) =>
             prev === 0 ? slides.length - 1 : prev - 1
         )
-
         startTimer() // Reset timer.
-
     }
 
     // Start timer when component loads.

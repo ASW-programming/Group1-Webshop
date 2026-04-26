@@ -1,56 +1,19 @@
 import { useParams } from "react-router-dom"
 import { priceInfo } from "../utils/priceSetter.jsx";
-import { getProducts } from "../utils/calls.js";
-import { useQuery } from "@tanstack/react-query";
 import ItemButton from "./ItemButton.jsx";
-import { useState, useRef } from "react";
+import { useShop } from "../utils/context.jsx";
 
-const ProductDetails = (props) => {
-
-    const [localQuantity, setLocalQuantity] = useState({});
-    const timerRef = useRef({});
-    const pendingAmount = useRef({});
-
-
-    // Show in real time number of added products and after 1 second send to shopping cart.
-    const handleQuantityChange = (product, amount) => {
-        // Instant feedback
-        setLocalQuantity((prev) => {
-            const newQty = (prev[product.id] ?? 0) + amount;
-            if (newQty <= 0) {
-                const updated = { ...prev };
-                delete updated[product.id];
-                return updated;
-            }
-            return { ...prev, [product.id]: newQty };
-        });
-
-        // Keep track of total amount of items
-        pendingAmount.current[product.id] =
-            (pendingAmount.current[product.id] ?? 0) + amount;
-
-        // Clear timer
-        clearTimeout(timerRef.current[product.id]);
-
-        // New timer with new total
-        timerRef.current[product.id] = setTimeout(() => {
-            props.onAddProduct(product, pendingAmount.current[product.id]);
-            // Reset after data send
-            pendingAmount.current[product.id] = 0;
-        }, 1000);
-    };
+const ProductDetails = () => {
+    const { localQuantity, handleQuantityChange, products, productsLoading, productsError } = useShop();
 
     const { id } = useParams();
 
     // Fetch product details by ID
-    const {
-        data: selectedProduct = null,
-        isLoading,
-        isError,
-    } = useQuery({ queryKey: ["selectedProduct", id], queryFn: () => getProducts(id) });
+    const selectedProduct = products.find(p => p.id === id);
 
-    if (isLoading) return <p>Loading product...</p>;
-    if (isError) return <p>Something went wrong!</p>;
+    if (productsLoading) return <p>Loading product...</p>;
+    if (productsError) return <p>Something went wrong!</p>;
+    if (!selectedProduct) return <p>Product not found!</p>;
 
     return (
         <div
@@ -79,6 +42,7 @@ const ProductDetails = (props) => {
 
             <ItemButton
                 text="Add to cart"
+                onClick={() => handleQuantityChange(selectedProduct, 1)}
             />
             <div
                 className="cartButtons"

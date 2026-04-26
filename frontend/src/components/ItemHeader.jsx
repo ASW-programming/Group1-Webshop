@@ -2,8 +2,11 @@ import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
+import { useShop } from "../utils/context";
 
-function ItemHeader(props) {
+function ItemHeader() {
+
+
 	return (
 		<header className="header">
 			<div className="headerTitle">
@@ -12,10 +15,7 @@ function ItemHeader(props) {
 
 			<div className="headerNav">
 				<div className="headerMenu">
-					<HamburgerMenu
-						categories={props.categories}
-						onCategorySelect={props.onCategorySelect}
-					/>
+					<HamburgerMenu/>
 				</div>
 
 				<div className="headerSearch">
@@ -25,10 +25,7 @@ function ItemHeader(props) {
 
 				<div className="headerCart">
 					<ShoppingCart
-						addedProducts={props.addedProducts}
-						onAddProduct={props.onAddProduct}
-						displayQuantity={props.displayQuantity}
-						onClearCart={props.onClearCart}
+						
 					/>
 				</div>
 			</div>
