@@ -5,9 +5,7 @@ import { useShop } from "../utils/context.jsx";
 import { useState, useEffect } from "react";
 
 function ProductCard({ products, activeCategory }) {
-	const { addedProducts, handleQuantityChange } = useShop();
-
-	
+	const { handleQuantityChange, getProductQuantity } = useShop();
 
 	const filteredProducts = products.filter(
 		(u) => !activeCategory || u.category === activeCategory,
@@ -16,7 +14,7 @@ function ProductCard({ products, activeCategory }) {
 	return (
 		<div className="productList">
 			{filteredProducts.map((u) => {
-				const productsInCart = addedProducts.find(p => p.id === u.id);
+				const quantity = getProductQuantity(u.id);
 				return (
 					<li key={u.id} className="productListElement">
 						<Link to={`/product/${u.id}`}>
@@ -39,7 +37,7 @@ function ProductCard({ products, activeCategory }) {
 						onClick={(e) => {
 							e.stopPropagation();
 						}}>
-						{productsInCart ? (
+						{quantity > 0 ? (
 							<>
 								<ItemButton
 									text="-"
@@ -48,7 +46,7 @@ function ProductCard({ products, activeCategory }) {
 									}}
 								/>
 
-								<p>{productsInCart.quantity}</p>
+								<p>{quantity}</p>
 								<ItemButton
 									text="+"
 									onClick={() => handleQuantityChange(u, 1)}

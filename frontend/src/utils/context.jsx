@@ -82,11 +82,12 @@ export function ShopProvider({ children }) {
 		
 	};
 
+    const getProductQuantity = (productId) => {
+        const found = addedProducts.find(p => p.id === productId);
+        return found ? found.quantity : 0;
+    }
 	//===== HAMBURGERMENU =====
 
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
 	const [activeCategory, setActiveCategory] = useState(null);
 
@@ -105,6 +106,7 @@ export function ShopProvider({ children }) {
 		addedProducts,
 		addProduct,
 		clearCart,
+		getProductQuantity,
 		// Local state for quantity changes
 		localQuantity,
 		handleQuantityChange,

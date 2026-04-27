@@ -4,16 +4,23 @@ import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
 
 const ProductDetails = () => {
-    const { addedProducts, handleQuantityChange, products, productsLoading, productsError } = useShop();
+    const { addedProducts, 
+            handleQuantityChange, 
+            products, 
+            productsLoading, 
+            productsError, 
+            getProductQuantity } = useShop();
 
     const { id } = useParams();
 
     // Fetch product details by ID
     const selectedProduct = products.find(p => p.id === id);
-    const productsInCart = addedProducts.find(p => p.id === selectedProduct.id);
+    
     if (productsLoading) return <p>Loading product...</p>;
     if (productsError) return <p>Something went wrong!</p>;
     if (!selectedProduct) return <p>Product not found!</p>;
+
+    const quantity = getProductQuantity(selectedProduct.id);
 
     return (
         <div
@@ -44,7 +51,7 @@ const ProductDetails = () => {
                 onClick={(e) => {
                     e.stopPropagation();
                 }}>
-                {productsInCart ? (
+                {quantity > 0 ? (
 							<>
 								<ItemButton
 									text="-"
@@ -53,7 +60,7 @@ const ProductDetails = () => {
 									}}
 								/>
 
-								<p>{productsInCart.quantity}</p>
+								<p>{quantity}</p>
 								<ItemButton
 									text="+"
 									onClick={() => handleQuantityChange(selectedProduct, 1)}
