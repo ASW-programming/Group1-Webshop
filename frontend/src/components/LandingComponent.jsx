@@ -1,9 +1,20 @@
 import ProductCard from "./ProductCard";
 import ScrollBanner from "./ScrollBanner.jsx";
 import { useShop } from "../utils/context.jsx";
+import { useSearchParams } from "react-router-dom";
 
 function LandingComponent() {
 	const { products, productsLoading, productsError} = useShop();
+	const [searchParams] = useSearchParams();
+	const query = searchParams.get("q")?.toLowerCase() ?? "";
+
+	const filteredProducts = query
+		? products.filter(
+			(p) =>
+                p.name?.toLowerCase().includes(query) ||
+                p.category?.toLowerCase().includes(query)
+		)
+	: products;
 
 	// Slides
 	const slidesData = products.map((u) => ({
@@ -20,9 +31,10 @@ function LandingComponent() {
 	return (
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
-			<ProductCard
-				products={products}
-			/>
+			{query && filteredProducts.length === 0 && (
+				<p className="statusText">No products found</p>
+			)}
+			<ProductCard products={filteredProducts}/>
 		</div>
 	);
 }

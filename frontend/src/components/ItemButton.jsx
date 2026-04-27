@@ -5,7 +5,7 @@ function ItemButton(props) {
 			id={props.id}
 			type={props.type}
 			onClick={props.onClick}>
-			{props.text}
+			{props.text || props.icon}
 		</button>
 	);
 }

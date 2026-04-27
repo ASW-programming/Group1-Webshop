@@ -6,6 +6,7 @@ function ItemInput(props) {
             type={props.type}
             placeholder={props.placeholder}
             onChange={props.onChange}
+            onKeyDown={props.onKeyDown}
         />
     )
 }
