@@ -7,24 +7,14 @@ import {
 	RemoveIcon,
 	ShoppingCartIcon,
 } from "../assets/Icons";
-
-function ShoppingCart() {
-	const {
-		addedProducts,
-		addProduct,
-		displayQuantity,
-		clearCart,
-		isCartOpen,
-		toggleCart,
-		handleQuantityChange,
-	} = useShop();
 import { useState } from "react";
 
 function ShoppingCart() {
-    const {addedProducts, displayQuantity, clearCart, handleQuantityChange} = useShop();
+	const { addedProducts, displayQuantity, clearCart, handleQuantityChange } =
+		useShop();
 
-    const [isCartOpen, setIsCartOpen] = useState(false);
-        const toggleCart = () => setIsCartOpen(!isCartOpen);
+	const [isCartOpen, setIsCartOpen] = useState(false);
+	const toggleCart = () => setIsCartOpen(!isCartOpen);
 
 	const totalPrice =
 		addedProducts
@@ -51,13 +41,9 @@ function ShoppingCart() {
 								Antal:{" "}
 								<ItemButton
 									icon={<RemoveIcon />}
-									onClick={() => {
-										handleQuantityChange(
-											product,
-											-1,
-											false,
-										);
-									}}
+									onClick={() =>
+										handleQuantityChange(product, -1, false)
+									}
 								/>
 								{displayQuantity[product.id] ??
 									product.quantity}
