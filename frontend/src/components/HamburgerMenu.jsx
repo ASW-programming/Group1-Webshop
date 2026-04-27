@@ -1,14 +1,17 @@
 import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
+import { useState } from "react";
 
 function HamburgerMenu() {
 	const {
 		categories,
-		isMenuOpen,
-		toggleMenu,
 		activeCategory,
 		selectCategory,
 	} = useShop();
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+        const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
 	const handleCategoryClick = (category) => {
 		selectCategory(category);
