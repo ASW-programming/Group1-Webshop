@@ -1,11 +1,8 @@
-import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
-import { useShop } from "../utils/context";
 
 function ItemHeader() {
-
 
 	return (
 		<header className="header">

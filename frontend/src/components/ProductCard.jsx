@@ -2,24 +2,28 @@ import ItemButton from "./ItemButton";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import { Link } from "react-router-dom";
 import { useShop } from "../utils/context.jsx";
+import { AddIcon, RemoveIcon } from "../assets/Icons.jsx";
+import { useState, useEffect } from "react";
 
-
-function ProductCard({products}) { 
-	const { localQuantity, handleQuantityChange} = useShop()
+function ProductCard({ products, activeCategory }) {
+	const { addedProducts, handleQuantityChange } = useShop();
 
 	
+
+	const filteredProducts = products.filter(
+		(u) => !activeCategory || u.category === activeCategory,
+	);
+
 	return (
-			
-			<div className="productList">
-				{products.map((u) => (
-					<li
-						key={u.id}
-						className="productListElement"
-						>
+		<div className="productList">
+			{filteredProducts.map((u) => {
+				const productsInCart = addedProducts.find(p => p.id === u.id);
+				return (
+					<li key={u.id} className="productListElement">
 						<Link to={`/product/${u.id}`}>
-						<div className="productInformation">
-							<img
-								className="productImage"
+							<div className="productInformation">
+								<img
+									className="productImage"
 								src={u.imageUrl}></img>
 							<span className="productName">{u.name}</span>
 							<span className="productCategory">
@@ -30,25 +34,40 @@ function ProductCard({products}) {
 								{u.description.slice(0, 30)}
 							</span>
 						</div>
-						</Link>
-						<div
-							className="cartButtons"
-							onClick={(e) => {
-								e.stopPropagation();
-							}}>
+					</Link>
+					<div
+						className="cartButtons"
+						onClick={(e) => {
+							e.stopPropagation();
+						}}>
+
+						{productsInCart ? (
+							<>
+								<ItemButton
+									icon={<RemoveIcon />}
+									onClick={() => {
+										handleQuantityChange(u, -1);
+									}}
+								/>
+
+								<p>{productsInCart.quantity}</p>
+								<ItemButton
+									icon={<AddIcon />}
+									onClick={() => handleQuantityChange(u, 1)}
+								/>
+							</>
+						) : (
 							<ItemButton
-								text="-"
-								onClick={() => handleQuantityChange(u, -1)}
+								text="Köp"
+								onClick={() => {
+									handleQuantityChange(u, 1);
+								}}
 							/>
-							<p>{localQuantity[u.id] ?? 0}</p>
-							<ItemButton
-								text="+"
-								onClick={() => handleQuantityChange(u, 1)}
-							/>
-						</div>
-					</li>
-				))}
-			</div>
+						)}
+					</div>
+				</li>
+			)})}
+		</div>
 	);
 }
 

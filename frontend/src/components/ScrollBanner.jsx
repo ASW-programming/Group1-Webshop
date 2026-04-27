@@ -1,78 +1,70 @@
-import { useState, useEffect, useRef } from "react"
-import ItemButton from "./ItemButton"
+import { useState, useEffect, useRef } from "react";
+import ItemButton from "./ItemButton";
+import { ArrowIcon, EnterIcon } from "../assets/Icons";
 
 const ScrollBanner = ({ slides = [] }) => {
+	const [current, setCurrent] = useState(0);
+	const intervalRef = useRef(null);
 
-    const [current, setCurrent] = useState(0)
-    const intervalRef = useRef(null)
+	// Start / Restart timer.
+	const startTimer = () => {
+		clearInterval(intervalRef.current);
 
-    // Start / Restart timer.
-    const startTimer = () => {
-        clearInterval(intervalRef.current)
+		intervalRef.current = setInterval(() => {
+			setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+		}, 4000);
+	};
 
-        intervalRef.current = setInterval(() => {
-            setCurrent((prev) =>
-                prev === slides.length - 1 ? 0 : prev + 1
-            )
-        }, 4000)
-    }
+	// Next.
+	const nextSlide = () => {
+		setCurrent(
+			(prev) => (prev === slides.length - 1 ? 0 : prev + 1), // Is it last (?) Go back to the first one (0) else go to next (+1).
+		);
+		startTimer(); // Reset timer.
+	};
 
-    // Next.
-    const nextSlide = () => {
-        setCurrent((prev) =>
-            prev === slides.length - 1 ? 0 : prev + 1 // Is it last (?) Go back to the first one (0) else go to next (+1).
-        )
-        startTimer() // Reset timer.
-    }
+	// Prev.
+	const prevSlide = () => {
+		setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+		startTimer(); // Reset timer.
+	};
 
-    // Prev.
-    const prevSlide = () => {
-        setCurrent((prev) =>
-            prev === 0 ? slides.length - 1 : prev - 1
-        )
-        startTimer() // Reset timer.
-    }
+	// Start timer when component loads.
+	useEffect(() => {
+		if (slides.length === 0) return;
 
-    // Start timer when component loads.
-    useEffect(() => {
+		startTimer();
 
-        if (slides.length === 0) return
+		return () => clearInterval(intervalRef.current);
+	}, [slides.length]);
 
-        startTimer()
+	if (slides.length === 0) {
+		return <div>No images found</div>;
+	}
 
-        return () => clearInterval(intervalRef.current)
-    }, [slides.length])
+	const slide = slides[current];
 
-    if (slides.length === 0) {
-        return <div>No images found</div>
-    }
+	return (
+		<div className="scrollBanner">
+			<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
 
-    const slide = slides[current]
+			<img src={slide.image} alt="banner" className="banner-image" />
 
-    return (
-        <div className="scrollBanner">
+			<div className="text">
+				{slide.title && <h2>{slide.title}</h2>}
+				{slide.subtitle && <p>{slide.subtitle}</p>}
 
-            <ItemButton onClick={prevSlide} text="←" />
+				{slide.buttonText && (
+					<ItemButton onClick={slide.onClick} icon={<EnterIcon />} />
+				)}
+			</div>
 
-            <img src={slide.image} alt="banner" className="banner-image" />
+			<ItemButton
+				onClick={nextSlide}
+				icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
+			/>
+		</div>
+	);
+};
 
-            <div className="text">
-                {slide.title && <h2>{slide.title}</h2>}
-                {slide.subtitle && <p>{slide.subtitle}</p>}
-
-                {slide.buttonText && (
-                    <ItemButton
-                        onClick={slide.onClick}
-                        text={slide.buttonText}
-                    />
-                )}
-            </div>
-
-            <ItemButton onClick={nextSlide} text="→" />
-
-        </div>
-    )
-
-}
-
-export default ScrollBanner
+export default ScrollBanner;

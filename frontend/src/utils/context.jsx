@@ -2,37 +2,32 @@ import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { getProducts } from "./calls.js";
 import { useQuery } from "@tanstack/react-query";
 
-
 const ShopContext = createContext();
 
-export function ShopProvider({children}){
+export function ShopProvider({ children }) {
+	// ===== PRODUCT DATA =====
+	const {
+		data: products = [],
+		isLoading: productsLoading,
+		isError: productsError,
+	} = useQuery({
+		queryKey: ["products"],
+		queryFn: getProducts,
+	});
 
-     // ===== PRODUCT DATA =====
-    const {
-        data: products = [],
-        isLoading: productsLoading,
-        isError: productsError,
-    } = useQuery({ 
-        queryKey: ["products"], 
-        queryFn: getProducts 
-    });
+	// Maps out categories. Removes duplicates and converts back into array.
+	const categories = [...new Set(products.map((p) => p.category))];
 
-    // Maps out categories. Removes duplicates and converts back into array.
-    const categories = [...new Set(products.map((p) => p.category))];
+	// ===== CART FUNCTIONALITY =====
 
-    // ===== CART FUNCTIONALITY =====
+	const [displayQuantity, setDisplayQuantity] = useState({});
 
-    const [isCartOpen, setIsCartOpen] = useState(false);
-    const toggleCart = () => setIsCartOpen(!isCartOpen);
+	const [addedProducts, setAddedProducts] = useState(() => {
+		const saved = localStorage.getItem("shoppingCart");
+		return saved ? JSON.parse(saved) : [];
+	});
 
-    const [displayQuantity, setDisplayQuantity] = useState({});
-
-    const [addedProducts, setAddedProducts] = useState(() => {
-        const saved = localStorage.getItem("shoppingCart");
-        return saved ? JSON.parse(saved) : [];
-    });
-
-    const addProduct = (product, amount = 1) => {
+	const addProduct = (product, amount = 1) => {
 		setDisplayQuantity((prev) => {
 			const newQty = (prev[product.id] ?? 0) + amount;
 			if (newQty <= 0) {
@@ -56,93 +51,71 @@ export function ShopProvider({children}){
 		});
 	};
 
-    const clearCart = () => {
+	const clearCart = () => {
 		setAddedProducts([]);
 		setDisplayQuantity({});
 		localStorage.removeItem("shoppingCart");
 	};
 
+	useEffect(() => {
+		localStorage.setItem("shoppingCart", JSON.stringify(addedProducts));
+	}, [addedProducts]);
 
-     useEffect(() => {
-    localStorage.setItem("shoppingCart", JSON.stringify(addedProducts));
-  }, [addedProducts]);
+	// ===== PRODUCTCARD AND PRODUCTDETAIL Functionality =====
 
+	const [localQuantity, setLocalQuantity] = useState({});
 
-  // ===== PRODUCTCARD AND PRODUCTDETAIL Functionality =====
+	// Show in real time number of added products and send to shopping cart
+	const handleQuantityChange = (product, amount) => {
+		// Instant feedback
+		setLocalQuantity((prev) => {
+			const newQty = (prev[product.id] ?? 0) + amount;
+			if (newQty <= 0) {
+				const updated = { ...prev };
+				delete updated[product.id];
+				return updated;
+			}
+			return { ...prev, [product.id]: newQty };
+		});
 
-const [localQuantity, setLocalQuantity] = useState({});
-    const timerRef = useRef({});
-    const pendingAmount = useRef({});
+			addProduct(product, amount);
+		
+	};
 
+	//===== HAMBURGERMENU =====
 
-    // Show in real time number of added products and after 1 second send to shopping cart.
-    const handleQuantityChange = (product, amount, useTimer = true) => {
-        // Instant feedback
-        setLocalQuantity((prev) => {
-            const newQty = (prev[product.id] ?? 0) + amount;
-            if (newQty <= 0) {
-                const updated = { ...prev };
-                delete updated[product.id];
-                return updated;
-            }
-            return { ...prev, [product.id]: newQty };
-        });
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-        if(useTimer === false){
-            addProduct(product, amount);
-            return
-        }
+	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-            // Keep track of total amount of items
-            pendingAmount.current[product.id] =
-                (pendingAmount.current[product.id] ?? 0) + amount;
-        
+	const [activeCategory, setActiveCategory] = useState(null);
 
-        // Clear timer
-        clearTimeout(timerRef.current[product.id]);
+	const selectCategory = (category) => {
+		setActiveCategory((prev) => (prev === category ? null : category)); // klicka igen = avmarkera
+	};
 
-        // New timer with new total
-        timerRef.current[product.id] = setTimeout(() => {
-            addProduct(product, pendingAmount.current[product.id]);
-            // Reset after data send
-            pendingAmount.current[product.id] = 0;
-        }, 1000);
-    };
+	const value = {
+		// product data
+		products,
+		productsLoading,
+		productsError,
+		categories,
+		// cart functionality
+		displayQuantity,
+		addedProducts,
+		addProduct,
+		clearCart,
+		// Local state for quantity changes
+		localQuantity,
+		handleQuantityChange,
+		//HamburgerMenu
+		activeCategory,
+		selectCategory,
+	};
 
-    //===== HAMBURGERMENU =====
-
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const toggleMenu = () =>
-        setIsMenuOpen(!isMenuOpen);
-
-  const value = {
-    // product data
-    products,
-    productsLoading,
-    productsError,
-    categories,
-    // cart functionality
-    displayQuantity,
-    addedProducts,
-    addProduct,
-    clearCart,
-    isCartOpen,
-    toggleCart,
-    // Local state for quantity changes
-    localQuantity,
-    handleQuantityChange,
-    //HamburgerMenu
-    isMenuOpen,
-    toggleMenu,
-  };
-
-  return (
-    <ShopContext.Provider value={value}>
-        {children}
-    </ShopContext.Provider>
-  );
-
+	return (
+		<ShopContext.Provider value={value}>{children}</ShopContext.Provider>
+	);
 }
 
 export const useShop = () => useContext(ShopContext);
