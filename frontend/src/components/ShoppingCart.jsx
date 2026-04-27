@@ -2,7 +2,14 @@ import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
 
 function ShoppingCart() {
-    const {addedProducts, addProduct, displayQuantity, clearCart, isCartOpen, toggleCart, handleQuantityChange} = useShop();
+	const {
+		addedProducts,
+		displayQuantity,
+		clearCart,
+		isCartOpen,
+		toggleCart,
+		handleQuantityChange,
+	} = useShop();
 
 	const totalPrice =
 		addedProducts
@@ -30,7 +37,11 @@ function ShoppingCart() {
 								<ItemButton
 									text="-"
 									onClick={() => {
-										handleQuantityChange(product, -1, false); 
+										handleQuantityChange(
+											product,
+											-1,
+											false,
+										);
 									}}></ItemButton>
 								{displayQuantity[product.id] ??
 									product.quantity}
