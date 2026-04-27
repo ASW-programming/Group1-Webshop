@@ -3,7 +3,8 @@ import ScrollBanner from "./ScrollBanner.jsx";
 import { useShop } from "../utils/context.jsx";
 
 function LandingComponent() {
-	const { products, productsLoading, productsError} = useShop();
+	const { products, productsLoading, productsError, activeCategory } =
+		useShop();
 
 	// Slides
 	const slidesData = products.map((u) => ({
@@ -20,9 +21,7 @@ function LandingComponent() {
 	return (
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
-			<ProductCard
-				products={products}
-			/>
+			<ProductCard products={products} activeCategory={activeCategory} />
 		</div>
 	);
 }
