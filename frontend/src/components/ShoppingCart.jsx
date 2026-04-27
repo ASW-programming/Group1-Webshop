@@ -1,12 +1,19 @@
 import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
+import {
+	AddIcon,
+	CancelIcon,
+	EmptyListIcon,
+	RemoveIcon,
+	ShoppingCartIcon,
+} from "../assets/Icons";
 import { useState } from "react";
 
 function ShoppingCart() {
     const {addedProducts, getProductQuantity, clearCart, handleQuantityChange} = useShop();
 
-    const [isCartOpen, setIsCartOpen] = useState(false);
-        const toggleCart = () => setIsCartOpen(!isCartOpen);
+	const [isCartOpen, setIsCartOpen] = useState(false);
+	const toggleCart = () => setIsCartOpen(!isCartOpen);
 
 	const totalPrice =
 		addedProducts
@@ -18,7 +25,7 @@ function ShoppingCart() {
 			<ItemButton
 				onClick={toggleCart}
 				className="shoppingcart-btn"
-				text={isCartOpen ? "x" : "🛒"}
+				icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
 			/>
 			{isCartOpen && (
 				<div className="shopping-list">
@@ -32,13 +39,13 @@ function ShoppingCart() {
 								{product.name} {product.price}kr{"  "}
 								Antal:{" "}
 								<ItemButton
-									text="-"
+									icon={<RemoveIcon />}
 									onClick={() => {
 										handleQuantityChange(product, -1); 
 									}}></ItemButton>
 								{getProductQuantity(product.id)}
 								<ItemButton
-									text="+"
+									icon={<AddIcon />}
 									onClick={() =>
 										handleQuantityChange(product, 1)
 									}></ItemButton>
@@ -46,7 +53,7 @@ function ShoppingCart() {
 						))}
 					</ul>
 					<h4>Total: {totalPrice}kr</h4>
-					<ItemButton text="Empty basket" onClick={clearCart} />
+					<ItemButton icon={<EmptyListIcon />} onClick={clearCart} />
 				</div>
 			)}
 		</div>

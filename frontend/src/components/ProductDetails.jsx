@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
+import { AddIcon, RemoveIcon, ReturnIcon } from "../assets/Icons.jsx";
 
 const ProductDetails = () => {
     const { addedProducts, 
@@ -11,7 +12,7 @@ const ProductDetails = () => {
             productsError, 
             getProductQuantity } = useShop();
 
-    const { id } = useParams();
+	const { id } = useParams();
 
     // Fetch product details by ID
     const selectedProduct = products.find(p => p.id === id);
@@ -26,7 +27,7 @@ const ProductDetails = () => {
         <div
             className="productDetails">
             <ItemButton
-                text="Tillbaka"
+                icon={<ReturnIcon />}
                 onClick={() => window.history.back()}
             />
             <div className="productInfo">
@@ -54,7 +55,7 @@ const ProductDetails = () => {
                 {quantity > 0 ? (
 							<>
 								<ItemButton
-									text="-"
+									icon={<RemoveIcon />}
 									onClick={() => {
 										handleQuantityChange(selectedProduct, -1);
 									}}
@@ -62,7 +63,7 @@ const ProductDetails = () => {
 
 								<p>{quantity}</p>
 								<ItemButton
-									text="+"
+									icon={<AddIcon />}
 									onClick={() => handleQuantityChange(selectedProduct, 1)}
 								/>
 							</>
@@ -73,15 +74,5 @@ const ProductDetails = () => {
 									handleQuantityChange(selectedProduct, 1);
 								}}
 							/>
-
-
-						)}
-            </div>
-
-        </div>
-
-    )
-}
-
 
 export default ProductDetails;
