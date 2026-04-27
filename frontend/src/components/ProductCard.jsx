@@ -2,6 +2,7 @@ import ItemButton from "./ItemButton";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import { Link } from "react-router-dom";
 import { useShop } from "../utils/context.jsx";
+import { AddIcon, RemoveIcon } from "../assets/Icons.jsx";
 
 function ProductCard({ products, activeCategory }) {
 	const { localQuantity, handleQuantityChange } = useShop();
@@ -35,12 +36,12 @@ function ProductCard({ products, activeCategory }) {
 							e.stopPropagation();
 						}}>
 						<ItemButton
-							text="-"
+							icon={<RemoveIcon />}
 							onClick={() => handleQuantityChange(u, -1)}
 						/>
 						<p>{localQuantity[u.id] ?? 0}</p>
 						<ItemButton
-							text="+"
+							icon={<AddIcon />}
 							onClick={() => handleQuantityChange(u, 1)}
 						/>
 					</div>
