@@ -1,17 +1,8 @@
-import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
+import { useShop } from "../utils/context";
 
-function ShoppingCart({
-	addedProducts,
-	onAddProduct,
-	displayQuantity,
-	onClearCart,
-}) {
-	const [isOpen, setIsOpen] = useState(false);
-
-	const toggleMenu = () => {
-		setIsOpen(!isOpen);
-	};
+function ShoppingCart() {
+    const {addedProducts, addProduct, displayQuantity, clearCart, isCartOpen, toggleCart, handleQuantityChange} = useShop();
 
 	const totalPrice =
 		addedProducts
@@ -21,11 +12,11 @@ function ShoppingCart({
 	return (
 		<div>
 			<ItemButton
-				onClick={toggleMenu}
+				onClick={toggleCart}
 				className="shoppingcart-btn"
-				text={isOpen ? "x" : "🛒"}
+				text={isCartOpen ? "x" : "🛒"}
 			/>
-			{isOpen && (
+			{isCartOpen && (
 				<div className="shopping-list">
 					<ul>
 						{addedProducts?.map((product) => (
@@ -39,20 +30,20 @@ function ShoppingCart({
 								<ItemButton
 									text="-"
 									onClick={() => {
-										onAddProduct(product, -1);
+										handleQuantityChange(product, -1, false); 
 									}}></ItemButton>
 								{displayQuantity[product.id] ??
 									product.quantity}
 								<ItemButton
 									text="+"
 									onClick={() =>
-										onAddProduct(product, 1)
+										handleQuantityChange(product, 1, false)
 									}></ItemButton>
 							</li>
 						))}
 					</ul>
 					<h4>Total: {totalPrice}kr</h4>
-					<ItemButton text="Empty basket" onClick={onClearCart} />
+					<ItemButton text="Empty basket" onClick={clearCart} />
 				</div>
 			)}
 		</div>

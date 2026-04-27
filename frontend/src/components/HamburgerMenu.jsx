@@ -1,15 +1,12 @@
-import { useState } from "react";
 import ItemButton from "./ItemButton";
+import { useShop } from "../utils/context";
 
-function HamburgerMenu({ categories, onCategorySelect }) {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleMenu = () =>
-        setIsOpen(!isOpen);
+function HamburgerMenu() {
+    const {categories, isMenuOpen, toggleMenu} = useShop();
 
     const handleCategoryClick = (category) => {
-        setIsOpen(false);
-        onCategorySelect(category)
+        toggleMenu();
+        // onCategorySelect(category)
     }
 
     return (
@@ -17,9 +14,9 @@ function HamburgerMenu({ categories, onCategorySelect }) {
             <ItemButton
                 onClick={toggleMenu}
                 className="hamburger-btn"
-                text={isOpen ? 'x' : '☰'}
+                text={isMenuOpen ? 'x' : '☰'}
             />
-            {isOpen && (
+            {isMenuOpen && (
                 <div className="menu-panel">
                     {categories?.map(category => (
                         <div
