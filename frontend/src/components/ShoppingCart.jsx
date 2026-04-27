@@ -18,6 +18,13 @@ function ShoppingCart() {
 		toggleCart,
 		handleQuantityChange,
 	} = useShop();
+import { useState } from "react";
+
+function ShoppingCart() {
+    const {addedProducts, displayQuantity, clearCart, handleQuantityChange} = useShop();
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
+        const toggleCart = () => setIsCartOpen(!isCartOpen);
 
 	const totalPrice =
 		addedProducts
