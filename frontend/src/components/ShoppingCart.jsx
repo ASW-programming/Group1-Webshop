@@ -10,8 +10,7 @@ import {
 import { useState } from "react";
 
 function ShoppingCart() {
-	const { addedProducts, displayQuantity, clearCart, handleQuantityChange } =
-		useShop();
+    const {addedProducts, getProductQuantity, clearCart, handleQuantityChange} = useShop();
 
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const toggleCart = () => setIsCartOpen(!isCartOpen);
@@ -41,18 +40,15 @@ function ShoppingCart() {
 								Antal:{" "}
 								<ItemButton
 									icon={<RemoveIcon />}
-									onClick={() =>
-										handleQuantityChange(product, -1, false)
-									}
-								/>
-								{displayQuantity[product.id] ??
-									product.quantity}
+									onClick={() => {
+										handleQuantityChange(product, -1); 
+									}}></ItemButton>
+								{getProductQuantity(product.id)}
 								<ItemButton
 									icon={<AddIcon />}
 									onClick={() =>
-										handleQuantityChange(product, 1, false)
-									}
-								/>
+										handleQuantityChange(product, 1)
+									}></ItemButton>
 							</li>
 						))}
 					</ul>
