@@ -4,13 +4,13 @@ import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
 
 const ProductDetails = () => {
-    const { localQuantity, handleQuantityChange, products, productsLoading, productsError } = useShop();
+    const { addedProducts, handleQuantityChange, products, productsLoading, productsError } = useShop();
 
     const { id } = useParams();
 
     // Fetch product details by ID
     const selectedProduct = products.find(p => p.id === id);
-
+    const productsInCart = addedProducts.find(p => p.id === selectedProduct.id);
     if (productsLoading) return <p>Loading product...</p>;
     if (productsError) return <p>Something went wrong!</p>;
     if (!selectedProduct) return <p>Product not found!</p>;
@@ -39,25 +39,36 @@ const ProductDetails = () => {
                     {selectedProduct.description}
                 </span>
             </div>
-
-            <ItemButton
-                text="Add to cart"
-                onClick={() => handleQuantityChange(selectedProduct, 1)}
-            />
             <div
                 className="cartButtons"
                 onClick={(e) => {
                     e.stopPropagation();
                 }}>
-                <ItemButton
-                    text="-"
-                    onClick={() => handleQuantityChange(selectedProduct, -1)}
-                />
-                <p>{localQuantity[selectedProduct.id] ?? 0}</p>
-                <ItemButton
-                    text="+"
-                    onClick={() => handleQuantityChange(selectedProduct, 1)}
-                />
+                {productsInCart ? (
+							<>
+								<ItemButton
+									text="-"
+									onClick={() => {
+										handleQuantityChange(selectedProduct, -1);
+									}}
+								/>
+
+								<p>{productsInCart.quantity}</p>
+								<ItemButton
+									text="+"
+									onClick={() => handleQuantityChange(selectedProduct, 1)}
+								/>
+							</>
+						) : (
+							<ItemButton
+								text="Köp"
+								onClick={() => {
+									handleQuantityChange(selectedProduct, 1);
+								}}
+							/>
+
+
+						)}
             </div>
 
         </div>

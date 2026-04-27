@@ -1,8 +1,12 @@
 import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
+import { useState } from "react";
 
 function ShoppingCart() {
-    const {addedProducts, addProduct, displayQuantity, clearCart, isCartOpen, toggleCart, handleQuantityChange} = useShop();
+    const {addedProducts, displayQuantity, clearCart, handleQuantityChange} = useShop();
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
+        const toggleCart = () => setIsCartOpen(!isCartOpen);
 
 	const totalPrice =
 		addedProducts

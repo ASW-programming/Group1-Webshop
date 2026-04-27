@@ -20,9 +20,6 @@ export function ShopProvider({ children }) {
 
 	// ===== CART FUNCTIONALITY =====
 
-	const [isCartOpen, setIsCartOpen] = useState(false);
-	const toggleCart = () => setIsCartOpen(!isCartOpen);
-
 	const [displayQuantity, setDisplayQuantity] = useState({});
 
 	const [addedProducts, setAddedProducts] = useState(() => {
@@ -67,8 +64,6 @@ export function ShopProvider({ children }) {
 	// ===== PRODUCTCARD AND PRODUCTDETAIL Functionality =====
 
 	const [localQuantity, setLocalQuantity] = useState({});
-	const timerRef = useRef({});
-	const pendingAmount = useRef({});
 
 	// Show in real time number of added products and send to shopping cart
 	const handleQuantityChange = (product, amount) => {
@@ -110,14 +105,10 @@ export function ShopProvider({ children }) {
 		addedProducts,
 		addProduct,
 		clearCart,
-		isCartOpen,
-		toggleCart,
 		// Local state for quantity changes
 		localQuantity,
 		handleQuantityChange,
 		//HamburgerMenu
-		isMenuOpen,
-		toggleMenu,
 		activeCategory,
 		selectCategory,
 	};
