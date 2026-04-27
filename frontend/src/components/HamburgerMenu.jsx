@@ -1,5 +1,6 @@
 import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
+import { HamburgerIcon, CancelIcon } from "../assets/Icons";
 import { useState } from "react";
 
 function HamburgerMenu() {
@@ -23,8 +24,9 @@ function HamburgerMenu() {
 			<ItemButton
 				onClick={toggleMenu}
 				className="hamburger-btn"
-				text={isMenuOpen ? "x" : "☰"}
+				icon={isMenuOpen ? <CancelIcon /> : <HamburgerIcon />}
 			/>
+
 			{isMenuOpen && (
 				<div className="menu-panel">
 					{categories?.map((category) => (
