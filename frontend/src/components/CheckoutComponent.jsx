@@ -2,12 +2,24 @@ import { useState } from "react";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import { postOrders } from "../utils/calls.js";
-import { useQuery } from "@tanstack/react-query";
 import { useShop } from "../utils/context.jsx";
+import { useMutation } from "@tanstack/react-query";
 
 function CheckoutComponent() {
 	const [customer, setCustomer] = useState("");
 	const { addedProducts, clearCart } = useShop();
+
+	const { mutate, isPending } = useMutation({
+		mutationFn: postOrders,
+		onSuccess: () => {
+			clearCart();
+			setCustomer("");
+			alert("Order Placed");
+		},
+		onError: (error) => {
+			console.error("Something went wrong:", error);
+		},
+	});
 
 	const placeOrders = async (e) => {
 		e.preventDefault();
@@ -18,7 +30,7 @@ function CheckoutComponent() {
 			return sum + item.price * item.quantity;
 		}, 0);
 
-		await postOrders({
+		mutate({
 			customer: customer,
 			items: addedProducts,
 			price: totalPrice,
@@ -36,7 +48,11 @@ function CheckoutComponent() {
 					onChange={(e) => setCustomer(e.target.value)}
 					value={customer}
 				/>
-				<ItemButton type="submit" text="Order" />
+				<ItemButton
+					type="submit"
+					text={isPending ? "Skickar..." : "Order"}
+					disabled={isPending}
+				/>
 			</form>
 		</div>
 	);
