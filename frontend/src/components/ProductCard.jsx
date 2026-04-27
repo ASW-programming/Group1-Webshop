@@ -6,9 +6,7 @@ import { AddIcon, RemoveIcon } from "../assets/Icons.jsx";
 import { useState, useEffect } from "react";
 
 function ProductCard({ products, activeCategory }) {
-	const { addedProducts, handleQuantityChange } = useShop();
-
-	
+	const { handleQuantityChange, getProductQuantity } = useShop();
 
 	const filteredProducts = products.filter(
 		(u) => !activeCategory || u.category === activeCategory,
@@ -17,7 +15,7 @@ function ProductCard({ products, activeCategory }) {
 	return (
 		<div className="productList">
 			{filteredProducts.map((u) => {
-				const productsInCart = addedProducts.find(p => p.id === u.id);
+				const quantity = getProductQuantity(u.id);
 				return (
 					<li key={u.id} className="productListElement">
 						<Link to={`/product/${u.id}`}>
@@ -40,8 +38,7 @@ function ProductCard({ products, activeCategory }) {
 						onClick={(e) => {
 							e.stopPropagation();
 						}}>
-
-						{productsInCart ? (
+						{quantity > 0 ? (
 							<>
 								<ItemButton
 									icon={<RemoveIcon />}
@@ -50,7 +47,7 @@ function ProductCard({ products, activeCategory }) {
 									}}
 								/>
 
-								<p>{productsInCart.quantity}</p>
+								<p>{quantity}</p>
 								<ItemButton
 									icon={<AddIcon />}
 									onClick={() => handleQuantityChange(u, 1)}
