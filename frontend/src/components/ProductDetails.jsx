@@ -69,10 +69,13 @@ const ProductDetails = () => {
 							</>
 						) : (
 							<ItemButton
-								text="Köp"
-								onClick={() => {
-									handleQuantityChange(selectedProduct, 1);
-								}}
-							/>
+                                text="Köp"
+                                onClick={() => {
+                                    handleQuantityChange(selectedProduct, 1);
+                                }}
+                            />
+                            )}
+                            </div>
+                            </div>)}
 
 export default ProductDetails;
