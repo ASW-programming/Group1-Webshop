@@ -3,20 +3,18 @@ import { priceInfo } from "../utils/priceSetter.jsx";
 import { Link } from "react-router-dom";
 import { useShop } from "../utils/context.jsx";
 
+function ProductCard({ products, activeCategory }) {
+	const { localQuantity, handleQuantityChange } = useShop();
 
-function ProductCard({products}) { 
-	const { localQuantity, handleQuantityChange} = useShop()
+	const filteredProducts = products.filter(
+		(u) => !activeCategory || u.category === activeCategory,
+	);
 
-	
 	return (
-			
-			<div className="productList">
-				{products.map((u) => (
-					<li
-						key={u.id}
-						className="productListElement"
-						>
-						<Link to={`/product/${u.id}`}>
+		<div className="productList">
+			{filteredProducts.map((u) => (
+				<li key={u.id} className="productListElement">
+					<Link to={`/product/${u.id}`}>
 						<div className="productInformation">
 							<img
 								className="productImage"
@@ -30,25 +28,25 @@ function ProductCard({products}) {
 								{u.description.slice(0, 30)}
 							</span>
 						</div>
-						</Link>
-						<div
-							className="cartButtons"
-							onClick={(e) => {
-								e.stopPropagation();
-							}}>
-							<ItemButton
-								text="-"
-								onClick={() => handleQuantityChange(u, -1)}
-							/>
-							<p>{localQuantity[u.id] ?? 0}</p>
-							<ItemButton
-								text="+"
-								onClick={() => handleQuantityChange(u, 1)}
-							/>
-						</div>
-					</li>
-				))}
-			</div>
+					</Link>
+					<div
+						className="cartButtons"
+						onClick={(e) => {
+							e.stopPropagation();
+						}}>
+						<ItemButton
+							text="-"
+							onClick={() => handleQuantityChange(u, -1)}
+						/>
+						<p>{localQuantity[u.id] ?? 0}</p>
+						<ItemButton
+							text="+"
+							onClick={() => handleQuantityChange(u, 1)}
+						/>
+					</div>
+				</li>
+			))}
+		</div>
 	);
 }
 
