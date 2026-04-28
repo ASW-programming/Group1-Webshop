@@ -15,6 +15,7 @@ function ShoppingCart() {
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const toggleCart = () => setIsCartOpen(!isCartOpen);
 
+
 	const totalPrice =
 		addedProducts
 			?.map((product) => product.price * product.quantity)
