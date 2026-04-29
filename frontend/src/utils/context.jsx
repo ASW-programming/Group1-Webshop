@@ -78,16 +78,14 @@ export function ShopProvider({ children }) {
 			return { ...prev, [product.id]: newQty };
 		});
 
-			addProduct(product, amount);
-		
+		addProduct(product, amount);
 	};
 
-    const getProductQuantity = (productId) => {
-        const found = addedProducts.find(p => p.id === productId);
-        return found ? found.quantity : 0;
-    }
+	const getProductQuantity = (productId) => {
+		const found = addedProducts.find((p) => p.id === productId);
+		return found ? found.quantity : 0;
+	};
 	//===== HAMBURGERMENU =====
-
 
 	const [activeCategory, setActiveCategory] = useState(null);
 

@@ -47,8 +47,9 @@ const ScrollBanner = ({ slides = [] }) => {
 	return (
         <div className="scrollBannerContainer">
 		<div className="scrollBanner">
-			<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
+			<ItemButton title="Previous slide" onClick={prevSlide} icon={<ArrowIcon />} />
             <div className="bannerContent">
+
 			<img src={slide.image} alt="banner" className="banner-image" />
 
 			<div className="bannerText">
@@ -59,6 +60,7 @@ const ScrollBanner = ({ slides = [] }) => {
 			</div>
             </div>
 			<ItemButton
+				title="Next slide"
 				onClick={nextSlide}
 				icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
 			/>
