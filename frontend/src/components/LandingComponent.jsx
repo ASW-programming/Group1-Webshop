@@ -4,7 +4,7 @@ import { useShop } from "../utils/context.jsx";
 import { useSearchParams } from "react-router-dom";
 
 function LandingComponent() {
-    const { products, productsLoading, productsError } = useShop();
+    const { products, productsLoading, productsError, activeCategory } = useShop();
     const [searchParams] = useSearchParams();
     const input = searchParams.get("q")?.toLowerCase() ?? "";
 
@@ -41,9 +41,10 @@ function LandingComponent() {
             {input && filteredProducts.length === 0 && (
                 <p className="statusText">No products found</p>
             )}
-            <ProductCard products={filteredProducts} />
+            <ProductCard products={filteredProducts} activeCategory={activeCategory}/>
         </div>
     );
+
 }
 
 export default LandingComponent;

@@ -74,28 +74,37 @@ app.get("/api/products/:id", async (req, res) => {
 // ENDPOINT 1: POST /api/products (För en produkt i taget)
 // ---------------------------------------------------------
 
-app.post('/api/addProduct', async (req, res) => {
-    try {
-        const productData = req.body
+app.post("/api/addProduct", async (req, res) => {
+	try {
+		const productData = req.body;
 
-        // Enkel validering
-        if (!productData.name || !productData.price || !productData.category || !productData.description || !productData.imageUrl || !productData.stock) {
-            return res.status(400).json({ error: 'Namn, pris, kategori, beskrivning, bild-URL och lager är obligatoriska fält.' })
-        }
+		// Enkel validering
+		if (
+			!productData.name ||
+			!productData.price ||
+			!productData.category ||
+			!productData.description ||
+			!productData.imageUrl ||
+			!productData.stock
+		) {
+			return res.status(400).json({
+				error: "Namn, pris, kategori, beskrivning, bild-URL och lager är obligatoriska fält.",
+			});
+		}
 
-        // Lägg till i Firestore-kollektionen 'products'
-        const docRef = await db.collection('products').add(productData)
+		// Lägg till i Firestore-kollektionen 'products'
+		const docRef = await db.collection("products").add(productData);
 
-        res.status(201).json({
-            message: 'Produkt skapad!',
-            id: docRef.id,
-            product: productData,
-        })
-    } catch (error) {
-        console.error('Fel vid tillägg av produkt:', error)
-        res.status(500).json({ error: 'Ett internt serverfel uppstod.' })
-    }
-})
+		res.status(201).json({
+			message: "Produkt skapad!",
+			id: docRef.id,
+			product: productData,
+		});
+	} catch (error) {
+		console.error("Fel vid tillägg av produkt:", error);
+		res.status(500).json({ error: "Ett internt serverfel uppstod." });
+	}
+});
 
 // ---------------------------------------------------------
 // ENDPOINT 2: POST /api/products/bulk (För att skicka in hela arrayen)
@@ -152,7 +161,7 @@ app.route("/api/orders")
 
 			res.status(200).json(orders);
 		} catch (error) {
-			console.log("Something wrong with get-endpoint.");
+			console.log("Something wrong with get-endpoint.", error.message);
 			res.status(500).send("Something wrong in the server.");
 		}
 	})
@@ -179,7 +188,7 @@ app.route("/api/orders")
 				...newOrder,
 			});
 		} catch (error) {
-			console.log("Something wrong with post-endpoint");
+			console.log("Fel:", error.message);
 			res.status(500).send("Something wrong in the server.");
 		}
 	});

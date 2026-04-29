@@ -7,8 +7,9 @@ function ItemInput(props) {
             placeholder={props.placeholder}
             onChange={props.onChange}
             onKeyDown={props.onKeyDown}
+            value={props.value}
         />
     )
 }
 
-export default ItemInput
+export default ItemInput;

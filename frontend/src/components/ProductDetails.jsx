@@ -1,25 +1,33 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
+import { AddIcon, RemoveIcon, ReturnIcon } from "../assets/Icons.jsx";
 
 const ProductDetails = () => {
-    const { localQuantity, handleQuantityChange, products, productsLoading, productsError } = useShop();
+    const { addedProducts, 
+            handleQuantityChange, 
+            products, 
+            productsLoading, 
+            productsError, 
+            getProductQuantity } = useShop();
 
-    const { id } = useParams();
+	const { id } = useParams();
 
     // Fetch product details by ID
     const selectedProduct = products.find(p => p.id === id);
-
+    
     if (productsLoading) return <p>Loading product...</p>;
     if (productsError) return <p>Something went wrong!</p>;
     if (!selectedProduct) return <p>Product not found!</p>;
+
+    const quantity = getProductQuantity(selectedProduct.id);
 
     return (
         <div
             className="productDetails">
             <ItemButton
-                text="Tillbaka"
+                icon={<ReturnIcon />}
                 onClick={() => window.history.back()}
             />
             <div className="productInfo">
@@ -39,31 +47,35 @@ const ProductDetails = () => {
                     {selectedProduct.description}
                 </span>
             </div>
-
-            <ItemButton
-                text="Add to cart"
-                onClick={() => handleQuantityChange(selectedProduct, 1)}
-            />
             <div
                 className="cartButtons"
                 onClick={(e) => {
                     e.stopPropagation();
                 }}>
-                <ItemButton
-                    text="-"
-                    onClick={() => handleQuantityChange(selectedProduct, -1)}
-                />
-                <p>{localQuantity[selectedProduct.id] ?? 0}</p>
-                <ItemButton
-                    text="+"
-                    onClick={() => handleQuantityChange(selectedProduct, 1)}
-                />
-            </div>
+                {quantity > 0 ? (
+							<>
+								<ItemButton
+									icon={<RemoveIcon />}
+									onClick={() => {
+										handleQuantityChange(selectedProduct, -1);
+									}}
+								/>
 
-        </div>
-
-    )
-}
-
+								<p>{quantity}</p>
+								<ItemButton
+									icon={<AddIcon />}
+									onClick={() => handleQuantityChange(selectedProduct, 1)}
+								/>
+							</>
+						) : (
+							<ItemButton
+                                text="Köp"
+                                onClick={() => {
+                                    handleQuantityChange(selectedProduct, 1);
+                                }}
+                            />
+                            )}
+                            </div>
+                            </div>)}
 
 export default ProductDetails;
