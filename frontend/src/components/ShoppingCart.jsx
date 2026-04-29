@@ -1,5 +1,5 @@
 import ItemButton from "./ItemButton";
-import { useShop } from "../utils/context";
+import { useShop } from "../utils/context.jsx";
 import {
 	AddIcon,
 	CancelIcon,

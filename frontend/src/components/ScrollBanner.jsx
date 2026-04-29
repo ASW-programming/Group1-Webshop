@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import ItemButton from "./ItemButton";
 import { ArrowIcon, EnterIcon } from "../assets/Icons";
+import { useNavigate } from "react-router-dom";
 
 const ScrollBanner = ({ slides = [] }) => {
 	const [current, setCurrent] = useState(0);
 	const intervalRef = useRef(null);
+	const navigate = useNavigate();
 
 	// Start / Restart timer.
 	const startTimer = () => {
@@ -45,27 +47,45 @@ const ScrollBanner = ({ slides = [] }) => {
 	const slide = slides[current];
 
 	return (
-        <div className="scrollBannerContainer">
-		<div className="scrollBanner">
-			<ItemButton title="Previous slide" onClick={prevSlide} icon={<ArrowIcon />} />
-            <div className="bannerContent">
+		<div className="scrollBannerContainer">
+			<div className="scrollBanner">
+				<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
+				<div
+					className="bannerContent"
+					onClick={() => navigate(`/product/${slide.id}`)}>
+					<img
+						src={slide.image}
+						alt="banner"
+						className="banner-image"
+					/>
 
-			<img src={slide.image} alt="banner" className="banner-image" />
+					<div className="bannerText">
+						{slide.title && <h3>{slide.title}</h3>}
+						{slide.subtitle && <p>{slide.subtitle}</p>}
 
-			<div className="bannerText">
-				{slide.title && <h3>{slide.title}</h3>}
-				{slide.subtitle && <p>{slide.subtitle}</p>}
-
-			
+						{slide.price && (
+							<div className="banner-price">
+								<span className="sale-price">
+									{slide.price} kr
+								</span>
+								<span
+									className="original-price"
+									style={{
+										textDecoration: "line-through",
+										marginLeft: "10px",
+									}}>
+									{slide.originalPrice} kr
+								</span>
+							</div>
+						)}
+					</div>
+				</div>
+				<ItemButton
+					onClick={nextSlide}
+					icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
+				/>
 			</div>
-            </div>
-			<ItemButton
-				title="Next slide"
-				onClick={nextSlide}
-				icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
-			/>
 		</div>
-        </div>
 	);
 };
 
