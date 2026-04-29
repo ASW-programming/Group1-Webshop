@@ -4,15 +4,11 @@ import { HamburgerIcon, CancelIcon } from "../assets/Icons";
 import { useState } from "react";
 
 function HamburgerMenu() {
-	const {
-		categories,
-		activeCategory,
-		selectCategory,
-	} = useShop();
+	const { categories, activeCategory, selectCategory } = useShop();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
-        const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
 	const handleCategoryClick = (category) => {
 		selectCategory(category);
@@ -22,17 +18,18 @@ function HamburgerMenu() {
 	return (
 		<div>
 			<ItemButton
+				title={isMenuOpen ? "Close Menu" : "Show Categories"}
 				onClick={toggleMenu}
-				className="hamburger-btn"
+				className="hamburgerBtn"
 				icon={isMenuOpen ? <CancelIcon /> : <HamburgerIcon />}
 			/>
 
 			{isMenuOpen && (
-				<div className="menu-panel">
+				<div className="menuPanel">
 					{categories?.map((category) => (
 						<div
 							key={category}
-							className={`category-item ${activeCategory === category ? "active" : ""}`}
+							className={`categoryItem ${activeCategory === category ? "activeCategory" : ""}`}
 							onClick={() => handleCategoryClick(category)}>
 							<span>
 								{activeCategory === category ? "✓ " : ""}

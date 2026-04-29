@@ -1,12 +1,31 @@
 import ProductCard from "./ProductCard";
 import ScrollBanner from "./ScrollBanner.jsx";
 import { useShop } from "../utils/context.jsx";
+import ItemButton from "./ItemButton.jsx";
+import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function LandingComponent() {
 	const { products, productsLoading, productsError, activeCategory } =
 		useShop();
+	const [searchParams] = useSearchParams();
+	const input = searchParams.get("q")?.toLowerCase() ?? "";
+	const discountedProducts = products.filter((p) => p.reducedPrice);
 
-	const discountedProducts = products.filter((p) => p.reducedPrice)
+	// Filters products based on search
+	const filteredProducts = input
+		? products.filter((p) => {
+				const regex = new RegExp(
+					`(^|[^a-zA-Z0-9åäöÅÄÖ])${input}([^a-zA-Z0-9åäöÅÄÖ]|$)`,
+					"i",
+				);
+				return (
+					regex.test(p.tags) ||
+					regex.test(p.name) ||
+					regex.test(p.category)
+				);
+			})
+		: products;
 
 	// Slides
 	const slidesData = discountedProducts.map((u) => ({
@@ -25,7 +44,13 @@ function LandingComponent() {
 	return (
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
-			<ProductCard products={products} activeCategory={activeCategory} />
+			{input && filteredProducts.length === 0 && (
+				<p className="statusText">No products found</p>
+			)}
+			<ProductCard
+				products={filteredProducts}
+				activeCategory={activeCategory}
+			/>
 		</div>
 	);
 }

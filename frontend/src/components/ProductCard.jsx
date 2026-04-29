@@ -22,39 +22,47 @@ function ProductCard({ products, activeCategory }) {
 							<div className="productInformation">
 								<img
 									className="productImage"
-								src={u.imageUrl}></img>
-							<span className="productName">{u.name}</span>
-							<span className="productCategory">
-								{u.category}
-							</span>
-							<span className="productPrice">{priceInfo(u)}</span>
-							<span className="productDescription">
-								{u.description.slice(0, 30)}
-							</span>
-						</div>
-					</Link>
-					<div
-						className="cartButtons"
-						onClick={(e) => {
-							e.stopPropagation();
-						}}>
-						{quantity > 0 ? (
-							<>
-								<ItemButton
-									icon={<RemoveIcon />}
-									onClick={() => {
-										handleQuantityChange(u, -1);
-									}}
-								/>
+									src={u.imageUrl}></img>
+								<span className="productName">{u.name}</span>
+								<span className="productCategory">
+									{u.category}
+								</span>
+								<span className="productPrice">
+									{priceInfo(u)}
+								</span>
+								<span className="productDescription">
+									{u.description.slice(0, 30)}
+								</span>
+							</div>
+						</Link>
+						<div
+							className="cartButtons"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}>
+							{quantity > 0 ? (
+								<>
+									<ItemButton
+										title="Remove one product"
+										icon={<RemoveIcon />}
+										onClick={() => {
+											handleQuantityChange(u, -1);
+										}}
+									/>
 
-								<p>{quantity}</p>
-								<ItemButton
-									icon={<AddIcon />}
-									onClick={() => handleQuantityChange(u, 1)}
-								/>
-							</>
-						) : (
+									<p>{quantity}</p>
+									<ItemButton
+                    className="addButton"
+										title="Add one product"
+										icon={<AddIcon />}
+										onClick={() =>
+											handleQuantityChange(u, 1)
+										}
+									/>
+								</>
+							) : (
 							<ItemButton
+								className="buyButton"
 								text="Köp"
 								onClick={() => {
 									handleQuantityChange(u, 1);
