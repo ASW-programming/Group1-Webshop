@@ -6,8 +6,9 @@ function ItemHeader() {
 
 	return (
 		<header className="header">
+			<div className="headerContainer">
 			<div className="headerTitle">
-				<h1>Webshop</h1>
+				<h1>GigaMat</h1>
 			</div>
 
 			<div className="headerNav">
@@ -16,7 +17,7 @@ function ItemHeader() {
 				</div>
 
 				<div className="headerSearch">
-					<ItemInput placeholder="Sök..." />
+					<ItemInput placeholder="Sök..." className="headerSearchInput"/>
 					<span className="searchIcon">🔍</span>
 				</div>
 
@@ -25,6 +26,7 @@ function ItemHeader() {
 						
 					/>
 				</div>
+			</div>
 			</div>
 		</header>
 	);

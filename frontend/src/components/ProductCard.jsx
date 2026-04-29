@@ -41,6 +41,7 @@ function ProductCard({ products, activeCategory }) {
 						{quantity > 0 ? (
 							<>
 								<ItemButton
+									className="removeButton"
 									icon={<RemoveIcon />}
 									onClick={() => {
 										handleQuantityChange(u, -1);
@@ -49,12 +50,14 @@ function ProductCard({ products, activeCategory }) {
 
 								<p>{quantity}</p>
 								<ItemButton
+									className="addButton"
 									icon={<AddIcon />}
 									onClick={() => handleQuantityChange(u, 1)}
 								/>
 							</>
 						) : (
 							<ItemButton
+								className="buyButton"
 								text="Köp"
 								onClick={() => {
 									handleQuantityChange(u, 1);

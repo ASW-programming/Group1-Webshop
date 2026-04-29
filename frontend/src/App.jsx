@@ -11,7 +11,6 @@ function App() {
 	return (
 		<div>
 			<ShopProvider>
-				<CheckoutComponent />
 				<Router>
 					<ItemHeader />
 

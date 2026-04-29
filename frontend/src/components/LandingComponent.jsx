@@ -9,8 +9,8 @@ function LandingComponent() {
 	// Slides
 	const slidesData = products.map((u) => ({
 		image: u.imageUrl,
-		title: u.title,
-		subtitle: u.description,
+		title: u.name,
+		subtitle: u.description.slice(0, 100),
 		buttonText: "View",
 		onClick: () => console.log(u.id),
 	}));
