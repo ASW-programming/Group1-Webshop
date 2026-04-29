@@ -158,7 +158,7 @@ button{
 	margin: 10px 0;
 }
 
-.shoppingListItems {
+.productTable {
 	display: flex;
 	flex-direction: column;
 	list-style: none;
@@ -264,6 +264,7 @@ button{
 	justify-content: center;
 	align-items: center;
 	background-color: white;
+	height: 300px;
 
 }
 
@@ -352,7 +353,6 @@ button{
 	border-radius: 5px;
 	cursor: pointer;
 	border: solid 1px black;
-	
 }
 
 .addButton {
