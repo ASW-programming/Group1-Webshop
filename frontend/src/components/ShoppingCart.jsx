@@ -1,5 +1,5 @@
 import ItemButton from "./ItemButton";
-import { useShop } from "../utils/context";
+import { useShop } from "../utils/context.jsx";
 import {
 	AddIcon,
 	CancelIcon,
@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 
 function ShoppingCart() {
-    const {addedProducts, getProductQuantity, clearCart, handleQuantityChange} = useShop();
+	const { addedProducts, getProductQuantity, clearCart, handleQuantityChange } = useShop();
 
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const toggleCart = () => setIsCartOpen(!isCartOpen);
@@ -42,7 +42,7 @@ function ShoppingCart() {
 								<ItemButton
 									icon={<RemoveIcon />}
 									onClick={() => {
-										handleQuantityChange(product, -1); 
+										handleQuantityChange(product, -1);
 									}}></ItemButton>
 								{getProductQuantity(product.id)}
 								<ItemButton

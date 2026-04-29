@@ -6,13 +6,17 @@ function LandingComponent() {
 	const { products, productsLoading, productsError, activeCategory } =
 		useShop();
 
+	const discountedProducts = products.filter((p) => p.reducedPrice)
+
 	// Slides
-	const slidesData = products.map((u) => ({
+	const slidesData = discountedProducts.map((u) => ({
+		id: u.id,
 		image: u.imageUrl,
-		title: u.title,
+		title: u.name,
 		subtitle: u.description,
+		price: u.reducedPrice,
+		originalPrice: u.price,
 		buttonText: "View",
-		onClick: () => console.log(u.id),
 	}));
 
 	if (productsLoading) return <p>Loading products...</p>;

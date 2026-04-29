@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import { postOrders } from "../utils/calls.js";
-import { useShop } from "../utils/contex.jsx";
+import { useShop } from "../utils/context.jsx";
 import { useMutation } from "@tanstack/react-query";
 import { AddIcon, RemoveIcon, EmptyListIcon } from "../assets/Icons";
 
