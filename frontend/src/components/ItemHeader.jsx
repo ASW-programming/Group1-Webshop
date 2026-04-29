@@ -9,61 +9,66 @@ import { SearchIcon } from "../assets/Icons";
 import { Link } from "react-router-dom";
 
 function ItemHeader() {
-    const inputRef = useRef("");
-    const navigate = useNavigate();
+	const inputRef = useRef("");
+	const navigate = useNavigate();
 	const location = useLocation();
 	const shopName = "GigaMat";
-	
-	if (location.pathname === "/checkout" || location.pathname === "/orderHistory")
+
+	if (
+		location.pathname === "/checkout" ||
+		location.pathname === "/orderHistory"
+	)
 		return (
 			<div className="headerTitle">
-				<h1>{shopName}</h1>
+				<Link to="/">
+					<h1>{shopName}</h1>
+				</Link>
 			</div>
 		);
-		
-	const handleSearch = () => {
-        const value = inputRef.current.trim();
-        if (value) navigate(`/?q=${encodeURIComponent(value)}`);
-    };
 
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter") handleSearch();
-    };
-	
+	const handleSearch = () => {
+		const value = inputRef.current.trim();
+		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") handleSearch();
+	};
+
 	return (
-        <header className="header">
-            <div className="headerTitle">
-                <Link to="/">
-                    <h1>Webshop</h1>
-                </Link>
-            </div>
+		<header className="header">
+			<div className="headerTitle">
+				<Link to="/">
+					<h1>GigaMat</h1>
+				</Link>
+			</div>
 
 			<div className="headerNav">
-                <div className="headerMenu">
-                    <HamburgerMenu />
-                </div>
-				
-				<div className="headerSearch">
-                    <ItemInput
-                        placeholder="Sök..."
-                        onChange={(e) => {
-                            inputRef.current = e.target.value;
-                        }}
-                        onKeyDown={handleKeyDown}
-                    />
-                    <ItemButton
-                        type="button"
-                        icon={<SearchIcon />}
-                        onClick={handleSearch}
-                    />
-                </div>
+				<div className="headerMenu">
+					<HamburgerMenu />
+				</div>
 
-                <div className="headerCart">
-                    <ShoppingCart />
-                </div>
-            </div>
-        </header>
-    );
+				<div className="headerSearch">
+					<ItemInput
+						placeholder="Sök..."
+						onChange={(e) => {
+							inputRef.current = e.target.value;
+						}}
+						onKeyDown={handleKeyDown}
+					/>
+					<ItemButton
+						type="button"
+						icon={<SearchIcon />}
+						onClick={handleSearch}
+					/>
+				</div>
+
+				<div className="headerCart">
+					<ShoppingCart />
+				</div>
+			</div>
+		</header>
+	);
 }
 
 export default ItemHeader;
