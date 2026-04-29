@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
+import { useShop } from "../utils/context";
+import {
+	AddIcon,
+	CancelIcon,
+	EmptyListIcon,
+	RemoveIcon,
+	ShoppingCartIcon,
+} from "../assets/Icons";
+import { useState } from "react";
 
-function ShoppingCart({
-	addedProducts,
-	onAddProduct,
-	displayQuantity,
-	onClearCart,
-}) {
-	const [isOpen, setIsOpen] = useState(false);
+function ShoppingCart() {
+    const {addedProducts, getProductQuantity, clearCart, handleQuantityChange} = useShop();
 
-	const toggleMenu = () => {
-		setIsOpen(!isOpen);
-	};
+	const [isCartOpen, setIsCartOpen] = useState(false);
+	const toggleCart = () => setIsCartOpen(!isCartOpen);
+
 
 	const totalPrice =
 		addedProducts
@@ -21,11 +24,11 @@ function ShoppingCart({
 	return (
 		<div>
 			<ItemButton
-				onClick={toggleMenu}
+				onClick={toggleCart}
 				className="shoppingcart-btn"
-				text={isOpen ? "x" : "🛒"}
+				icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
 			/>
-			{isOpen && (
+			{isCartOpen && (
 				<div className="shopping-list">
 					<ul>
 						{addedProducts?.map((product) => (
@@ -37,22 +40,21 @@ function ShoppingCart({
 								{product.name} {product.price}kr{"  "}
 								Antal:{" "}
 								<ItemButton
-									text="-"
+									icon={<RemoveIcon />}
 									onClick={() => {
-										onAddProduct(product, -1);
+										handleQuantityChange(product, -1); 
 									}}></ItemButton>
-								{displayQuantity[product.id] ??
-									product.quantity}
+								{getProductQuantity(product.id)}
 								<ItemButton
-									text="+"
+									icon={<AddIcon />}
 									onClick={() =>
-										onAddProduct(product, 1)
+										handleQuantityChange(product, 1)
 									}></ItemButton>
 							</li>
 						))}
 					</ul>
 					<h4>Total: {totalPrice}kr</h4>
-					<ItemButton text="Empty basket" onClick={onClearCart} />
+					<ItemButton icon={<EmptyListIcon />} onClick={clearCart} />
 				</div>
 			)}
 		</div>

@@ -1,40 +1,49 @@
-import { useState } from "react";
 import ItemButton from "./ItemButton";
+import { useShop } from "../utils/context";
+import { HamburgerIcon, CancelIcon } from "../assets/Icons";
+import { useState } from "react";
 
-function HamburgerMenu({ categories, onCategorySelect }) {
-    const [isOpen, setIsOpen] = useState(false);
+function HamburgerMenu() {
+	const {
+		categories,
+		activeCategory,
+		selectCategory,
+	} = useShop();
 
-    const toggleMenu = () =>
-        setIsOpen(!isOpen);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+        const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    const handleCategoryClick = (category) => {
-        setIsOpen(false);
-        onCategorySelect(category)
-    }
+	const handleCategoryClick = (category) => {
+		selectCategory(category);
+		toggleMenu();
+	};
 
-    return (
-        <div>
-            <ItemButton
-                onClick={toggleMenu}
-                className="hamburger-btn"
-                text={isOpen ? 'x' : '☰'}
-            />
-            {isOpen && (
-                <div className="menu-panel">
-                    {categories?.map(category => (
-                        <div
-                            key={category}
-                            className="category-item"
-                            onClick={() => handleCategoryClick(category)}
-                        >
-                            {category}
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-    )
+	return (
+		<div>
+			<ItemButton
+				onClick={toggleMenu}
+				className="hamburger-btn"
+				icon={isMenuOpen ? <CancelIcon /> : <HamburgerIcon />}
+			/>
+
+			{isMenuOpen && (
+				<div className="menu-panel">
+					{categories?.map((category) => (
+						<div
+							key={category}
+							className={`category-item ${activeCategory === category ? "active" : ""}`}
+							onClick={() => handleCategoryClick(category)}>
+							<span>
+								{activeCategory === category ? "✓ " : ""}
+							</span>
+							{category}
+						</div>
+					))}
+				</div>
+			)}
+		</div>
+	);
 }
-
 
 export default HamburgerMenu;

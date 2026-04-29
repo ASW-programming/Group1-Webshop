@@ -19,3 +19,31 @@ export const getProducts = async (id = null) => {
 
 	return response.json();
 };
+
+export const postOrders = async (orderData) => {
+	const postOrder = await fetch(`${BASE_URL}/api/orders`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(orderData),
+	});
+
+	if (!postOrder.ok) {
+		throw new Error("Failed to create order");
+	}
+
+	const data = await postOrder.json();
+	return data;
+};
+
+export const getOrders = async (req, res) => {
+	const getOrder = await fetch(`${BASE_URL}/api/orders`, {
+		method: "GET",
+	});
+
+	if (!getOrder.ok) {
+		throw new Error("Failed to get orders");
+	}
+
+	const data = await getOrder.json();
+	return data;
+};
