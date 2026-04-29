@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import { postOrders } from "../utils/calls.js";
-import { useShop } from "../utils/contex.jsx";
+import { useShop } from "../utils/context.jsx";
 import { useMutation } from "@tanstack/react-query";
-import { AddIcon, RemoveIcon, EmptyListIcon } from "../assets/Icons";
+import {
+	AddIcon,
+	RemoveIcon,
+	EmptyListIcon,
+	ReturnIcon,
+	HomeIcon,
+} from "../assets/Icons";
+import { Link } from "react-router-dom";
 
 function CheckoutComponent() {
 	const [customer, setCustomer] = useState("");
@@ -56,6 +63,10 @@ function CheckoutComponent() {
 					We will let you know when your order is ready for you to
 					pick it up!
 				</p>
+				<ItemButton
+					icon={<ReturnIcon />}
+					onClick={() => window.history.back()}
+				/>
 			</div>
 		);
 	}
@@ -167,7 +178,17 @@ function CheckoutComponent() {
 						disabled={isPending}
 					/>
 				</form>
+				<ItemButton
+					icon={<ReturnIcon />}
+					onClick={() => window.history.back()}
+				/>
+				<Link to="/">
+					<ItemButton icon={<HomeIcon />} />
+				</Link>
 			</div>
+			<Link to="/orderHistory">
+				<ItemButton text="Order historik" />
+			</Link>
 		</div>
 	);
 }

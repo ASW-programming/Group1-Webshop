@@ -1,6 +1,8 @@
 import ProductCard from "./ProductCard";
 import ScrollBanner from "./ScrollBanner.jsx";
 import { useShop } from "../utils/context.jsx";
+import ItemButton from "./ItemButton.jsx";
+import { Link } from "react-router-dom";
 
 function LandingComponent() {
 	const { products, productsLoading, productsError, activeCategory } =
@@ -20,6 +22,9 @@ function LandingComponent() {
 
 	return (
 		<div className="content">
+			<Link to="/orderHistory">
+				<ItemButton text="Order historik" />
+			</Link>
 			<ScrollBanner slides={slidesData} />
 			<ProductCard products={products} activeCategory={activeCategory} />
 		</div>
