@@ -47,35 +47,43 @@ const ScrollBanner = ({ slides = [] }) => {
 	const slide = slides[current];
 
 	return (
-		<div className="scrollBanner">
-			<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
-			<div onClick={() => navigate(`/product/${slide.id}`)}>
-				<img src={slide.image} alt="banner" className="banner-image" />
+		<div className="scrollBannerContainer">
+			<div className="scrollBanner">
+				<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
+				<div onClick={() => navigate(`/product/${slide.id}`)}>
+					<img
+						src={slide.image}
+						alt="banner"
+						className="banner-image"
+					/>
 
-				<div className="text">
-					{slide.title && <h2>{slide.title}</h2>}
-					{slide.subtitle && <p>{slide.subtitle}</p>}
+					<div className="text">
+						{slide.title && <h2>{slide.title}</h2>}
+						{slide.subtitle && <p>{slide.subtitle}</p>}
 
-					{slide.price && (
-						<div className="banner-price">
-							<span className="sale-price">{slide.price} kr</span>
-							<span
-								className="original-price"
-								style={{
-									textDecoration: "line-through",
-									marginLeft: "10px",
-								}}>
-								{slide.originalPrice} kr
-							</span>
-						</div>
-					)}
+						{slide.price && (
+							<div className="banner-price">
+								<span className="sale-price">
+									{slide.price} kr
+								</span>
+								<span
+									className="original-price"
+									style={{
+										textDecoration: "line-through",
+										marginLeft: "10px",
+									}}>
+									{slide.originalPrice} kr
+								</span>
+							</div>
+						)}
+					</div>
 				</div>
-			</div>
 
-			<ItemButton
-				onClick={nextSlide}
-				icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
-			/>
+				<ItemButton
+					onClick={nextSlide}
+					icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
+				/>
+			</div>
 		</div>
 	);
 };
