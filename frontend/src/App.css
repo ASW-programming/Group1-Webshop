@@ -109,3 +109,69 @@
 .active {
 	background-color: green;
 }
+
+.orderHistory {
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+}
+
+.returnBtns {
+	display: flex;
+	gap: 5px;
+	margin-top: 5px;
+}
+
+.cartTable {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+.cartTable th,
+.cartTable td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.cartTable td {
+	border-bottom: 1px solid black;
+}
+
+.cartTable th:nth-child(1),
+.cartTable td:nth-child(1),
+.cartTable th:nth-child(5),
+.cartTable td:nth-child(5) {
+	text-align: left;
+}
+
+.cartItemQuantity {
+	margin: 0 8px;
+}
+
+.orderTable {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.orderTable th,
+.orderTable td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 8px 12px;
+	border-bottom: 1px solid black;
+}
+
+.orderRow {
+	border: 1px solid black;
+}
+
+.orderItemImage {
+	width: 25px;
+	height: 25px;
+}
+
+.navigationBtns {
+	display: flex;
+	gap: 5px;
+}

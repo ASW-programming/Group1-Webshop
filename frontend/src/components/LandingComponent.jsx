@@ -22,9 +22,6 @@ function LandingComponent() {
 
 	return (
 		<div className="content">
-			<Link to="/orderHistory">
-				<ItemButton text="Order historik" />
-			</Link>
 			<ScrollBanner slides={slidesData} />
 			<ProductCard products={products} activeCategory={activeCategory} />
 		</div>

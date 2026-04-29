@@ -23,7 +23,6 @@ export function CancelIcon() {
 			height={height}
 			viewBox="0 0 32 32"
 			version="1.1">
-			<title>cancel</title>
 			<path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path>
 		</svg>
 	);
@@ -63,8 +62,6 @@ export function AddIcon() {
 export function RemoveIcon() {
 	return (
 		<svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
-			<title>minus-circle</title>
-			<desc>Created with Sketch Beta.</desc>
 			<defs></defs>
 			<g
 				id="Page-1"
@@ -126,8 +123,6 @@ export function EmptyListIcon() {
 export function ArrowIcon({ transform }) {
 	return (
 		<svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
-			<title>arrow-left-circle</title>
-			<desc>Created with Sketch Beta.</desc>
 			<defs></defs>
 			<g
 				transform={transform}
@@ -206,7 +201,7 @@ export function HomeIcon() {
 				stroke="#1C274C"
 				strokeWidth="1.5"
 				strokeLinecap="round"
-				stroke-linejoin="round"
+				strokeLinejoin="round"
 			/>
 			<path
 				d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z"
@@ -214,5 +209,74 @@ export function HomeIcon() {
 				strokeWidth="1.5"
 			/>
 		</svg>
+	);
+}
+
+export function AcceptIcon() {
+	return (
+		<div>
+			<svg
+				width={width}
+				height={height}
+				viewBox="0 0 28 28"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M6.65263 14.0304C6.29251 13.6703 6.29251 13.0864 6.65263 12.7263C7.01276 12.3662 7.59663 12.3662 7.95676 12.7263L11.6602 16.4297L19.438 8.65183C19.7981 8.29171 20.382 8.29171 20.7421 8.65183C21.1023 9.01195 21.1023 9.59583 20.7421 9.95596L12.3667 18.3314C11.9762 18.7219 11.343 18.7219 10.9525 18.3314L6.65263 14.0304Z"
+					fill="#000000"
+				/>
+				<path
+					clipRule="evenodd"
+					d="M14 1C6.8203 1 1 6.8203 1 14C1 21.1797 6.8203 27 14 27C21.1797 27 27 21.1797 27 14C27 6.8203 21.1797 1 14 1ZM3 14C3 7.92487 7.92487 3 14 3C20.0751 3 25 7.92487 25 14C25 20.0751 20.0751 25 14 25C7.92487 25 3 20.0751 3 14Z"
+					fill="#000000"
+					fillRule="evenodd"
+				/>
+			</svg>
+		</div>
+	);
+}
+
+export function ClearListIcon() {
+	return (
+		<div>
+			<svg
+				width={width}
+				height={height}
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M15 18.5L20 13.5M20 18.5L15 13.5"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M11 14L3 14"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M11 18H3"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M3 6L13.5 6M20 6L17.75 6"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M20 10L9.5 10M3 10H5.25"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+			</svg>
+		</div>
 	);
 }

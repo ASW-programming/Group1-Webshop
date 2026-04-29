@@ -20,50 +20,66 @@ function OrderHistory() {
 
 	return (
 		<div>
-			<ItemButton
-				icon={<ReturnIcon />}
-				onClick={() => window.history.back()}
-			/>
+			<div className="navigationBtns">
+				<Link to="/">
+					<ItemButton title="Homepage" icon={<HomeIcon />} />
+				</Link>
 
-			<Link to="/">
-				<ItemButton icon={<HomeIcon />} />
-			</Link>
+				<ItemButton
+					title="Go back"
+					icon={<ReturnIcon />}
+					onClick={() => window.history.back()}
+				/>
+			</div>
 
-			{orders.map((o) => (
-				<li key={o.id} style={{ border: "1px solid black" }}>
-					{o.customer}
-					<div
-						style={{
-							display: "flex",
-							gap: "10px",
-							listStyle: "none",
-						}}>
-						{o.items.map((i) => (
-							<div
-								style={{
-									display: "flex",
-									flexDirection: "row",
-								}}>
-								<img
-									src={i.imageUrl}
-									style={{ width: "25px", height: "25px" }}
-								/>
-								<p
-									key={i.id}
-									style={{
-										display: "flex",
-										flexDirection: "column",
-									}}>
-									{i.name} {i.quantity}st{" "}
+			<table className="orderTable">
+				<thead>
+					<tr>
+						<th>Kund</th>
+						<th>Bild</th>
+						<th>Produkt</th>
+						<th>Antal</th>
+						<th>Pris</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					{orders?.map((o) =>
+						o.items.map((i, index) => (
+							<tr key={`${o.id}-${i.id}`} className="orderRow">
+								{index === 0 && (
+									<td
+										rowSpan={o.items.length}
+										className="orderCustomer">
+										{o.customer}
+									</td>
+								)}
+								<td className="orderImage">
+									<img
+										src={i.imageUrl}
+										className="orderItemImage"
+									/>
+								</td>
+								<td className="orderName">{i.name}</td>
+								<td className="orderQuantity">
+									{i.quantity} st
+								</td>
+								<td className="orderPrice">
 									{i.reducedPrice ? i.reducedPrice : i.price}{" "}
 									kr
-								</p>
-							</div>
-						))}
-					</div>
-					<p>Total: {o.price} kr</p>
-				</li>
-			))}
+								</td>
+								{index === 0 && (
+									<td
+										rowSpan={o.items.length}
+										className="orderTotal">
+										{o.price} kr
+									</td>
+								)}
+							</tr>
+						)),
+					)}
+				</tbody>
+			</table>
 		</div>
 	);
 }
