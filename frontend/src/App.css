@@ -4,7 +4,7 @@
 
 :root {
 	--primary-color: #1E88E5;
-	--secondary-color: #1565C0;
+	--secondary-color: #094993;
 	--background-color: #F5F9FF;
 	--text-color: #1A1A1A;
 	--accent-color: #FB8C00;
@@ -307,6 +307,28 @@ button{
 	white-space: pre-line;
 }
 
+.productPrice{
+
+}
+
+.priceContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.originalPrice {
+	text-decoration: line-through;
+	color: rgba(11, 11, 11, 0.517);
+	font-size: small;
+}
+
+.savings {
+	color: var(--accent-color);
+	font-weight: bold;
+	font-size: small;
+}
 
 .productNameCategory {
 	display: flex;
