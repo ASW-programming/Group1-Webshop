@@ -1,5 +1,5 @@
-const width = "12px";
-const height = "12px";
+const width = "15px";
+const height = "15px";
 
 export function SearchIcon() {
     return (

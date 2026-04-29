@@ -25,13 +25,13 @@ function LandingComponent() {
           })
         : products;
 
+
     // Slides
     const slidesData = products.map((u) => ({
         image: u.imageUrl,
         title: u.title,
-        subtitle: u.description,
+        subtitle: u.description.slice(0, 100),
         buttonText: "View",
-        onClick: () => console.log(u.id),
     }));
 
     if (productsLoading) return <p>Loading products...</p>;

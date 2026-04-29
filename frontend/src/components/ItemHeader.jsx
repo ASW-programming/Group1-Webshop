@@ -37,6 +37,7 @@ function ItemHeader() {
 
 	return (
 		<header className="header">
+			<div className="headerContainer">
 			<div className="headerTitle">
 				<Link to="/">
 					<h1>GigaMat</h1>
@@ -50,6 +51,7 @@ function ItemHeader() {
 
 				<div className="headerSearch">
 					<ItemInput
+            className="headerSearchInput"
 						placeholder="Sök..."
 						onChange={(e) => {
 							inputRef.current = e.target.value;
@@ -66,6 +68,7 @@ function ItemHeader() {
 				<div className="headerCart">
 					<ShoppingCart />
 				</div>
+			</div>
 			</div>
 		</header>
 	);

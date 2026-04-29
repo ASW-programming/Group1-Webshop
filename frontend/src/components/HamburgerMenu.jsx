@@ -20,16 +20,16 @@ function HamburgerMenu() {
 			<ItemButton
 				title={isMenuOpen ? "Close Menu" : "Show Categories"}
 				onClick={toggleMenu}
-				className="hamburger-btn"
+				className="hamburgerBtn"
 				icon={isMenuOpen ? <CancelIcon /> : <HamburgerIcon />}
 			/>
 
 			{isMenuOpen && (
-				<div className="menu-panel">
+				<div className="menuPanel">
 					{categories?.map((category) => (
 						<div
 							key={category}
-							className={`category-item ${activeCategory === category ? "active" : ""}`}
+							className={`categoryItem ${activeCategory === category ? "activeCategory" : ""}`}
 							onClick={() => handleCategoryClick(category)}>
 							<span>
 								{activeCategory === category ? "✓ " : ""}

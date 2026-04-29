@@ -52,6 +52,7 @@ function ProductCard({ products, activeCategory }) {
 
 									<p>{quantity}</p>
 									<ItemButton
+                    className="addButton"
 										title="Add one product"
 										icon={<AddIcon />}
 										onClick={() =>
@@ -60,18 +61,17 @@ function ProductCard({ products, activeCategory }) {
 									/>
 								</>
 							) : (
-								<ItemButton
-									title="Buy"
-									text="Köp"
-									onClick={() => {
-										handleQuantityChange(u, 1);
-									}}
-								/>
-							)}
-						</div>
-					</li>
-				);
-			})}
+							<ItemButton
+								className="buyButton"
+								text="Köp"
+								onClick={() => {
+									handleQuantityChange(u, 1);
+								}}
+							/>
+						)}
+					</div>
+				</li>
+			)})}
 		</div>
 	);
 }

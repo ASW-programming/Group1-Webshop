@@ -35,12 +35,13 @@ function ShoppingCart() {
 			<ItemButton
 				title={isCartOpen ? "Close Menu" : "Open Cart"}
 				onClick={toggleCart}
-				className="shoppingcart-btn"
+				className="shoppingcartBtn"
 				icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
 			/>
 			{isCartOpen && (
-				<div className="shopping-list">
-					<table className="productTable">
+				<div className="shoppingList">
+          <h4 className="shoppingListTitle">Valda produkter</h4>
+					<table className="productTable shoppingListItems">
 						<tbody>
 							{addedProducts?.map((product) => (
 								<tr key={product.id}>
@@ -60,8 +61,9 @@ function ShoppingCart() {
 											: product.price}{" "}
 										kr
 									</td>
-									<td>
+									<td className="quantityControls">
 										<ItemButton
+                      className="removeButton"
 											title="Remove on product"
 											icon={<RemoveIcon />}
 											onClick={() =>
@@ -73,6 +75,7 @@ function ShoppingCart() {
 										/>
 										{getProductQuantity(product.id)}
 										<ItemButton
+                      className="addButton"
 											title="Add one product"
 											icon={<AddIcon />}
 											onClick={() =>
