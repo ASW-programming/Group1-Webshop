@@ -1,6 +1,8 @@
 import ProductCard from "./ProductCard";
 import ScrollBanner from "./ScrollBanner.jsx";
 import { useShop } from "../utils/context.jsx";
+import ItemButton from "./ItemButton.jsx";
+import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 function LandingComponent() {

@@ -22,48 +22,56 @@ function ProductCard({ products, activeCategory }) {
 							<div className="productInformation">
 								<img
 									className="productImage"
-								src={u.imageUrl}></img>
-							<span className="productName">{u.name}</span>
-							<span className="productCategory">
-								{u.category}
-							</span>
-							<span className="productPrice">{priceInfo(u)}</span>
-							<span className="productDescription">
-								{u.description.slice(0, 30)}
-							</span>
-						</div>
-					</Link>
-					<div
-						className="cartButtons"
-						onClick={(e) => {
-							e.stopPropagation();
-						}}>
-						{quantity > 0 ? (
-							<>
+									src={u.imageUrl}></img>
+								<span className="productName">{u.name}</span>
+								<span className="productCategory">
+									{u.category}
+								</span>
+								<span className="productPrice">
+									{priceInfo(u)}
+								</span>
+								<span className="productDescription">
+									{u.description.slice(0, 30)}
+								</span>
+							</div>
+						</Link>
+						<div
+							className="cartButtons"
+							onClick={(e) => {
+								e.stopPropagation();
+							}}>
+							{quantity > 0 ? (
+								<>
+									<ItemButton
+										title="Remove one product"
+										icon={<RemoveIcon />}
+										onClick={() => {
+											handleQuantityChange(u, -1);
+										}}
+									/>
+
+									<p>{quantity}</p>
+									<ItemButton
+										title="Add one product"
+										icon={<AddIcon />}
+										onClick={() =>
+											handleQuantityChange(u, 1)
+										}
+									/>
+								</>
+							) : (
 								<ItemButton
-									icon={<RemoveIcon />}
+									title="Buy"
+									text="Köp"
 									onClick={() => {
-										handleQuantityChange(u, -1);
+										handleQuantityChange(u, 1);
 									}}
 								/>
-
-								<p>{quantity}</p>
-								<ItemButton
-									icon={<AddIcon />}
-									onClick={() => handleQuantityChange(u, 1)}
-								/>
-							</>
-						) : (
-							<ItemButton
-								text="Köp"
-								onClick={() => {
-									handleQuantityChange(u, 1);
-								}}
-							/>
-						)}
-					</div>
-				</li>
-			)})}
+							)}
+						</div>
+					</li>
+				);
+			})}
 		</div>
 	);
 }

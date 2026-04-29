@@ -6,12 +6,12 @@ import ItemHeader from "./components/ItemHeader";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { ShopProvider } from "./utils/context";
 import CheckoutComponent from "./components/CheckoutComponent";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
 	return (
 		<div>
 			<ShopProvider>
-				<CheckoutComponent />
 				<Router>
 					<ItemHeader />
 
@@ -20,6 +20,14 @@ function App() {
 						<Route
 							path="/product/:id"
 							element={<ProductDetails />}
+						/>
+						<Route
+							path="/orderHistory"
+							element={<OrderHistory />}
+						/>
+						<Route
+							path="/checkout"
+							element={<CheckoutComponent />}
 						/>
 					</Routes>
 				</Router>

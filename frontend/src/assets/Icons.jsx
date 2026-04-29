@@ -43,18 +43,16 @@ export function HamburgerIcon() {
 }
 
 export function CancelIcon() {
-    return (
-        <svg
-            fill="#000000"
-            width={width}
-            height={height}
-            viewBox="0 0 32 32"
-            version="1.1"
-        >
-            <title>cancel</title>
-            <path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path>
-        </svg>
-    );
+	return (
+		<svg
+			fill="#000000"
+			width={width}
+			height={height}
+			viewBox="0 0 32 32"
+			version="1.1">
+			<path d="M10.771 8.518c-1.144 0.215-2.83 2.171-2.086 2.915l4.573 4.571-4.573 4.571c-0.915 0.915 1.829 3.656 2.744 2.742l4.573-4.571 4.573 4.571c0.915 0.915 3.658-1.829 2.744-2.742l-4.573-4.571 4.573-4.571c0.915-0.915-1.829-3.656-2.744-2.742l-4.573 4.571-4.573-4.571c-0.173-0.171-0.394-0.223-0.657-0.173v0zM16 1c-8.285 0-15 6.716-15 15s6.715 15 15 15 15-6.716 15-15-6.715-15-15-15zM16 4.75c6.213 0 11.25 5.037 11.25 11.25s-5.037 11.25-11.25 11.25-11.25-5.037-11.25-11.25c0.001-6.213 5.037-11.25 11.25-11.25z"></path>
+		</svg>
+	);
 }
 
 export function ShoppingCartIcon() {
@@ -89,34 +87,29 @@ export function AddIcon() {
 }
 
 export function RemoveIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
-            <title>minus-circle</title>
-            <desc>Created with Sketch Beta.</desc>
-            <defs></defs>
-            <g
-                id="Page-1"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
-                sketch:type="MSPage"
-            >
-                <g
-                    id="Icon-Set"
-                    sketch:type="MSLayerGroup"
-                    transform="translate(-516.000000, -1087.000000)"
-                    fill="#000000"
-                >
-                    <path
-                        d="M532,1117 C524.268,1117 518,1110.73 518,1103 C518,1095.27 524.268,1089 532,1089 C539.732,1089 546,1095.27 546,1103 C546,1110.73 539.732,1117 532,1117 L532,1117 Z M532,1087 C523.163,1087 516,1094.16 516,1103 C516,1111.84 523.163,1119 532,1119 C540.837,1119 548,1111.84 548,1103 C548,1094.16 540.837,1087 532,1087 L532,1087 Z M538,1102 L526,1102 C525.447,1102 525,1102.45 525,1103 C525,1103.55 525.447,1104 526,1104 L538,1104 C538.553,1104 539,1103.55 539,1103 C539,1102.45 538.553,1102 538,1102 L538,1102 Z"
-                        id="minus-circle"
-                        sketch:type="MSShapeGroup"
-                    ></path>
-                </g>
-            </g>
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
+			<defs></defs>
+			<g
+				id="Page-1"
+				stroke="none"
+				strokeWidth="1"
+				fill="none"
+				fillRule="evenodd"
+				sketch:type="MSPage">
+				<g
+					id="Icon-Set"
+					sketch:type="MSLayerGroup"
+					transform="translate(-516.000000, -1087.000000)"
+					fill="#000000">
+					<path
+						d="M532,1117 C524.268,1117 518,1110.73 518,1103 C518,1095.27 524.268,1089 532,1089 C539.732,1089 546,1095.27 546,1103 C546,1110.73 539.732,1117 532,1117 L532,1117 Z M532,1087 C523.163,1087 516,1094.16 516,1103 C516,1111.84 523.163,1119 532,1119 C540.837,1119 548,1111.84 548,1103 C548,1094.16 540.837,1087 532,1087 L532,1087 Z M538,1102 L526,1102 C525.447,1102 525,1102.45 525,1103 C525,1103.55 525.447,1104 526,1104 L538,1104 C538.553,1104 539,1103.55 539,1103 C539,1102.45 538.553,1102 538,1102 L538,1102 Z"
+						id="minus-circle"
+						sketch:type="MSShapeGroup"></path>
+				</g>
+			</g>
+		</svg>
+	);
 }
 
 export function ReturnIcon() {
@@ -155,35 +148,30 @@ export function EmptyListIcon() {
 }
 
 export function ArrowIcon({ transform }) {
-    return (
-        <svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
-            <title>arrow-left-circle</title>
-            <desc>Created with Sketch Beta.</desc>
-            <defs></defs>
-            <g
-                transform={transform}
-                id="Page-1"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
-                sketch:type="MSPage"
-            >
-                <g
-                    id="Icon-Set"
-                    sketch:type="MSLayerGroup"
-                    transform="translate(-256.000000, -1087.000000)"
-                    fill="#000000"
-                >
-                    <path
-                        d="M279,1102 L268.414,1102 L272.536,1097.88 C272.926,1097.49 272.926,1096.86 272.536,1096.46 C272.145,1096.07 271.512,1096.07 271.121,1096.46 L265.464,1102.12 C265.225,1102.36 265.15,1102.69 265.205,1103 C265.15,1103.31 265.225,1103.64 265.464,1103.88 L271.121,1109.54 C271.512,1109.93 272.145,1109.93 272.536,1109.54 C272.926,1109.15 272.926,1108.51 272.536,1108.12 L268.414,1104 L279,1104 C279.552,1104 280,1103.55 280,1103 C280,1102.45 279.552,1102 279,1102 L279,1102 Z M272,1117 C264.268,1117 258,1110.73 258,1103 C258,1095.27 264.268,1089 272,1089 C279.732,1089 286,1095.27 286,1103 C286,1110.73 279.732,1117 272,1117 L272,1117 Z M272,1087 C263.164,1087 256,1094.16 256,1103 C256,1111.84 263.164,1119 272,1119 C280.836,1119 288,1111.84 288,1103 C288,1094.16 280.836,1087 272,1087 L272,1087 Z"
-                        id="arrow-left-circle"
-                        sketch:type="MSShapeGroup"
-                    ></path>
-                </g>
-            </g>
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
+			<defs></defs>
+			<g
+				transform={transform}
+				id="Page-1"
+				stroke="none"
+				strokeWidth="1"
+				fill="none"
+				fillRule="evenodd"
+				sketch:type="MSPage">
+				<g
+					id="Icon-Set"
+					sketch:type="MSLayerGroup"
+					transform="translate(-256.000000, -1087.000000)"
+					fill="#000000">
+					<path
+						d="M279,1102 L268.414,1102 L272.536,1097.88 C272.926,1097.49 272.926,1096.86 272.536,1096.46 C272.145,1096.07 271.512,1096.07 271.121,1096.46 L265.464,1102.12 C265.225,1102.36 265.15,1102.69 265.205,1103 C265.15,1103.31 265.225,1103.64 265.464,1103.88 L271.121,1109.54 C271.512,1109.93 272.145,1109.93 272.536,1109.54 C272.926,1109.15 272.926,1108.51 272.536,1108.12 L268.414,1104 L279,1104 C279.552,1104 280,1103.55 280,1103 C280,1102.45 279.552,1102 279,1102 L279,1102 Z M272,1117 C264.268,1117 258,1110.73 258,1103 C258,1095.27 264.268,1089 272,1089 C279.732,1089 286,1095.27 286,1103 C286,1110.73 279.732,1117 272,1117 L272,1117 Z M272,1087 C263.164,1087 256,1094.16 256,1103 C256,1111.84 263.164,1119 272,1119 C280.836,1119 288,1111.84 288,1103 C288,1094.16 280.836,1087 272,1087 L272,1087 Z"
+						id="arrow-left-circle"
+						sketch:type="MSShapeGroup"></path>
+				</g>
+			</g>
+		</svg>
+	);
 }
 
 export function EnterIcon() {
@@ -201,4 +189,122 @@ export function EnterIcon() {
             <line x1="19.32" y1="45.72" x2="54.61" y2="8.91" />
         </svg>
     );
+}
+
+export function HomeIcon() {
+	return (
+		<svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+			<path
+				d="M22 22L2 22"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M2 11L6.06296 7.74968M22 11L13.8741 4.49931C12.7784 3.62279 11.2216 3.62279 10.1259 4.49931L9.34398 5.12486"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M4 22V9.5"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M20 9.5V13.5M20 22V17.5"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+			<path
+				d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+			<path
+				d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+			/>
+		</svg>
+	);
+}
+
+export function AcceptIcon() {
+	return (
+		<div>
+			<svg
+				width={width}
+				height={height}
+				viewBox="0 0 28 28"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M6.65263 14.0304C6.29251 13.6703 6.29251 13.0864 6.65263 12.7263C7.01276 12.3662 7.59663 12.3662 7.95676 12.7263L11.6602 16.4297L19.438 8.65183C19.7981 8.29171 20.382 8.29171 20.7421 8.65183C21.1023 9.01195 21.1023 9.59583 20.7421 9.95596L12.3667 18.3314C11.9762 18.7219 11.343 18.7219 10.9525 18.3314L6.65263 14.0304Z"
+					fill="#000000"
+				/>
+				<path
+					clipRule="evenodd"
+					d="M14 1C6.8203 1 1 6.8203 1 14C1 21.1797 6.8203 27 14 27C21.1797 27 27 21.1797 27 14C27 6.8203 21.1797 1 14 1ZM3 14C3 7.92487 7.92487 3 14 3C20.0751 3 25 7.92487 25 14C25 20.0751 20.0751 25 14 25C7.92487 25 3 20.0751 3 14Z"
+					fill="#000000"
+					fillRule="evenodd"
+				/>
+			</svg>
+		</div>
+	);
+}
+
+export function ClearListIcon() {
+	return (
+		<div>
+			<svg
+				width={width}
+				height={height}
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M15 18.5L20 13.5M20 18.5L15 13.5"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+				<path
+					d="M11 14L3 14"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M11 18H3"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M3 6L13.5 6M20 6L17.75 6"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+				<path
+					d="M20 10L9.5 10M3 10H5.25"
+					stroke="#1C274C"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+				/>
+			</svg>
+		</div>
+	);
 }
