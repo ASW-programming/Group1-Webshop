@@ -85,16 +85,18 @@ function ShoppingCart() {
 						</tbody>
 					</table>
 					<h4>Total: {totalPrice}kr</h4>
-					<ItemButton
-						icon={<ClearListIcon />}
-						className="cartDeleteBtn"
-						onClick={() => clearCart()}
-						title="Clear cart"
-					/>
 
 					<Link to="/checkout">
 						<ItemButton text="Checkout" />
 					</Link>
+					{addedProducts.length > 0 && (
+						<ItemButton
+							icon={<ClearListIcon />}
+							className="cartDeleteBtn"
+							onClick={() => clearCart()}
+							title="Clear cart"
+						/>
+					)}
 				</div>
 			)}
 		</div>

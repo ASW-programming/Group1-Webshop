@@ -36,7 +36,6 @@ function OrderHistory() {
 				<thead>
 					<tr>
 						<th>Kund</th>
-						<th>Bild</th>
 						<th>Produkt</th>
 						<th>Antal</th>
 						<th>Pris</th>
@@ -54,13 +53,13 @@ function OrderHistory() {
 										{o.customer}
 									</td>
 								)}
-								<td className="orderImage">
+								<td className="orderImage orderName">
 									<img
 										src={i.imageUrl}
 										className="orderItemImage"
 									/>
+									{i.name}
 								</td>
-								<td className="orderName">{i.name}</td>
 								<td className="orderQuantity">
 									{i.quantity} st
 								</td>

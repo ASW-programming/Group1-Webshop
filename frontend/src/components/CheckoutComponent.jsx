@@ -21,6 +21,7 @@ function CheckoutComponent() {
 	const { addProduct, addedProducts = [], clearCart } = useShop();
 	const [checkout, setCheckout] = useState(false);
 	const [orderSuccess, setOrderSuccess] = useState(false);
+	const [error, setError] = useState("");
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: postOrders,
@@ -49,8 +50,13 @@ function CheckoutComponent() {
 	const placeOrders = async (e) => {
 		e.preventDefault();
 
+		if (addedProducts.length === 0) {
+			setError("Du har inte lagt till några produkter");
+			return;
+		}
+
 		if (!customer.trim()) {
-			alert("Write your name before going to payment");
+			setError("Skriv ditt namn innan betalning");
 			return;
 		}
 
@@ -80,7 +86,7 @@ function CheckoutComponent() {
 
 			{/* If addedProducts is empty, show the message, else show the list. Create a new HTML-element for each product in the list */}
 			{addedProducts.length === 0 ? (
-				<p className="cart-empty">Din kundbagn är tom</p>
+				<p className="cart-empty">Din kundvagn är tom</p>
 			) : (
 				<table className="cartTable">
 					<thead>
@@ -161,12 +167,14 @@ function CheckoutComponent() {
 					</tbody>
 				</table>
 			)}
-			<ItemButton
-				title="Clear cart"
-				icon={<ClearListIcon />}
-				className="cartDeleteBtn"
-				onClick={() => clearCart()}
-			/>
+			{addedProducts.length > 0 && (
+				<ItemButton
+					title="Clear cart"
+					icon={<ClearListIcon />}
+					className="cartDeleteBtn"
+					onClick={() => clearCart()}
+				/>
+			)}
 
 			<h2 className="cart-divider"></h2>
 			<div className="cart-total-row">
@@ -174,6 +182,8 @@ function CheckoutComponent() {
 					{`Total kostnad: ${totalPrice.toFixed(2)}`} kr
 				</span>
 			</div>
+
+			{error && <p className="error-message">{error}</p>}
 
 			<div className="cart-name-section">
 				<label htmlFor="cart-name-input" className="cart-name-label">
