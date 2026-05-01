@@ -142,20 +142,20 @@ app.post("/api/products/bulk", async (req, res) => {
 app.route("/api/orders")
 	.get(async (req, res) => {
 		try {
-			const ordersCollection = db.collection("orders");
+			const snapshot = await db.collection("orders").get();
 
-			snapshot = await ordersCollection.get();
-
-			if (snapshot.empty) {
-				return res.status(200).json([]);
-			}
+			if (snapshot.empty) return res.status(200).json([]);
 
 			const orders = [];
 
 			snapshot.forEach((order) => {
+				const data = order.data();
 				orders.push({
 					id: order.id,
-					...order.data(),
+					...data,
+					createdAt: data.createdAt
+						? data.createdAt.toDate().toISOString()
+						: null,
 				});
 			});
 
@@ -167,25 +167,46 @@ app.route("/api/orders")
 	})
 	.post(async (req, res) => {
 		try {
-			const orders = req.body;
+			const { customer, items, price } = req.body;
+
+			// Get latest orderID from DB.
+			const snapshot = await db
+				.collection("orders")
+				.orderBy("orderID", "desc")
+				.limit(1)
+				.get();
+
+			let nextNumber = 1;
+
+			if (!snapshot.empty) {
+				const lastOrder = snapshot.docs[0].data().orderID;
+				nextNumber = lastOrder + 1;
+			}
+
+			const formattedID = String(nextNumber).padStart(5, "0");
 
 			const docRef = await db.collection("orders").add({
-				customer: orders.customer,
-				items: orders.items,
-				price: orders.price,
+				orderID: nextNumber,
+				orderIDFormatted: formattedID,
+				customer,
+				items,
+				price,
+				createdAt: admin.firestore.FieldValue.serverTimestamp(),
 			});
 
-			const newOrder = {
-				id: docRef.id,
-				customer: orders.customer,
-				items: orders.items,
-				price: orders.price,
-				createdAt: admin.firestore.FieldValue.serverTimestamp(),
-			};
+			const docSnapshot = await docRef.get();
+			const createdAt = docSnapshot
+				.data()
+				.createdAt.toDate()
+				.toISOString();
 
 			res.status(200).json({
 				id: docRef.id,
-				...newOrder,
+				orderID: formattedID,
+				customer,
+				items,
+				price,
+				createdAt,
 			});
 		} catch (error) {
 			console.log("Fel:", error.message);
