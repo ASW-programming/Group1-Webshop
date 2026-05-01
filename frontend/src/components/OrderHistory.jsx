@@ -15,6 +15,9 @@ function OrderHistory() {
 		queryFn: getOrders,
 	});
 
+	const formatDate = (createdAt) =>
+		createdAt ? new Date(createdAt).toLocaleString("sv-SE") : "Okänt datum";
+
 	if (isLoading) return <p>Loading</p>;
 	if (isError) return <p>Error</p>;
 
@@ -35,6 +38,8 @@ function OrderHistory() {
 			<table className="orderTable">
 				<thead>
 					<tr>
+						<th>Order #</th>
+						<th>Datum</th>
 						<th>Kund</th>
 						<th>Produkt</th>
 						<th>Antal</th>
@@ -46,6 +51,19 @@ function OrderHistory() {
 					{orders?.map((o) =>
 						o.items.map((i, index) => (
 							<tr key={`${o.id}-${i.id}`} className="orderRow">
+								{index === 0 && (
+									<td rowSpan={o.items.length}>
+										{o.orderIDFormatted ||
+											"Order ID Saknas"}
+									</td>
+								)}
+
+								{index === 0 && (
+									<td rowSpan={o.items.length}>
+										{formatDate(o.createdAt)}
+									</td>
+								)}
+
 								{index === 0 && (
 									<td
 										rowSpan={o.items.length}
