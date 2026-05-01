@@ -35,7 +35,7 @@ export const postOrders = async (orderData) => {
 	return data;
 };
 
-export const getOrders = async (req, res) => {
+export const getOrders = async () => {
 	const getOrder = await fetch(`${BASE_URL}/api/orders`, {
 		method: "GET",
 	});
@@ -46,4 +46,12 @@ export const getOrders = async (req, res) => {
 
 	const data = await getOrder.json();
 	return data;
+};
+
+export const deleteOrder = async (id) => {
+	const response = await fetch(`${BASE_URL}/api/deleteOrders/${id}`, {
+		method: "DELETE",
+	});
+
+	if (!response.ok) throw new Error("Could not delete order");
 };
