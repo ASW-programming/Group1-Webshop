@@ -30,7 +30,9 @@ function ShoppingCart() {
 	return (
 		<div>
 			<div className="shoppingCartCombo">
-				<p className="quantityCounter">{totalQuantity}</p>
+				{totalQuantity > 0 && (
+					<p className="quantityCounter">{totalQuantity}</p>
+				)}
 				<ItemButton
 					title={isCartOpen ? "Close Menu" : "Open Cart"}
 					onClick={toggleCart}
