@@ -51,6 +51,10 @@ function LandingComponent() {
 				products={filteredProducts}
 				activeCategory={activeCategory}
 			/>
+
+			<Link to="/orderHistory" className="orderHistory">
+				<ItemButton title="Order History" text="Order historik" />
+			</Link>
 		</div>
 	);
 }

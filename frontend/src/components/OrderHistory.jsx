@@ -104,8 +104,8 @@ function OrderHistory() {
 									}}
 									transform={
 										sortAscending
-											? "rotate(180, 8.5, 5.5)"
-											: ""
+											? ""
+											: "rotate(180, 8.5, 5.5)"
 									}
 								/>{" "}
 								Order #
@@ -173,8 +173,8 @@ function OrderHistory() {
 									}}
 									transform={
 										sortAscending
-											? "rotate(180, 8.5, 5.5)"
-											: ""
+											? ""
+											: "rotate(180, 8.5, 5.5)"
 									}
 								/>
 								Total
@@ -216,8 +216,8 @@ function OrderHistory() {
 
 								// Sorts numbers
 								return sortAscending
-									? choiceA - choiceB
-									: choiceB - choiceA;
+									? choiceB - choiceA
+									: choiceA - choiceB;
 							})
 							.map((o) =>
 								o.items.map((i, index) => (
