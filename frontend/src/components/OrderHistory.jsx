@@ -264,7 +264,7 @@ function OrderHistory() {
 											<td
 												rowSpan={o.items.length}
 												className="orderTotal">
-												{o.price} kr
+												{o.totalPrice} kr
 											</td>
 										)}
 										{index === 0 && (
