@@ -26,6 +26,12 @@ function HamburgerMenu() {
 
 			{isMenuOpen && (
 				<div className="menuPanel">
+                    <div
+                    className={`categoryItem ${!activeCategory ? "activeCategory" : ""}`}
+                    onClick={() => handleCategoryClick("")}
+                    >
+                        Alla Produkter
+                    </div>
 					{categories?.map((category) => (
 						<div
 							key={category}
