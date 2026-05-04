@@ -214,6 +214,20 @@ app.route("/api/orders")
 		}
 	});
 
+app.delete("/api/deleteOrders/:id", async (req, res) => {
+	try {
+		const orderID = req.params.id;
+
+		if (!orderID)
+			return res.status(400).json({ error: "Missing order ID" });
+
+		await db.collection("orders").doc(orderID).delete();
+		res.status(200).json({ message: "Order deleted successfully" });
+	} catch (error) {
+		res.status(500).json({ error: "Something went wrong" });
+	}
+});
+
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}`);
 });
