@@ -138,18 +138,18 @@ function CheckoutComponent() {
 								</td>
 								<td className="cartItemControls">
 									<ItemButton
+										className="removeButton"
 										title="Remove one product"
 										icon={<RemoveIcon />}
-										className="cart-btn-minus"
 										onClick={() => addProduct(product, -1)}
 									/>
 									<span className="cartItemQuantity">
 										{`${product.quantity} st`}
 									</span>
 									<ItemButton
+										className="addButton"
 										title="Add one product"
 										icon={<AddIcon />}
-										className="cart-btn-plus"
 										onClick={() => addProduct(product, 1)}
 									/>
 								</td>
@@ -190,14 +190,13 @@ function CheckoutComponent() {
 				/>
 			)}
 
-			<h2 className="cart-divider"></h2>
-			<div className="cart-total-row">
+			<div className="checkoutTotal">
 				<span className="cart-total-price-cost">
 					{`Total kostnad: ${totalPrice.toFixed(2)}`} kr
 				</span>
 			</div>
 
-			<div className="cart-name-section">
+			<div className="checkoutInfo">
 				<label htmlFor="cart-name-input" className="cart-name-label">
 					Ditt namn{" "}
 				</label>

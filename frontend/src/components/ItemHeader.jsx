@@ -49,7 +49,6 @@ function ItemHeader() {
 					<div className="headerMenu">
 						<HamburgerMenu />
 					</div>
-
 					<div className="headerSearch">
 						<ItemInput
 							className="headerSearchInput"
@@ -60,6 +59,7 @@ function ItemHeader() {
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton
+							className="headerSearchButton"
 							type="button"
 							icon={<SearchIcon />}
 							onClick={handleSearch}

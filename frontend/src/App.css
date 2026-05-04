@@ -21,9 +21,7 @@ body {
 	color: var(--text-color);
 }
 
-button {
-	background-color: var(--accent-color);
-}
+
 
 /* Header */
 .header {
@@ -39,8 +37,8 @@ button {
 	flex-direction: column;
 	align-items: stretch;
 	width: 100%;
-	padding-left: 150px;
-	padding-right: 150px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .headerTitle {
@@ -56,6 +54,11 @@ button {
 	border-radius: 20px;
 	margin-left: 10px;
 	outline: 1px solid var(--accent-color);
+	
+}
+.headerTitle a {
+	text-decoration: none;
+	color: inherit;
 }
 
 .headerTitle h1 {
@@ -70,14 +73,9 @@ button {
 	margin-bottom: 10px;
 }
 
-.content {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-}
 
 .hamburgerBtn {
-	position: fixed;
+	position: sticky;
 	z-index: 1001;
 	border-radius: 10px;
 	display: flex;
@@ -87,6 +85,7 @@ button {
 	padding-bottom: 3px;
 	width: 35px;
 	left: 20px;
+	
 }
 
 .menuPanel {
@@ -94,7 +93,6 @@ button {
 	position: fixed;
 	width: 150px;
 	padding: 10px;
-	margin-left: -130px;
 	margin-top: 10px;
 	z-index: 1000;
 	border-radius: 10px;
@@ -107,17 +105,32 @@ button {
 	padding-top: 5px;
 }
 
+.headerSearch {
+	display: flex;
+	align-items: center;
+}
+
 .headerSearchInput {
-	padding: 5px;
+	height: 30px;
 	border-radius: 5px;
 	border: 1px solid var(--accent-color);
 	width: 300px;
 	margin-right: 10px;
 	background-color: var(--background-color);
+
+}
+
+.headerSearchButton {
+	background-color: var(--accent-color);
+	border-radius: 10px;
+	cursor: pointer;
+	border: solid 1px black;
+	height: 40px;
+	width: 40px;
+
 }
 
 .shoppingcartBtn {
-	position: fixed;
 	z-index: 1001;
 	border-radius: 10px;
 	display: flex;
@@ -187,12 +200,19 @@ button {
 	display: flex;
 	flex-direction: row;
 	background-color: var(--primary-color);
-	justify-content: space-around;
+	justify-content: center;
 	width: 80%;
 	height: 200px;
 	align-items: center;
 	margin-top: 10px;
 	border-radius: 20px;
+}
+
+.arrowButton {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	
 }
 
 .bannerContent {
@@ -201,13 +221,15 @@ button {
 	justify-content: center;
 	align-items: center;
 	background-color: white;
-	width: 60%;
-	max-height: 170px;
+	width: 70%;
+	height: 150px;
 	border-radius: 20px;
 	padding-top: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.346);
-	padding-left: 20px;
+	padding-left: 10px;
 	padding-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .banner-image {
@@ -231,16 +253,19 @@ button {
 }
 
 /* Product List */
-
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
 .productList {
 	display: flex;
-	gap: 10px;
+	gap: 30px;
 	flex-wrap: wrap;
 	width: 75%;
 	flex-direction: row;
 	justify-content: center;
 	margin: 0 auto;
-	gap: 30px;
 }
 
 .productListElement {
@@ -248,12 +273,13 @@ button {
 	list-style: none;
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
 	padding: 5px;
 	justify-content: center;
 	align-items: center;
 	background-color: white;
-	height: 300px;
+	height: 350px;
+	width: 250px;
+	padding-top: 30px;
 }
 
 .productListElement a {
@@ -266,6 +292,7 @@ button {
 	flex-direction: column;
 	max-width: 150px;
 	align-items: center;
+	justify-content: center;
 	padding: 5px;
 	gap: 5px;
 }
@@ -289,9 +316,8 @@ button {
 
 .productDescription {
 	white-space: pre-line;
-}
-
-.productPrice {
+	text-align: center;
+	
 }
 
 .priceContainer {
@@ -318,47 +344,44 @@ button {
 	flex-direction: column;
 }
 
-.cartButtons {
-	background-color: white;
-	display: inline-flex;
-	gap: 1rem;
+.cardButtons {
+	display: flex;
+	gap: 0.5rem;
 	border-radius: 5px;
 	justify-content: center;
 	align-items: center;
+	margin-top: auto;
+	padding-bottom: 30px;
+	min-height: 30px;
+}
+
+.cardButtons p {
+	margin: 0;
+	line-height: 30px;
+	font-size: 1rem;
 }
 
 .buyButton {
 	background-color: var(--accent-color);
 	color: var(--text-color);
 	border: none;
-	padding: 5px 10px;
+	padding: 5px 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	border: solid 1px black;
+	height: 30px;
+	
 }
 
-.addButton {
-	background-color: var(--accent-color);
-	color: var(--text-color);
-	border: none;
-	padding: 5px 10px;
-	border-radius: 7px;
-	cursor: pointer;
-	height: fit-content;
-	border: solid 1px black;
-}
-
+.addButton,
 .removeButton {
-	background-color: var(--accent-color);
-	color: var(--text-color);
 	border: none;
-	padding: 5px 10px;
-	border-radius: 7px;
+	background-color: transparent;
 	cursor: pointer;
-	height: fit-content;
-	border: solid 1px black;
+	line-height: 1;
 }
 
+/* Checkout */
 .orderHistory {
 	position: fixed;
 	right: 10px;
@@ -375,12 +398,15 @@ button {
 	width: 100%;
 	table-layout: fixed;
 	border-collapse: collapse;
+	margin-bottom: 10px;
 }
 
 .cartTable th,
 .cartTable td {
 	text-align: center;
 	vertical-align: middle;
+	padding: 10px 15px ;
+
 }
 
 .cartTable td {
@@ -396,8 +422,36 @@ button {
 
 .cartItemQuantity {
 	margin: 0 8px;
+
 }
 
+.cartDeleteBtn {
+	margin-left: 20px;
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+.cartDeleteBtn:hover {
+	background-color: rgb(227, 117, 117);
+}
+
+.checkoutTotal {
+	font-weight: bold;
+	padding: 0 10px;
+}
+
+.checkoutInfo {
+	padding: 10px 10px;
+	
+}
+
+.navigationBtns{
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+/*Order History*/
 .orderTable {
 	border-collapse: collapse;
 	width: 100%;
@@ -479,4 +533,19 @@ button {
 	z-index: 1002;
 	border: 1px solid black;
 	box-shadow: 3px 3px 5px black;
+}
+
+.cartBody .cartItemQuantity{
+	display: inline-flex;
+	align-items: center;
+	line-height: 20px;
+}
+
+.cartBtnDel{
+	border-radius: 5px;
+}
+
+.cartBtnDel:hover {
+	background-color: rgb(227, 117, 117);
+	border-radius: 5px;
 }
