@@ -425,6 +425,20 @@ button {
 	gap: 5px;
 }
 
+.chosen {
+	background-color: var(--accent-color);
+	border: 1px solid black;
+}
+
+.notChosen:hover {
+	cursor: pointer;
+}
+
+.orderCategories {
+	background-color: var(--background-color);
+	border: 1px solid black;
+}
+
 /* Animating delete */
 @keyframes slideOutLeft {
 	from {
