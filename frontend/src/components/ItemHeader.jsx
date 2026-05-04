@@ -12,6 +12,7 @@ function ItemHeader() {
 	const inputRef = useRef("");
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	const shopName = "GigaMat";
 
 	if (
@@ -38,37 +39,37 @@ function ItemHeader() {
 	return (
 		<header className="header">
 			<div className="headerContainer">
-			<div className="headerTitle">
-				<Link to="/">
-					<h1>GigaMat</h1>
-				</Link>
-			</div>
-
-			<div className="headerNav">
-				<div className="headerMenu">
-					<HamburgerMenu />
+				<div className="headerTitle">
+					<Link to="/">
+						<h1>GigaMat</h1>
+					</Link>
 				</div>
 
-				<div className="headerSearch">
-					<ItemInput
-            className="headerSearchInput"
-						placeholder="Sök..."
-						onChange={(e) => {
-							inputRef.current = e.target.value;
-						}}
-						onKeyDown={handleKeyDown}
-					/>
-					<ItemButton
-						type="button"
-						icon={<SearchIcon />}
-						onClick={handleSearch}
-					/>
-				</div>
+				<div className="headerNav">
+					<div className="headerMenu">
+						<HamburgerMenu />
+					</div>
 
-				<div className="headerCart">
-					<ShoppingCart />
+					<div className="headerSearch">
+						<ItemInput
+							className="headerSearchInput"
+							placeholder="Sök..."
+							onChange={(e) => {
+								inputRef.current = e.target.value;
+							}}
+							onKeyDown={handleKeyDown}
+						/>
+						<ItemButton
+							type="button"
+							icon={<SearchIcon />}
+							onClick={handleSearch}
+						/>
+					</div>
+
+					<div className="headerCart">
+						<ShoppingCart />
+					</div>
 				</div>
-			</div>
 			</div>
 		</header>
 	);

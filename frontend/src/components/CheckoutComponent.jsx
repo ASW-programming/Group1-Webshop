@@ -20,7 +20,7 @@ function CheckoutComponent() {
 	const [checkout, setCheckout] = useState(false);
 	const [error, setError] = useState("");
 	const [lastOrder, setLastOrder] = useState(null);
-	const { addProduct, addedProducts = [], clearCart } = useShop();
+	const { addProduct, addedProducts = [], clearCart, totalPrice } = useShop();
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: postOrders,
@@ -36,11 +36,6 @@ function CheckoutComponent() {
 			setCheckout(true);
 		},
 	});
-
-	const totalPrice = addedProducts.reduce((sum, item) => {
-		const price = item.reducedPrice || item.price;
-		return sum + price * item.quantity;
-	}, 0);
 
 	const placeOrders = async (e) => {
 		e.preventDefault();
