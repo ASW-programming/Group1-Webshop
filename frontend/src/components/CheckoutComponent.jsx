@@ -60,7 +60,7 @@ function CheckoutComponent() {
 			return;
 		}
 
-		mutate({ customer, items: addedProducts, price: totalPrice });
+		mutate({ customer, items: addedProducts, totalPrice: totalPrice });
 	};
 
 	//When checkout is true show frindly message.

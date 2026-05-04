@@ -167,7 +167,7 @@ app.route("/api/orders")
 	})
 	.post(async (req, res) => {
 		try {
-			const { customer, items, price } = req.body;
+			const { customer, items, totalPrice } = req.body;
 
 			// Get latest orderID from DB.
 			const snapshot = await db
@@ -190,7 +190,7 @@ app.route("/api/orders")
 				orderIDFormatted: formattedID,
 				customer,
 				items,
-				price,
+				totalPrice,
 				createdAt: admin.firestore.FieldValue.serverTimestamp(),
 			});
 
@@ -205,7 +205,7 @@ app.route("/api/orders")
 				orderID: formattedID,
 				customer,
 				items,
-				price,
+				totalPrice,
 				createdAt,
 			});
 		} catch (error) {

@@ -2,44 +2,41 @@ const width = "15px";
 const height = "15px";
 
 export function SearchIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
-            <g
-                id="Page-1"
-                stroke="none"
-                strokeWidth="1"
-                fill="none"
-                fillRule="evenodd"
-                sketch:type="MSPage"
-            >
-                <g
-                    id="Icon-Set"
-                    sketch:type="MSLayerGroup"
-                    transform="translate(-256.000000, -1139.000000)"
-                    fill="#000000"
-                >
-                    <path
-                        d="M269.46,1163.45 C263.17,1163.45 258.071,1158.44 258.071,1152.25 C258.071,1146.06 263.17,1141.04 269.46,1141.04 C275.75,1141.04 280.85,1146.06 280.85,1152.25 C280.85,1158.44 275.75,1163.45 269.46,1163.45 L269.46,1163.45 Z M287.688,1169.25 L279.429,1161.12 C281.591,1158.77 282.92,1155.67 282.92,1152.25 C282.92,1144.93 276.894,1139 269.46,1139 C262.026,1139 256,1144.93 256,1152.25 C256,1159.56 262.026,1165.49 269.46,1165.49 C272.672,1165.49 275.618,1164.38 277.932,1162.53 L286.224,1170.69 C286.629,1171.09 287.284,1171.09 287.688,1170.69 C288.093,1170.3 288.093,1169.65 287.688,1169.25 L287.688,1169.25 Z"
-                        id="search"
-                        sketch:type="MSShapeGroup"
-                    ></path>
-                </g>
-            </g>
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 32 32" version="1.1">
+			<g
+				id="Page-1"
+				stroke="none"
+				strokeWidth="1"
+				fill="none"
+				fillRule="evenodd"
+				sketch:type="MSPage">
+				<g
+					id="Icon-Set"
+					sketch:type="MSLayerGroup"
+					transform="translate(-256.000000, -1139.000000)"
+					fill="#000000">
+					<path
+						d="M269.46,1163.45 C263.17,1163.45 258.071,1158.44 258.071,1152.25 C258.071,1146.06 263.17,1141.04 269.46,1141.04 C275.75,1141.04 280.85,1146.06 280.85,1152.25 C280.85,1158.44 275.75,1163.45 269.46,1163.45 L269.46,1163.45 Z M287.688,1169.25 L279.429,1161.12 C281.591,1158.77 282.92,1155.67 282.92,1152.25 C282.92,1144.93 276.894,1139 269.46,1139 C262.026,1139 256,1144.93 256,1152.25 C256,1159.56 262.026,1165.49 269.46,1165.49 C272.672,1165.49 275.618,1164.38 277.932,1162.53 L286.224,1170.69 C286.629,1171.09 287.284,1171.09 287.688,1170.69 C288.093,1170.3 288.093,1169.65 287.688,1169.25 L287.688,1169.25 Z"
+						id="search"
+						sketch:type="MSShapeGroup"></path>
+				</g>
+			</g>
+		</svg>
+	);
 }
 export function HamburgerIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
-            <path
-                d="M4 6H20M4 12H20M4 18H20"
-                stroke="#000000"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+			<path
+				d="M4 6H20M4 12H20M4 18H20"
+				stroke="#000000"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
 }
 
 export function CancelIcon() {
@@ -56,34 +53,34 @@ export function CancelIcon() {
 }
 
 export function ShoppingCartIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
-            <g id="Interface / Shopping_Cart_01">
-                <path
-                    id="Vector"
-                    d="M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM17 17H9.29395C8.83288 17 8.60193 17 8.41211 16.918C8.24466 16.8456 8.09938 16.7291 7.99354 16.5805C7.8749 16.414 7.82719 16.1913 7.73274 15.7505L5.27148 4.26465C5.17484 3.81363 5.12587 3.58838 5.00586 3.41992C4.90002 3.27135 4.75477 3.15441 4.58732 3.08205C4.39746 3 4.16779 3 3.70653 3H3M6 6H18.8732C19.595 6 19.9555 6 20.1978 6.15036C20.41 6.28206 20.5653 6.48862 20.633 6.729C20.7104 7.00343 20.611 7.34996 20.411 8.04346L19.0264 12.8435C18.9068 13.2581 18.8469 13.465 18.7256 13.6189C18.6185 13.7547 18.4772 13.861 18.317 13.9263C18.1361 14 17.9211 14 17.4921 14H7.73047M8 21C6.89543 21 6 20.1046 6 19C6 17.8954 6.89543 17 8 17C9.10457 17 10 17.8954 10 19C10 20.1046 9.10457 21 8 21Z"
-                    stroke="#000000"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            </g>
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+			<g id="Interface / Shopping_Cart_01">
+				<path
+					id="Vector"
+					d="M17 17C15.8954 17 15 17.8954 15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17ZM17 17H9.29395C8.83288 17 8.60193 17 8.41211 16.918C8.24466 16.8456 8.09938 16.7291 7.99354 16.5805C7.8749 16.414 7.82719 16.1913 7.73274 15.7505L5.27148 4.26465C5.17484 3.81363 5.12587 3.58838 5.00586 3.41992C4.90002 3.27135 4.75477 3.15441 4.58732 3.08205C4.39746 3 4.16779 3 3.70653 3H3M6 6H18.8732C19.595 6 19.9555 6 20.1978 6.15036C20.41 6.28206 20.5653 6.48862 20.633 6.729C20.7104 7.00343 20.611 7.34996 20.411 8.04346L19.0264 12.8435C18.9068 13.2581 18.8469 13.465 18.7256 13.6189C18.6185 13.7547 18.4772 13.861 18.317 13.9263C18.1361 14 17.9211 14 17.4921 14H7.73047M8 21C6.89543 21 6 20.1046 6 19C6 17.8954 6.89543 17 8 17C9.10457 17 10 17.8954 10 19C10 20.1046 9.10457 21 8 21Z"
+					stroke="#000000"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</g>
+		</svg>
+	);
 }
 
 export function AddIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="#1C274C" strokeWidth="1.5" />
-            <path
-                d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
-                stroke="#1C274C"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+			<circle cx="12" cy="12" r="10" stroke="#1C274C" strokeWidth="1.5" />
+			<path
+				d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+				stroke="#1C274C"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
+		</svg>
+	);
 }
 
 export function RemoveIcon() {
@@ -113,38 +110,38 @@ export function RemoveIcon() {
 }
 
 export function ReturnIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 48 48" fill="none">
-            <path
-                d="M12.9998 8L6 14L12.9998 21"
-                stroke="#000000"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-            <path
-                d="M6 14H28.9938C35.8768 14 41.7221 19.6204 41.9904 26.5C42.2739 33.7696 36.2671 40 28.9938 40H11.9984"
-                stroke="#000000"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 48 48" fill="none">
+			<path
+				d="M12.9998 8L6 14L12.9998 21"
+				stroke="#000000"
+				strokeWidth="4"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+			<path
+				d="M6 14H28.9938C35.8768 14 41.7221 19.6204 41.9904 26.5C42.2739 33.7696 36.2671 40 28.9938 40H11.9984"
+				stroke="#000000"
+				strokeWidth="4"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
 }
 
 export function EmptyListIcon() {
-    return (
-        <svg width={width} height={height} viewBox="0 0 24 24" fill="none">
-            <path
-                d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17"
-                stroke="#000000"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    );
+	return (
+		<svg width={width} height={height} viewBox="0 0 24 24" fill="none">
+			<path
+				d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17"
+				stroke="#000000"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
 }
 
 export function ArrowIcon({ transform }) {
@@ -175,20 +172,19 @@ export function ArrowIcon({ transform }) {
 }
 
 export function EnterIcon() {
-    return (
-        <svg
-            width={width}
-            height={height}
-            viewBox="0 0 64 64"
-            strokeWidth="3"
-            stroke="#000000"
-            fill="none"
-        >
-            <path d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32" />
-            <polyline points="40.32 8.6 55.4 8.6 55.4 24.18" />
-            <line x1="19.32" y1="45.72" x2="54.61" y2="8.91" />
-        </svg>
-    );
+	return (
+		<svg
+			width={width}
+			height={height}
+			viewBox="0 0 64 64"
+			strokeWidth="3"
+			stroke="#000000"
+			fill="none">
+			<path d="M55.4,32V53.58a1.81,1.81,0,0,1-1.82,1.82H10.42A1.81,1.81,0,0,1,8.6,53.58V10.42A1.81,1.81,0,0,1,10.42,8.6H32" />
+			<polyline points="40.32 8.6 55.4 8.6 55.4 24.18" />
+			<line x1="19.32" y1="45.72" x2="54.61" y2="8.91" />
+		</svg>
+	);
 }
 
 export function HomeIcon() {
@@ -306,5 +302,31 @@ export function ClearListIcon() {
 				/>
 			</svg>
 		</div>
+	);
+}
+
+export function SortIcon({ transform, style }) {
+	return (
+		<svg
+			width={width}
+			height={height}
+			viewBox="0 -0.5 17 17"
+			version="1.1"
+			xmlns="http://www.w3.org/2000/svg"
+			className="si-glyph si-glyph-triangle-up"
+			style={style}>
+			<defs></defs>
+			<g
+				stroke="none"
+				strokeWidth="1"
+				fill="none"
+				fillRule="evenodd"
+				transform={`rotate(180, 8.5, 5.5) ${transform ?? ""}`}>
+				<path
+					d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
+					fill="#434343"
+					class="si-glyph-fill"></path>
+			</g>
+		</svg>
 	);
 }
