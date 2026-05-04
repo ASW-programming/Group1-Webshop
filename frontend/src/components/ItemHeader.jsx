@@ -7,23 +7,13 @@ import ShoppingCart from "./ShoppingCart";
 import { useLocation } from "react-router-dom";
 import { SearchIcon } from "../assets/Icons";
 import { Link } from "react-router-dom";
-import { useShop } from "../utils/context";
 
 function ItemHeader() {
 	const inputRef = useRef("");
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { addedProducts } = useShop();
 
 	const shopName = "GigaMat";
-
-	const totalPrice =
-		addedProducts
-			?.map((product) => {
-				const price = product.reducedPrice || product.price;
-				return price * product.quantity;
-			})
-			.reduce((sum, productTotal) => sum + productTotal, 0) || 0;
 
 	if (
 		location.pathname === "/checkout" ||
