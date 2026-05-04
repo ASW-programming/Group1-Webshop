@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
@@ -7,12 +7,23 @@ import ShoppingCart from "./ShoppingCart";
 import { useLocation } from "react-router-dom";
 import { SearchIcon } from "../assets/Icons";
 import { Link } from "react-router-dom";
+import { useShop } from "../utils/context";
 
 function ItemHeader() {
 	const inputRef = useRef("");
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { addedProducts } = useShop();
+
 	const shopName = "GigaMat";
+
+	const totalPrice =
+		addedProducts
+			?.map((product) => {
+				const price = product.reducedPrice || product.price;
+				return price * product.quantity;
+			})
+			.reduce((sum, productTotal) => sum + productTotal, 0) || 0;
 
 	if (
 		location.pathname === "/checkout" ||
@@ -38,37 +49,37 @@ function ItemHeader() {
 	return (
 		<header className="header">
 			<div className="headerContainer">
-			<div className="headerTitle">
-				<Link to="/">
-					<h1>GigaMat</h1>
-				</Link>
-			</div>
-
-			<div className="headerNav">
-				<div className="headerMenu">
-					<HamburgerMenu />
+				<div className="headerTitle">
+					<Link to="/">
+						<h1>GigaMat</h1>
+					</Link>
 				</div>
 
-				<div className="headerSearch">
-					<ItemInput
-            className="headerSearchInput"
-						placeholder="Sök..."
-						onChange={(e) => {
-							inputRef.current = e.target.value;
-						}}
-						onKeyDown={handleKeyDown}
-					/>
-					<ItemButton
-						type="button"
-						icon={<SearchIcon />}
-						onClick={handleSearch}
-					/>
-				</div>
+				<div className="headerNav">
+					<div className="headerMenu">
+						<HamburgerMenu />
+					</div>
 
-				<div className="headerCart">
-					<ShoppingCart />
+					<div className="headerSearch">
+						<ItemInput
+							className="headerSearchInput"
+							placeholder="Sök..."
+							onChange={(e) => {
+								inputRef.current = e.target.value;
+							}}
+							onKeyDown={handleKeyDown}
+						/>
+						<ItemButton
+							type="button"
+							icon={<SearchIcon />}
+							onClick={handleSearch}
+						/>
+					</div>
+
+					<div className="headerCart">
+						<ShoppingCart />
+					</div>
 				</div>
-			</div>
 			</div>
 		</header>
 	);

@@ -93,6 +93,11 @@ export function ShopProvider({ children }) {
 		setActiveCategory((prev) => (prev === category ? null : category)); // klicka igen = avmarkera
 	};
 
+	const totalPrice = (addedProducts ?? []).reduce((sum, item) => {
+		const price = item.reducedPrice || item.price;
+		return sum + price * item.quantity;
+	}, 0);
+
 	const value = {
 		// product data
 		products,
@@ -111,6 +116,7 @@ export function ShopProvider({ children }) {
 		//HamburgerMenu
 		activeCategory,
 		selectCategory,
+		totalPrice,
 	};
 
 	return (
