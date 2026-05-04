@@ -1,7 +1,12 @@
 import ItemButton from "./ItemButton";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getOrders, deleteOrder } from "../utils/calls.js";
-import { ReturnIcon, HomeIcon, EmptyListIcon } from "../assets/Icons.jsx";
+import {
+	ReturnIcon,
+	HomeIcon,
+	EmptyListIcon,
+	SortIcon,
+} from "../assets/Icons.jsx";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -79,194 +84,209 @@ function OrderHistory() {
 				/>
 			</div>
 
-			<table className="orderTable">
-				<thead>
-					<tr className="orderCategories">
-						<th
-							className={
-								sortCategory === "orderID"
-									? "chosen"
-									: "notChosen"
-							}
-							onClick={() => handleSort("orderID")}>
-							<SortIcon
-								style={{
-									visibility:
-										sortCategory === "orderID"
-											? "visible"
-											: "hidden",
-								}}
-								transform={
-									sortAscending ? "rotate(180, 8.5, 5.5)" : ""
+			{orders.length > 0 ? (
+				<table className="orderTable">
+					<thead>
+						<tr className="orderCategories">
+							<th
+								className={
+									sortCategory === "orderID"
+										? "chosen"
+										: "notChosen"
 								}
-							/>{" "}
-							Order #
-						</th>
-						<th
-							className={
-								sortCategory === "createdAt"
-									? "chosen"
-									: "notChosen"
-							}
-							onClick={() => handleSort("createdAt")}>
-							<SortIcon
-								style={{
-									visibility:
-										sortCategory === "createdAt"
-											? "visible"
-											: "hidden",
-								}}
-								transform={
-									sortAscending ? "rotate(180, 8.5, 5.5)" : ""
+								onClick={() => handleSort("orderID")}>
+								<SortIcon
+									style={{
+										visibility:
+											sortCategory === "orderID"
+												? "visible"
+												: "hidden",
+									}}
+									transform={
+										sortAscending
+											? "rotate(180, 8.5, 5.5)"
+											: ""
+									}
+								/>{" "}
+								Order #
+							</th>
+							<th
+								className={
+									sortCategory === "createdAt"
+										? "chosen"
+										: "notChosen"
 								}
-							/>
-							Datum
-						</th>
-						<th
-							className={
-								sortCategory === "customer"
-									? "chosen"
-									: "notChosen"
-							}
-							onClick={() => handleSort("customer")}>
-							<SortIcon
-								style={{
-									visibility:
-										sortCategory === "customer"
-											? "visible"
-											: "hidden",
-								}}
-								transform={
-									sortAscending ? "rotate(180, 8.5, 5.5)" : ""
+								onClick={() => handleSort("createdAt")}>
+								<SortIcon
+									style={{
+										visibility:
+											sortCategory === "createdAt"
+												? "visible"
+												: "hidden",
+									}}
+									transform={
+										sortAscending
+											? "rotate(180, 8.5, 5.5)"
+											: ""
+									}
+								/>
+								Datum
+							</th>
+							<th
+								className={
+									sortCategory === "customer"
+										? "chosen"
+										: "notChosen"
 								}
-							/>
-							Kund
-						</th>
-						<th>Produkt</th>
-						<th>Antal</th>
-						<th>Pris</th>
-						<th
-							className={
-								sortCategory === "totalPrice"
-									? "chosen"
-									: "notChosen"
-							}
-							onClick={() => handleSort("totalPrice")}>
-							<SortIcon
-								style={{
-									visibility:
-										sortCategory === "totalPrice"
-											? "visible"
-											: "hidden",
-								}}
-								transform={
-									sortAscending ? "rotate(180, 8.5, 5.5)" : ""
+								onClick={() => handleSort("customer")}>
+								<SortIcon
+									style={{
+										visibility:
+											sortCategory === "customer"
+												? "visible"
+												: "hidden",
+									}}
+									transform={
+										sortAscending
+											? "rotate(180, 8.5, 5.5)"
+											: ""
+									}
+								/>
+								Kund
+							</th>
+							<th>Produkt</th>
+							<th>Antal</th>
+							<th>Pris</th>
+							<th
+								className={
+									sortCategory === "totalPrice"
+										? "chosen"
+										: "notChosen"
 								}
-							/>
-							Total
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{orders
-						?.slice()
-						.sort((a, b) => {
-							const choiceA = a[sortCategory];
-							const choiceB = b[sortCategory];
+								onClick={() => handleSort("totalPrice")}>
+								<SortIcon
+									style={{
+										visibility:
+											sortCategory === "totalPrice"
+												? "visible"
+												: "hidden",
+									}}
+									transform={
+										sortAscending
+											? "rotate(180, 8.5, 5.5)"
+											: ""
+									}
+								/>
+								Total
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{orders
+							?.slice()
+							.sort((a, b) => {
+								const choiceA = a[sortCategory];
+								const choiceB = b[sortCategory];
 
-							if (!sortCategory) return 0;
+								if (!sortCategory) return 0;
 
-							// Checks if Choice A is a string and not a date. If not a date then isNaN = true and return to sort String
-							if (
-								typeof choiceA === "string" &&
-								isNaN(Date.parse(choiceA))
-							) {
-								// Checks if A is greater than B with support of Swedish Letters
+								// Checks if Choice A is a string and not a date. If not a date then isNaN = true and return to sort String
+								if (
+									typeof choiceA === "string" &&
+									isNaN(Date.parse(choiceA))
+								) {
+									// Checks if A is greater than B with support of Swedish Letters
+									return sortAscending
+										? choiceA.localeCompare(
+												choiceB,
+												"sv-SE",
+											)
+										: choiceB.localeCompare(
+												choiceA,
+												"sv-SE",
+											);
+								}
+
+								// Checks the date if its newer or older.
+								if (typeof choiceA === "string") {
+									return sortAscending
+										? new Date(choiceA) - new Date(choiceB)
+										: new Date(choiceB) - new Date(choiceA);
+								}
+
+								// Sorts numbers
 								return sortAscending
-									? choiceA.localeCompare(choiceB, "sv-SE")
-									: choiceB.localeCompare(choiceA, "sv-SE");
-							}
+									? choiceA - choiceB
+									: choiceB - choiceA;
+							})
+							.map((o) =>
+								o.items.map((i, index) => (
+									<tr
+										key={`${o.id}-${i.id}`}
+										className={`orderRow ${deletingId === o.id ? "slideOutLeft" : ""}`}>
+										{index === 0 && (
+											<td rowSpan={o.items.length}>
+												{o.orderIDFormatted ||
+													"Order ID Saknas"}
+											</td>
+										)}
 
-							// Checks the date if its newer or older.
-							if (typeof choiceA === "string") {
-								return sortAscending
-									? new Date(choiceA) - new Date(choiceB)
-									: new Date(choiceB) - new Date(choiceA);
-							}
+										{index === 0 && (
+											<td rowSpan={o.items.length}>
+												{formatDate(o.createdAt)}
+											</td>
+										)}
 
-							// Sorts numbers
-							return sortAscending
-								? choiceA - choiceB
-								: choiceB - choiceA;
-						})
-						.map((o) =>
-							o.items.map((i, index) => (
-								<tr
-									key={`${o.id}-${i.id}`}
-									className={`orderRow ${deletingId === o.id ? "slideOutLeft" : ""}`}>
-									{index === 0 && (
-										<td rowSpan={o.items.length}>
-											{o.orderIDFormatted ||
-												"Order ID Saknas"}
-										</td>
-									)}
-
-									{index === 0 && (
-										<td rowSpan={o.items.length}>
-											{formatDate(o.createdAt)}
-										</td>
-									)}
-
-									{index === 0 && (
-										<td
-											rowSpan={o.items.length}
-											className="orderCustomer">
-											{o.customer}
-										</td>
-									)}
-									<td className="orderImage orderName">
-										<img
-											src={i.imageUrl}
-											className="orderItemImage"
-										/>
-										{i.name}
-									</td>
-									<td className="orderQuantity">
-										{i.quantity} st
-									</td>
-									<td className="orderPrice">
-										{i.reducedPrice
-											? i.reducedPrice
-											: i.price}{" "}
-										kr
-									</td>
-									{index === 0 && (
-										<td
-											rowSpan={o.items.length}
-											className="orderTotal">
-											{o.price} kr
-										</td>
-									)}
-									{index === 0 && (
-										<td rowSpan={o.items.length}>
-											<ItemButton
-												title="Delete Order"
-												icon={<EmptyListIcon />}
-												onClick={() => {
-													if (
-														window.confirm(
-															`Delete order ${o.orderIDFormatted}?`,
-														)
-													) {
-														mutate(o.id);
-													}
-												}}
+										{index === 0 && (
+											<td
+												rowSpan={o.items.length}
+												className="orderCustomer">
+												{o.customer}
+											</td>
+										)}
+										<td className="orderImage orderName">
+											<img
+												src={i.imageUrl}
+												className="orderItemImage"
 											/>
+											{i.name}
 										</td>
-									)}
-								</tr>
-							)),
-						)}
+										<td className="orderQuantity">
+											{i.quantity} st
+										</td>
+										<td className="orderPrice">
+											{i.reducedPrice
+												? i.reducedPrice
+												: i.price}{" "}
+											kr
+										</td>
+										{index === 0 && (
+											<td
+												rowSpan={o.items.length}
+												className="orderTotal">
+												{o.price} kr
+											</td>
+										)}
+										{index === 0 && (
+											<td rowSpan={o.items.length}>
+												<ItemButton
+													title="Delete Order"
+													icon={<EmptyListIcon />}
+													onClick={() => {
+														if (
+															window.confirm(
+																`Delete order ${o.orderIDFormatted}?`,
+															)
+														) {
+															mutate(o.id);
+														}
+													}}
+												/>
+											</td>
+										)}
+									</tr>
+								)),
+							)}
 					</tbody>
 				</table>
 			) : (
