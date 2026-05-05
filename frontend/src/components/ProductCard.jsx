@@ -67,7 +67,7 @@ function ProductCard({ products, activeCategory }) {
 								</div>
 							</Link>
 							<div
-								className="cartButtons"
+								className="cardButtons"
 								onClick={(e) => {
 									e.stopPropagation();
 								}}>

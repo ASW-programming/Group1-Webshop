@@ -20,10 +20,12 @@ function ItemHeader() {
 		location.pathname === "/orderHistory"
 	)
 		return (
-			<div className="headerTitle">
-				<Link to="/">
-					<h1>{shopName}</h1>
-				</Link>
+			<div className="headerContainer2">
+				<div className="headerTitle">
+					<Link to="/">
+						<h1>{shopName}</h1>
+					</Link>
+				</div>
 			</div>
 		);
 

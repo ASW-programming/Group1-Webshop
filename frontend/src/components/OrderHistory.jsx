@@ -71,7 +71,7 @@ function OrderHistory() {
 	if (isError) return <p>Error</p>;
 
 	return (
-		<div>
+		<div className="orderHistoryContent">
 			<div className="navigationBtns">
 				<Link to="/">
 					<ItemButton title="Homepage" icon={<HomeIcon />} />
@@ -270,6 +270,7 @@ function OrderHistory() {
 										{index === 0 && (
 											<td rowSpan={o.items.length}>
 												<ItemButton
+													className="cartBtnDel"
 													title="Delete Order"
 													icon={<EmptyListIcon />}
 													onClick={() => {
