@@ -1,15 +1,13 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
-import { useLocation } from "react-router-dom";
 import { SearchIcon } from "../assets/Icons";
-import { Link } from "react-router-dom";
 
 function ItemHeader() {
-	const inputRef = useRef("");
+	const [inputValue, setInputValue] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -28,8 +26,9 @@ function ItemHeader() {
 		);
 
 	const handleSearch = () => {
-		const value = inputRef.current.trim();
-		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
+		const value = inputValue.trim();
+		navigate(`/?q=${encodeURIComponent(value)}`);
+		setInputValue("");
 	};
 
 	const handleKeyDown = (e) => {
@@ -54,9 +53,8 @@ function ItemHeader() {
 						<ItemInput
 							className="headerSearchInput"
 							placeholder="Sök..."
-							onChange={(e) => {
-								inputRef.current = e.target.value;
-							}}
+							value={inputValue}
+							onChange={(e) => setInputValue(e.target.value)}
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton
