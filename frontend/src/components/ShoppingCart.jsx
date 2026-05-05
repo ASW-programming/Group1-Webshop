@@ -1,111 +1,111 @@
 import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context.jsx";
 import {
-	AddIcon,
-	CancelIcon,
-	EmptyListIcon,
-	RemoveIcon,
-	ShoppingCartIcon,
-	ClearListIcon,
+    AddIcon,
+    CancelIcon,
+    EmptyListIcon,
+    RemoveIcon,
+    ShoppingCartIcon,
+    ClearListIcon,
 } from "../assets/Icons";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function ShoppingCart() {
-	const {
-		addedProducts,
-		getProductQuantity,
-		clearCart,
-		handleQuantityChange,
-		totalPrice,
-	} = useShop();
+    const {
+        addedProducts,
+        getProductQuantity,
+        clearCart,
+        handleQuantityChange,
+        totalPrice,
+    } = useShop();
 
-	const [isCartOpen, setIsCartOpen] = useState(false);
-	const toggleCart = () => setIsCartOpen(!isCartOpen);
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const toggleCart = () => setIsCartOpen(!isCartOpen);
 
-	const totalQuantity = addedProducts.reduce((sum, product) => {
-		return sum + product.quantity;
-	}, 0);
+    const totalQuantity = addedProducts.reduce((sum, product) => {
+        return sum + product.quantity;
+    }, 0);
 
-	return (
-		<div>
-			<div className="shoppingCartCombo">
-				{totalQuantity > 0 && (
-					<p className="quantityCounter">{totalQuantity}</p>
-				)}
-				<ItemButton
-					title={isCartOpen ? "Close Menu" : "Open Cart"}
-					onClick={toggleCart}
-					className="shoppingcartBtn"
-					icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
-				/>
-			</div>
-			{isCartOpen && (
-				<div className="shoppingList">
-					<h4 className="shoppingListTitle">Valda produkter</h4>
-					<table className="productTable shoppingListItems">
-						<tbody>
-							{addedProducts?.map((product) => (
-								<tr key={product.id}>
-									<td>
-										<img
-											src={product.imageUrl}
-											style={{
-												width: "15px",
-												height: "15px",
-											}}
-										/>
-									</td>
-									<td>{product.name}</td>
-									<td>
-										{product.reducedPrice
-											? product.reducedPrice
-											: product.price}{" "}
-										kr
-									</td>
-									<td className="quantityControls">
-										<ItemButton
-											className="removeButton"
-											title="Remove on product"
-											icon={<RemoveIcon />}
-											onClick={() =>
-												handleQuantityChange(
-													product,
-													-1,
-												)
-											}
-										/>
-										{getProductQuantity(product.id)}
-										<ItemButton
-											className="addButton"
-											title="Add one product"
-											icon={<AddIcon />}
-											onClick={() =>
-												handleQuantityChange(product, 1)
-											}
-										/>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<h4>Total: {totalPrice}kr</h4>
+    return (
+        <div>
+            <div className="shoppingCartCombo">
+                {totalQuantity > 0 && (
+                    <p className="quantityCounter">{totalQuantity}</p>
+                )}
+                <ItemButton
+                    title={isCartOpen ? "Close Menu" : "Open Cart"}
+                    onClick={toggleCart}
+                    className="shoppingcartBtn"
+                    icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
+                />
+            </div>
+            {isCartOpen && (
+                <div className="shoppingList">
+                    <h4 className="shoppingListTitle">Valda produkter</h4>
+                    <table className="productTable shoppingListItems">
+                        <tbody>
+                            {addedProducts?.map((product) => (
+                                <tr key={product.id}>
+                                    <td>
+                                        <img
+                                            src={product.imageUrl}
+                                            style={{
+                                                width: "15px",
+                                                height: "15px",
+                                            }}
+                                        />
+                                    </td>
+                                    <td>{product.name}</td>
+                                    <td>
+                                        {product.reducedPrice
+                                            ? product.reducedPrice
+                                            : product.price}{" "}
+                                        kr
+                                    </td>
+                                    <td className="quantityControls">
+                                        <ItemButton
+                                            className="removeButton"
+                                            title="Remove on product"
+                                            icon={<RemoveIcon />}
+                                            onClick={() =>
+                                                handleQuantityChange(
+                                                    product,
+                                                    -1,
+                                                )
+                                            }
+                                        />
+                                        {getProductQuantity(product.id)}
+                                        <ItemButton
+                                            className="addButton"
+                                            title="Add one product"
+                                            icon={<AddIcon />}
+                                            onClick={() =>
+                                                handleQuantityChange(product, 1)
+                                            }
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <h4>Total: {totalPrice}kr</h4>
 
-					<Link to="/checkout">
-						<ItemButton text="Checkout" />
-					</Link>
-					{addedProducts.length > 0 && (
-						<ItemButton
-							icon={<ClearListIcon />}
-							className="cartDeleteBtn"
-							onClick={() => clearCart()}
-							title="Clear cart"
-						/>
-					)}
-				</div>
-			)}
-		</div>
-	);
+                    <Link to="/checkout">
+                        <ItemButton text="Checkout" className="checkoutButton" />
+                    </Link>
+                    {addedProducts.length > 0 && (
+                        <ItemButton
+                            icon={<ClearListIcon />}
+                            className="cartDeleteBtn"
+                            onClick={() => clearCart()}
+                            title="Clear cart"
+                        />
+                    )}
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default ShoppingCart;
