@@ -43,7 +43,7 @@ function ItemHeader() {
 			<div className="headerContainer">
 				<div className="headerTitle">
 					<Link to="/">
-						<h1>GigaMat</h1>
+						<h1>{shopName}</h1>
 					</Link>
 				</div>
 

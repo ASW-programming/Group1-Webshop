@@ -58,7 +58,7 @@ function CheckoutComponent() {
 		return (
 			<div className="checkoutCart">
 				{lastOrder && (
-					<div>
+					<div className="checkedOutInfo">
 						<h2>
 							Tack för din beställning,{" "}
 							{lastOrder.customer.charAt(0).toUpperCase() +
@@ -162,9 +162,8 @@ function CheckoutComponent() {
 								<td className="cart-item-total">
 									<span className="cartTotalPrice">
 										{`${(
-											(product.reducedPrice
-												? product.reducedPrice
-												: product.price) *
+											(product.reducedPrice ||
+												product.price) *
 											product.quantity
 										).toFixed(2)} kr`}
 									</span>
@@ -236,12 +235,20 @@ function CheckoutComponent() {
 						onClick={() => window.history.back()}
 					/>
 					<Link to="/">
-						<ItemButton icon={<HomeIcon />} title="Homepage" className="homeBtn" />
+						<ItemButton
+							icon={<HomeIcon />}
+							title="Homepage"
+							className="homeBtn"
+						/>
 					</Link>
 				</div>
 			</div>
-			<Link to="/orderHistory" >
-				<ItemButton title="Order History" text="Order historik" className="orderHistory" />
+			<Link to="/orderHistory">
+				<ItemButton
+					title="Order History"
+					text="Order historik"
+					className="orderHistory"
+				/>
 			</Link>
 		</div>
 	);
