@@ -31,7 +31,7 @@ function ProductCard({ products, activeCategory }) {
 									{priceInfo(u)}
 								</span>
 								<span className="productDescription">
-									{u.description.slice(0, 30)}
+									{u.shortDesc?.slice(0, 30) || "No description"}
 								</span>
 							</div>
 						</Link>
@@ -52,7 +52,7 @@ function ProductCard({ products, activeCategory }) {
 
 									<p>{quantity}</p>
 									<ItemButton
-                    className="addButton"
+										className="addButton"
 										title="Add one product"
 										icon={<AddIcon />}
 										onClick={() =>
@@ -61,17 +61,18 @@ function ProductCard({ products, activeCategory }) {
 									/>
 								</>
 							) : (
-							<ItemButton
-								className="buyButton"
-								text="Köp"
-								onClick={() => {
-									handleQuantityChange(u, 1);
-								}}
-							/>
-						)}
-					</div>
-				</li>
-			)})}
+								<ItemButton
+									className="buyButton"
+									text="Köp"
+									onClick={() => {
+										handleQuantityChange(u, 1);
+									}}
+								/>
+							)}
+						</div>
+					</li>
+				)
+			})}
 		</div>
 	);
 }

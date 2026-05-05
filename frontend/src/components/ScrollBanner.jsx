@@ -60,7 +60,6 @@ const ScrollBanner = ({ slides = [] }) => {
 					/>
 
 					<div className="bannerText">
-						{slide.title && <h3>{slide.title}</h3>}
 						{slide.subtitle && <p>{slide.subtitle}</p>}
 
 						{slide.price && (
