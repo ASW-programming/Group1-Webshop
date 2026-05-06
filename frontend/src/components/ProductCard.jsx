@@ -54,9 +54,7 @@ function ProductCard({ products, activeCategory }) {
 									<img
 										className="productImage"
 										src={u.imageUrl}></img>
-									<span className="productName">
-										{u.name}
-									</span>
+									<span className="productName">{u.name}</span>
 									<span className="productCategory">
 										{u.category}
 									</span>
@@ -64,18 +62,19 @@ function ProductCard({ products, activeCategory }) {
 										{priceInfo(u)}
 									</span>
 									<span className="productDescription">
-										{u.description.slice(0, 30)}
+										{u.shortDesc || "Ingen Beskrivning"}
 									</span>
 								</div>
 							</Link>
 							<div
-								className="cartButtons"
+								className="cardButtons"
 								onClick={(e) => {
 									e.stopPropagation();
 								}}>
 								{quantity > 0 ? (
 									<>
 										<ItemButton
+											className="removeButton"
 											title="Remove one product"
 											icon={<RemoveIcon />}
 											onClick={() => {

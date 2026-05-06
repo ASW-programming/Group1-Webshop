@@ -29,8 +29,7 @@ function LandingComponent() {
 	const slidesData = discountedProducts.map((u) => ({
 		id: u.id,
 		image: u.imageUrl,
-		title: u.title,
-		subtitle: u.description.slice(0, 100),
+		subtitle: u.shortDesc.slice(0, 100),
 		price: u.reducedPrice,
 		originalPrice: u.price,
 		buttonText: "View",

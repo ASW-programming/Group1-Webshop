@@ -56,12 +56,12 @@ function ShoppingCart() {
 											}}
 										/>
 									</td>
-									<td>{product.name}</td>
-									<td>
-										{product.reducedPrice
-											? product.reducedPrice
-											: product.price}{" "}
-										kr
+									<td className="columnName">
+										{product.name}
+									</td>
+									<td className="columnPrice">
+										{(product.reducedPrice ||
+											product.price) + " kr"}
 									</td>
 									<td className="quantityControls">
 										<ItemButton
@@ -92,7 +92,10 @@ function ShoppingCart() {
 					<h4>Total: {totalPrice}kr</h4>
 
 					<Link to="/checkout">
-						<ItemButton text="Checkout" />
+						<ItemButton
+							text="Checkout"
+							className="checkoutButton"
+						/>
 					</Link>
 					{addedProducts.length > 0 && (
 						<ItemButton

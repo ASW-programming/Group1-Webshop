@@ -49,7 +49,7 @@ const ScrollBanner = ({ slides = [] }) => {
 	return (
 		<div className="scrollBannerContainer">
 			<div className="scrollBanner">
-				<ItemButton onClick={prevSlide} icon={<ArrowIcon />} />
+				<ItemButton className="arrowButton" onClick={prevSlide} icon={<ArrowIcon width="20px" height="20px" />} />
 				<div
 					className="bannerContent"
 					onClick={() => navigate(`/product/${slide.id}`)}>
@@ -60,7 +60,6 @@ const ScrollBanner = ({ slides = [] }) => {
 					/>
 
 					<div className="bannerText">
-						{slide.title && <h3>{slide.title}</h3>}
 						{slide.subtitle && <p>{slide.subtitle}</p>}
 
 						{slide.price && (
@@ -81,6 +80,7 @@ const ScrollBanner = ({ slides = [] }) => {
 					</div>
 				</div>
 				<ItemButton
+                    className="arrowButton"
 					onClick={nextSlide}
 					icon={<ArrowIcon transform={"rotate(180 16 16)"} />}
 				/>
