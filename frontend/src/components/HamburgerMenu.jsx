@@ -2,19 +2,21 @@ import ItemButton from "./ItemButton";
 import { useShop } from "../utils/context";
 import { HamburgerIcon, CancelIcon } from "../assets/Icons";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function HamburgerMenu() {
 	const { categories, activeCategory, selectCategory } = useShop();
-	const [searchParams, setSearchParams] = useSearchParams();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	const handleCategoryClick = (category) => {
 		selectCategory(category);
-		setSearchParams({});
 		toggleMenu();
+		if (location.pathname !== "") {
+			navigate("/");
+		}
 	};
 
 	return (
