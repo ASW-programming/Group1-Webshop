@@ -1,17 +1,17 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { startTransition, useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
-import { useLocation } from "react-router-dom";
 import { SearchIcon } from "../assets/Icons";
-import { Link } from "react-router-dom";
+import { useShop } from "../utils/context.jsx";
 
 function ItemHeader() {
-	const inputRef = useRef("");
+	const [inputValue, setInputValue] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { selectCategory } = useShop();
 
 	const shopName = "GigaMat";
 
@@ -30,8 +30,11 @@ function ItemHeader() {
 		);
 
 	const handleSearch = () => {
-		const value = inputRef.current.trim();
-		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
+		startTransition(() => {
+			selectCategory(null);
+		});
+		navigate(`/?q=${inputValue.trim()}`);
+		setInputValue("");
 	};
 
 	const handleKeyDown = (e) => {
@@ -55,9 +58,8 @@ function ItemHeader() {
 						<ItemInput
 							className="headerSearchInput"
 							placeholder="Sök..."
-							onChange={(e) => {
-								inputRef.current = e.target.value;
-							}}
+							value={inputValue}
+							onChange={(e) => setInputValue(e.target.value)}
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton
