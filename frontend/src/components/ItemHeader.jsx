@@ -1,31 +1,12 @@
-import { startTransition, useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import ItemButton from "./ItemButton";
-import ItemInput from "./ItemInput";
+import { useLocation, Link } from "react-router-dom";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
-import { SearchIcon } from "../assets/Icons";
-import { useShop } from "../utils/context.jsx";
+import SearchBar from "./SearchBar.jsx";
 
 function ItemHeader() {
-	const [inputValue, setInputValue] = useState("");
-	const navigate = useNavigate();
 	const location = useLocation();
-	const { selectCategory } = useShop();
 
 	const shopName = "GigaMat";
-
-	const handleSearch = () => {
-		startTransition(() => {
-			selectCategory(null);
-		});
-		navigate(`/?q=${inputValue.trim()}`);
-		setInputValue("");
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key === "Enter") handleSearch();
-	};
 
 	if (
 		location.pathname === "/checkout" ||
@@ -54,23 +35,7 @@ function ItemHeader() {
 					<div className="headerMenu">
 						<HamburgerMenu />
 					</div>
-					<div className="headerSearch">
-						<ItemInput
-							className="headerSearchInput"
-							placeholder="Sök..."
-							value={inputValue}
-							onChange={(e) => setInputValue(e.target.value)}
-							onKeyDown={handleKeyDown}
-						/>
-						<ItemButton
-							title="Search"
-							className="headerSearchButton"
-							type="button"
-							icon={<SearchIcon />}
-							onClick={handleSearch}
-						/>
-					</div>
-
+					<SearchBar />
 					<div className="headerCart">
 						<ShoppingCart />
 					</div>
