@@ -29,13 +29,14 @@ function LandingComponent() {
 	return (
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
+			
 			<ProductCard
 				products={searchedProducts}
 				activeCategory={activeCategory}
 			/>
 
-			<Link to="/orderHistory" className="orderHistory">
-				<ItemButton title="Order History" text="Order historik" />
+			<Link to="/orderHistory" >
+				<ItemButton title="Order History" text="Order historik" className="orderHistory"/>
 			</Link>
 		</div>
 	);

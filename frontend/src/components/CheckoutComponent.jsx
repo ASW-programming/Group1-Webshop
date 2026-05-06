@@ -216,7 +216,7 @@ function CheckoutComponent() {
 
 			<div className="checkoutInfo">
 				<form onSubmit={placeOrders}>
-					{error && <p className="error-message">{error}</p>}
+					{error && <p className="errorMessage">{error}</p>}
 					<div className="checkoutName">
 						<label
 							htmlFor="cart-name-input"
