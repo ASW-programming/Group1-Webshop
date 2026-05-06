@@ -20,7 +20,7 @@ function CheckoutComponent() {
 	const [checkout, setCheckout] = useState(false);
 	const [error, setError] = useState("");
 	const [lastOrder, setLastOrder] = useState(null);
-	const { addProduct, addedProducts = [], clearCart } = useShop();
+	const { addProduct, addedProducts = [], clearCart, totalPrice } = useShop();
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: postOrders,
@@ -36,11 +36,6 @@ function CheckoutComponent() {
 			setCheckout(true);
 		},
 	});
-
-	const totalPrice = addedProducts.reduce((sum, item) => {
-		const price = item.reducedPrice || item.price;
-		return sum + price * item.quantity;
-	}, 0);
 
 	const placeOrders = async (e) => {
 		e.preventDefault();
@@ -61,9 +56,9 @@ function CheckoutComponent() {
 	//When checkout is true show frindly message.
 	if (checkout) {
 		return (
-			<div className="checkout-cart">
+			<div className="checkoutCart">
 				{lastOrder && (
-					<div>
+					<div className="checkedOutInfo">
 						<h2>
 							Tack för din beställning,{" "}
 							{lastOrder.customer.charAt(0).toUpperCase() +
@@ -71,7 +66,7 @@ function CheckoutComponent() {
 							!
 						</h2>
 						<p>Ordernummer {lastOrder.orderID}</p>
-						<h3>Producter:</h3>
+						<h3>Produkter:</h3>
 						{lastOrder.items.map((i) => (
 							<li key={i.id}>
 								<div className="checkoutProductInfo">
@@ -96,16 +91,22 @@ function CheckoutComponent() {
 				)}
 
 				<ItemButton
+					className="goBackButton"
 					title="Go back"
 					icon={<ReturnIcon />}
 					onClick={() => window.history.back()}
+				/>
+				<img
+					className="foodPicture"
+					src="/food.png"
+					alt="Food illustration"
 				/>
 			</div>
 		);
 	}
 
 	return (
-		<div className="cart-overview">
+		<div className="cartOverview">
 			<h2 className="cart-title">Din kundvagn</h2>
 
 			{/* If addedProducts is empty, show the message, else show the list. Create a new HTML-element for each product in the list */}
@@ -143,27 +144,26 @@ function CheckoutComponent() {
 								</td>
 								<td className="cartItemControls">
 									<ItemButton
+										className="removeButton"
 										title="Remove one product"
 										icon={<RemoveIcon />}
-										className="cart-btn-minus"
 										onClick={() => addProduct(product, -1)}
 									/>
 									<span className="cartItemQuantity">
 										{`${product.quantity} st`}
 									</span>
 									<ItemButton
+										className="addButton"
 										title="Add one product"
 										icon={<AddIcon />}
-										className="cart-btn-plus"
 										onClick={() => addProduct(product, 1)}
 									/>
 								</td>
 								<td className="cart-item-total">
 									<span className="cartTotalPrice">
 										{`${(
-											(product.reducedPrice
-												? product.reducedPrice
-												: product.price) *
+											(product.reducedPrice ||
+												product.price) *
 											product.quantity
 										).toFixed(2)} kr`}
 									</span>
@@ -172,7 +172,7 @@ function CheckoutComponent() {
 									<ItemButton
 										title="Remove item"
 										icon={<EmptyListIcon />}
-										className="cart-btn-del-item"
+										className="cartBtnDel"
 										onClick={() =>
 											addProduct(
 												product,
@@ -195,24 +195,23 @@ function CheckoutComponent() {
 				/>
 			)}
 
-			<h2 className="cart-divider"></h2>
-			<div className="cart-total-row">
+			<div className="checkoutTotal">
 				<span className="cart-total-price-cost">
 					{`Total kostnad: ${totalPrice.toFixed(2)}`} kr
 				</span>
 			</div>
 
-			<div className="cart-name-section">
-				<label htmlFor="cart-name-input" className="cart-name-label">
+			<div className="checkoutInfo">
+				<label htmlFor="cart-name-input" className="cartNameLabel">
 					Ditt namn{" "}
 				</label>
 
 				<form onSubmit={placeOrders}>
 					{error && <p className="error-message">{error}</p>}
 					<ItemInput
-						className="cart-name-input"
+						className="cartNameInput"
 						id="cart-name-input"
-						placeholder="Enter name..."
+						placeholder="Namn..."
 						onChange={(e) => {
 							setCustomer(e.target.value);
 							setError("");
@@ -222,6 +221,7 @@ function CheckoutComponent() {
 
 					<ItemButton
 						title="Place order"
+						className="placeOrderBtn"
 						type="submit"
 						text={isPending ? "Skickar..." : "Order"}
 						disabled={isPending}
@@ -229,17 +229,26 @@ function CheckoutComponent() {
 				</form>
 				<div className="navigationBtns">
 					<ItemButton
+						className="returnBtn"
 						title="Go back"
 						icon={<ReturnIcon />}
 						onClick={() => window.history.back()}
 					/>
 					<Link to="/">
-						<ItemButton icon={<HomeIcon />} title="Homepage" />
+						<ItemButton
+							icon={<HomeIcon />}
+							title="Homepage"
+							className="homeBtn"
+						/>
 					</Link>
 				</div>
 			</div>
-			<Link to="/orderHistory" className="orderHistory">
-				<ItemButton title="Order History" text="Order historik" />
+			<Link to="/orderHistory">
+				<ItemButton
+					title="Order History"
+					text="Order historik"
+					className="orderHistory"
+				/>
 			</Link>
 		</div>
 	);

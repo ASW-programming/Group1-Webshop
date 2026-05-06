@@ -27,33 +27,27 @@ const ProductDetails = () => {
 
 	return (
 		<div className="productDetails">
-			<ItemButton
-				title="Go back"
-				icon={<ReturnIcon />}
-				onClick={() => window.history.back()}
-			/>
 			<div className="productInfo">
-				<img
-					className="productImage"
-					src={selectedProduct.imageUrl}></img>
-				<div className="productNameCategory">
-					<span className="productName">{selectedProduct.name}</span>
-					<span className="productCategory">
-						{selectedProduct.category}
-					</span>
+				<div className="productNameImg">
+					<img
+						className="productImage"
+						src={selectedProduct.imageUrl}></img>
+					<div className="productNameCategory">
+						<p className="productName">{selectedProduct.name}</p>
+						<p className="productCategory">
+							{selectedProduct.category}
+						</p>
+						<p className="productPrice">
+							{priceInfo(selectedProduct)}
+						</p>
+					</div>
 				</div>
-				<span className="productPrice">
-					{priceInfo(selectedProduct)}
-				</span>
-				<span className="productDescription">
+
+				<p className="productDescription">
 					{selectedProduct.description}
-				</span>
+				</p>
 			</div>
-			<div
-				className="cartButtons"
-				onClick={(e) => {
-					e.stopPropagation();
-				}}>
+			<div className="cardButtons productPageButtons">
 				{quantity > 0 ? (
 					<>
 						<ItemButton
@@ -66,7 +60,7 @@ const ProductDetails = () => {
 
 						<p>{quantity}</p>
 						<ItemButton
-							title="Add one banner"
+							title="Add one product"
 							icon={<AddIcon />}
 							onClick={() =>
 								handleQuantityChange(selectedProduct, 1)
@@ -75,6 +69,7 @@ const ProductDetails = () => {
 					</>
 				) : (
 					<ItemButton
+						className="buyButton"
 						title="Buy"
 						text="Köp"
 						onClick={() => {
@@ -83,6 +78,12 @@ const ProductDetails = () => {
 					/>
 				)}
 			</div>
+			<ItemButton
+				className="returnBtn"
+				title="Go back"
+				icon={<ReturnIcon />}
+				onClick={() => window.history.back()}
+			/>
 		</div>
 	);
 };

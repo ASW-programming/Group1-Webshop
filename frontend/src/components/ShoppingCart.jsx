@@ -17,30 +17,32 @@ function ShoppingCart() {
 		getProductQuantity,
 		clearCart,
 		handleQuantityChange,
+		totalPrice,
 	} = useShop();
 
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const toggleCart = () => setIsCartOpen(!isCartOpen);
 
-	const totalPrice =
-		addedProducts
-			?.map((product) => {
-				const price = product.reducedPrice || product.price;
-				return price * product.quantity;
-			})
-			.reduce((sum, productTotal) => sum + productTotal, 0) || 0;
+	const totalQuantity = addedProducts.reduce((sum, product) => {
+		return sum + product.quantity;
+	}, 0);
 
 	return (
 		<div>
-			<ItemButton
-				title={isCartOpen ? "Close Menu" : "Open Cart"}
-				onClick={toggleCart}
-				className="shoppingcartBtn"
-				icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
-			/>
+			<div className="shoppingCartCombo">
+				{totalQuantity > 0 && (
+					<p className="quantityCounter">{totalQuantity}</p>
+				)}
+				<ItemButton
+					title={isCartOpen ? "Close Menu" : "Open Cart"}
+					onClick={toggleCart}
+					className="shoppingcartBtn"
+					icon={isCartOpen ? <CancelIcon /> : <ShoppingCartIcon />}
+				/>
+			</div>
 			{isCartOpen && (
 				<div className="shoppingList">
-          <h4 className="shoppingListTitle">Valda produkter</h4>
+					<h4 className="shoppingListTitle">Valda produkter</h4>
 					<table className="productTable shoppingListItems">
 						<tbody>
 							{addedProducts?.map((product) => (
@@ -54,16 +56,16 @@ function ShoppingCart() {
 											}}
 										/>
 									</td>
-									<td>{product.name}</td>
-									<td>
-										{product.reducedPrice
-											? product.reducedPrice
-											: product.price}{" "}
-										kr
+									<td className="columnName">
+										{product.name}
+									</td>
+									<td className="columnPrice">
+										{(product.reducedPrice ||
+											product.price) + " kr"}
 									</td>
 									<td className="quantityControls">
 										<ItemButton
-                      className="removeButton"
+											className="removeButton"
 											title="Remove on product"
 											icon={<RemoveIcon />}
 											onClick={() =>
@@ -75,7 +77,7 @@ function ShoppingCart() {
 										/>
 										{getProductQuantity(product.id)}
 										<ItemButton
-                      className="addButton"
+											className="addButton"
 											title="Add one product"
 											icon={<AddIcon />}
 											onClick={() =>
@@ -90,7 +92,10 @@ function ShoppingCart() {
 					<h4>Total: {totalPrice}kr</h4>
 
 					<Link to="/checkout">
-						<ItemButton text="Checkout" />
+						<ItemButton
+							text="Checkout"
+							className="checkoutButton"
+						/>
 					</Link>
 					{addedProducts.length > 0 && (
 						<ItemButton
