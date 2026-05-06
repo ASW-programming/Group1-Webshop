@@ -101,7 +101,7 @@ export function ShopProvider({ children }) {
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const input = searchParams.get("q")?.toLowerCase() ?? "";
-	const filteredProducts = input
+	const searchedProducts = input
 		? products.filter((p) => {
 				const search = input.toLowerCase();
 
@@ -134,7 +134,7 @@ export function ShopProvider({ children }) {
 		activeCategory,
 		selectCategory,
 		totalPrice,
-		filteredProducts,
+		searchedProducts,
 	};
 
 	return (

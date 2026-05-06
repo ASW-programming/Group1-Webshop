@@ -10,7 +10,7 @@ function LandingComponent() {
 		productsLoading,
 		productsError,
 		activeCategory,
-		filteredProducts,
+		searchedProducts,
 	} = useShop();
 	const discountedProducts = products.filter((p) => p.reducedPrice);
 
@@ -30,7 +30,7 @@ function LandingComponent() {
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
 			<ProductCard
-				products={filteredProducts}
+				products={searchedProducts}
 				activeCategory={activeCategory}
 			/>
 

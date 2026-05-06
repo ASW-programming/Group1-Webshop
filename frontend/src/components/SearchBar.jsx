@@ -6,7 +6,7 @@ import { SearchIcon } from "../assets/Icons.jsx";
 import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
-	const { filteredProducts, selectCategory } = useShop();
+	const { selectCategory } = useShop();
 	const [inputValue, setInputValue] = useState("");
 	const navigate = useNavigate();
 
