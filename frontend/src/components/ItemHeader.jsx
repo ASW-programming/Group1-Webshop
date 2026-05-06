@@ -1,12 +1,10 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
-import { useLocation } from "react-router-dom";
 import { SearchIcon } from "../assets/Icons";
-import { Link } from "react-router-dom";
 
 function ItemHeader() {
 	const inputRef = useRef("");
@@ -14,6 +12,15 @@ function ItemHeader() {
 	const location = useLocation();
 
 	const shopName = "GigaMat";
+
+	const handleSearch = () => {
+		const value = inputRef.current.trim();
+		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") handleSearch();
+	};
 
 	if (
 		location.pathname === "/checkout" ||
@@ -28,15 +35,6 @@ function ItemHeader() {
 				</div>
 			</div>
 		);
-
-	const handleSearch = () => {
-		const value = inputRef.current.trim();
-		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key === "Enter") handleSearch();
-	};
 
 	return (
 		<header className="header">

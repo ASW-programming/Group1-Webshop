@@ -44,68 +44,83 @@ function ProductCard({ products, activeCategory }) {
 				<option value="name-desc">Ö → A</option>
 			</select>
 
-			<div className="productList">
-				{sortedProducts.map((u) => {
-					const quantity = getProductQuantity(u.id);
-					return (
-						<li key={u.id} className="productListElement">
-							<Link to={`/product/${u.id}`}>
-								<div className="productInformation">
-									<img
-										className="productImage"
-										src={u.imageUrl}></img>
-									<span className="productName">{u.name}</span>
-									<span className="productCategory">
-										{u.category}
-									</span>
-									<span className="productPrice">
-										{priceInfo(u)}
-									</span>
-									<span className="productDescription">
-										{u.shortDesc || "Ingen Beskrivning"}
-									</span>
-								</div>
-							</Link>
-							<div
-								className="cardButtons"
-								onClick={(e) => {
-									e.stopPropagation();
-								}}>
-								{quantity > 0 ? (
-									<>
-										<ItemButton
-											className="removeButton"
-											title="Remove one product"
-											icon={<RemoveIcon />}
-											onClick={() => {
-												handleQuantityChange(u, -1);
-											}}
-										/>
+			{sortedProducts.length === 0 ? (
+				<p>Inga produkter hittades.</p>
+			) : (
+				<div className="productList">
+					{sortedProducts.map((u) => {
+						const quantity = getProductQuantity(u.id);
+						return (
+							<ul>
+								<li key={u.id} className="productListElement">
+									<Link to={`/product/${u.id}`}>
+										<div className="productInformation">
+											<img
+												className="productImage"
+												src={u.imageUrl}></img>
+											<span className="productName">
+												{u.name}
+											</span>
+											<span className="productCategory">
+												{u.category}
+											</span>
+											<span className="productPrice">
+												{priceInfo(u)}
+											</span>
+											<span className="productDescription">
+												{u.shortDesc ||
+													"Ingen Beskrivning"}
+											</span>
+										</div>
+									</Link>
+									<div
+										className="cardButtons"
+										onClick={(e) => {
+											e.stopPropagation();
+										}}>
+										{quantity > 0 ? (
+											<>
+												<ItemButton
+													className="removeButton"
+													title="Remove one product"
+													icon={<RemoveIcon />}
+													onClick={() => {
+														handleQuantityChange(
+															u,
+															-1,
+														);
+													}}
+												/>
 
-										<p>{quantity}</p>
-										<ItemButton
-											className="addButton"
-											title="Add one product"
-											icon={<AddIcon />}
-											onClick={() =>
-												handleQuantityChange(u, 1)
-											}
-										/>
-									</>
-								) : (
-									<ItemButton
-										className="buyButton"
-										text="Köp"
-										onClick={() => {
-											handleQuantityChange(u, 1);
-										}}
-									/>
-								)}
-							</div>
-						</li>
-					);
-				})}
-			</div>
+												<p>{quantity}</p>
+												<ItemButton
+													className="addButton"
+													title="Add one product"
+													icon={<AddIcon />}
+													onClick={() =>
+														handleQuantityChange(
+															u,
+															1,
+														)
+													}
+												/>
+											</>
+										) : (
+											<ItemButton
+												className="buyButton"
+												text="Köp"
+												onClick={() => {
+													handleQuantityChange(u, 1);
+												}}
+											/>
+										)}
+									</div>
+								</li>
+							</ul>
+						);
+					})}
+				</div>
+			)}
 		</>
 	);
 }

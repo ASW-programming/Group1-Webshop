@@ -54,4 +54,6 @@ export const deleteOrder = async (id) => {
 	});
 
 	if (!response.ok) throw new Error("Could not delete order");
+
+	await response.json();
 };

@@ -27,6 +27,12 @@ button {
 	cursor: pointer;
 }
 
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
 /* Header */
 .header {
 	display: flex;
@@ -773,4 +779,21 @@ button {
 
 .productPageButtons {
 	padding: 10px;
+}
+
+.orderTable th:nth-last-child(2) {
+	border-right: none !important;
+}
+
+.orderTable th.deleteHeader {
+	border-left: none !important;
+}
+
+.checkoutName {
+	display: flex;
+	flex-direction: column;
+}
+
+#lastOrderCustomer {
+	text-transform: capitalize;
 }
