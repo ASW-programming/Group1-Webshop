@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import { postOrders } from "../utils/calls.js";
@@ -38,6 +38,11 @@ function CheckoutComponent() {
 			setCheckout(true);
 		},
 	});
+
+	useEffect(() => {
+		const img = new Image();
+		img.src = "/food.webp";
+	}, []);
 
 	const placeOrders = async (e) => {
 		e.preventDefault();
@@ -106,7 +111,7 @@ function CheckoutComponent() {
 				/>
 				<img
 					className="foodPicture"
-					src="/food.png"
+					src="/food.webp"
 					alt="Food illustration"
 				/>
 			</div>
