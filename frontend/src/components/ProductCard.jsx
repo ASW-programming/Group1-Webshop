@@ -99,6 +99,7 @@ function ProductCard({ products, activeCategory }) {
 										</>
 									) : (
 										<ItemButton
+											title="Buy"
 											className="buyButton"
 											text="Köp"
 											onClick={() => {

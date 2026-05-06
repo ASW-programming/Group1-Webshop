@@ -93,6 +93,7 @@ function ShoppingCart() {
 
 					<Link to="/checkout">
 						<ItemButton
+							title="Checkout"
 							text="Checkout"
 							className="checkoutButton"
 							onClick={() => setIsCartOpen(false)}

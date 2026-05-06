@@ -7,11 +7,13 @@ import {
 	EmptyListIcon,
 	SortIcon,
 } from "../assets/Icons.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function OrderHistory() {
 	const queryClient = useQueryClient();
+
+	const navigate = useNavigate();
 
 	const [deletingId, setDeletingId] = useState(null);
 	const [sortCategory, setSortCategory] = useState("orderID");
@@ -85,7 +87,7 @@ function OrderHistory() {
 				<ItemButton
 					title="Go back"
 					icon={<ReturnIcon />}
-					onClick={() => window.history.back()}
+					onClick={() => navigate(-1)}
 				/>
 			</div>
 

@@ -27,6 +27,20 @@ function ItemHeader() {
 		if (e.key === "Enter") handleSearch();
 	};
 
+	if (
+		location.pathname === "/checkout" ||
+		location.pathname === "/orderHistory"
+	)
+		return (
+			<div className="headerContainer2">
+				<div className="headerTitle">
+					<Link to="/">
+						<h1>{shopName}</h1>
+					</Link>
+				</div>
+			</div>
+		);
+
 	return (
 		<header className="header">
 			<div className="headerContainer">
@@ -49,6 +63,7 @@ function ItemHeader() {
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton
+							title="Search"
 							className="headerSearchButton"
 							type="button"
 							icon={<SearchIcon />}

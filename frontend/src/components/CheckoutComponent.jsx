@@ -102,7 +102,7 @@ function CheckoutComponent() {
 					className="goBackButton"
 					title="Go back"
 					icon={<ReturnIcon />}
-					onClick={() => navigate(-1)}
+					onClick={() => navigate("/")}
 				/>
 				<img
 					className="foodPicture"
@@ -243,7 +243,7 @@ function CheckoutComponent() {
 						className="returnBtn"
 						title="Go back"
 						icon={<ReturnIcon />}
-						onClick={() => navigate(-1)}
+						onClick={() => navigate("/")}
 					/>
 					<Link to="/">
 						<ItemButton
