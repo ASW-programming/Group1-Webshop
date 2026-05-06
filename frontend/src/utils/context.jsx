@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { getProducts } from "./calls.js";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 const ShopContext = createContext();
 
@@ -98,6 +99,22 @@ export function ShopProvider({ children }) {
 		return sum + price * item.quantity;
 	}, 0);
 
+	const [searchParams, setSearchParams] = useSearchParams();
+	const input = searchParams.get("q")?.toLowerCase() ?? "";
+	const searchedProducts = input
+		? products.filter((p) => {
+				const search = input.toLowerCase();
+
+				const tags = Array.isArray(p.tags) ? p.tags : [];
+
+				return (
+					p.name?.toLowerCase().includes(search) ||
+					tags.some((tag) => tag.toLowerCase() === search) ||
+					p.category?.toLowerCase() === search
+				);
+			})
+		: products;
+
 	const value = {
 		// product data
 		products,
@@ -117,6 +134,7 @@ export function ShopProvider({ children }) {
 		activeCategory,
 		selectCategory,
 		totalPrice,
+		searchedProducts,
 	};
 
 	return (

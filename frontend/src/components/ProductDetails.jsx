@@ -38,9 +38,9 @@ const ProductDetails = () => {
 						<p className="productCategory">
 							{selectedProduct.category}
 						</p>
-						<p className="productPrice">
+						<div className="productPrice">
 							{priceInfo(selectedProduct)}
-						</p>
+						</div>
 					</div>
 				</div>
 

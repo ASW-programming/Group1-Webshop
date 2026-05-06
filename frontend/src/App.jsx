@@ -11,8 +11,8 @@ import OrderHistory from "./components/OrderHistory";
 function App() {
 	return (
 		<div>
-			<ShopProvider>
-				<Router>
+			<Router>
+				<ShopProvider>
 					<ItemHeader />
 
 					<Routes>
@@ -30,8 +30,8 @@ function App() {
 							element={<CheckoutComponent />}
 						/>
 					</Routes>
-				</Router>
-			</ShopProvider>
+				</ShopProvider>
+			</Router>
 		</div>
 	);
 }
