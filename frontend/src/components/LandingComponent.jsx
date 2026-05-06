@@ -47,7 +47,7 @@ function LandingComponent() {
 			)}
 			<ProductCard
 				products={filteredProducts}
-				activeCategory={input ? null : activeCategory}
+				activeCategory={activeCategory}
 			/>
 
 			<Link to="/orderHistory" className="orderHistory">
