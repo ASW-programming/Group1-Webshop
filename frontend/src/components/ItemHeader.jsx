@@ -1,5 +1,5 @@
 import { startTransition, useState } from "react";
-import { useSearchParams, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
@@ -9,7 +9,7 @@ import { useShop } from "../utils/context.jsx";
 
 function ItemHeader() {
 	const [inputValue, setInputValue] = useState("");
-	const [searchParams, setSearchParams] = useSearchParams();
+	const navigate = useNavigate();
 	const location = useLocation();
 	const { selectCategory } = useShop();
 
@@ -33,7 +33,7 @@ function ItemHeader() {
 		startTransition(() => {
 			selectCategory(null);
 		});
-		setSearchParams({ q: inputValue.trim() });
+		navigate(`/?q=${inputValue.trim()}`);
 		setInputValue("");
 	};
 
