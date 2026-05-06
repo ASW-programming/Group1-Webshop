@@ -1,15 +1,17 @@
-import { useRef } from "react";
+import { startTransition, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
 import { SearchIcon } from "../assets/Icons";
+import { useShop } from "../utils/context.jsx";
 
 function ItemHeader() {
-	const inputRef = useRef("");
+	const [inputValue, setInputValue] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { selectCategory } = useShop();
 
 	const shopName = "GigaMat";
 
@@ -36,6 +38,18 @@ function ItemHeader() {
 			</div>
 		);
 
+	const handleSearch = () => {
+		startTransition(() => {
+			selectCategory(null);
+		});
+		navigate(`/?q=${inputValue.trim()}`);
+		setInputValue("");
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") handleSearch();
+	};
+
 	return (
 		<header className="header">
 			<div className="headerContainer">
@@ -53,9 +67,8 @@ function ItemHeader() {
 						<ItemInput
 							className="headerSearchInput"
 							placeholder="Sök..."
-							onChange={(e) => {
-								inputRef.current = e.target.value;
-							}}
+							value={inputValue}
+							onChange={(e) => setInputValue(e.target.value)}
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton

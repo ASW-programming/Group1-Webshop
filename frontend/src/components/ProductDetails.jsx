@@ -1,9 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
 import { AddIcon, RemoveIcon, ReturnIcon } from "../assets/Icons.jsx";
-import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
 	const navigate = useNavigate();
@@ -84,7 +83,7 @@ const ProductDetails = () => {
 				className="returnBtn"
 				title="Go back"
 				icon={<ReturnIcon />}
-				onClick={() => navigate(-1)}
+				onClick={() => navigate("/")}
 			/>
 		</div>
 	);

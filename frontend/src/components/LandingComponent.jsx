@@ -7,21 +7,20 @@ import { Link, useSearchParams } from "react-router-dom";
 function LandingComponent() {
 	const { products, productsLoading, productsError, activeCategory } =
 		useShop();
-	const [searchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const input = searchParams.get("q")?.toLowerCase() ?? "";
 	const discountedProducts = products.filter((p) => p.reducedPrice);
 
-	// Filters products based on search
 	const filteredProducts = input
 		? products.filter((p) => {
-				const regex = new RegExp(
-					`(^|[^a-zA-Z0-9åäöÅÄÖ])${input}([^a-zA-Z0-9åäöÅÄÖ]|$)`,
-					"i",
-				);
+				const search = input.toLowerCase();
+
+				const tags = Array.isArray(p.tags) ? p.tags : [];
+
 				return (
-					regex.test(p.tags) ||
-					regex.test(p.name) ||
-					regex.test(p.category)
+					p.name?.toLowerCase().includes(search) ||
+					tags.some((tag) => tag.toLowerCase() === search) ||
+					p.category?.toLowerCase() === search
 				);
 			})
 		: products;
