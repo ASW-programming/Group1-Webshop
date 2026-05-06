@@ -32,7 +32,6 @@ function LandingComponent() {
 		subtitle: u.shortDesc.slice(0, 100),
 		price: u.reducedPrice,
 		originalPrice: u.price,
-		buttonText: "View",
 	}));
 
 	if (productsLoading) return <p>Loading products...</p>;

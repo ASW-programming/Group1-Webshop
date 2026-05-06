@@ -1,9 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { priceInfo } from "../utils/priceSetter.jsx";
 import ItemButton from "./ItemButton.jsx";
 import { useShop } from "../utils/context.jsx";
 import { AddIcon, RemoveIcon, ReturnIcon } from "../assets/Icons.jsx";
-import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
 	const navigate = useNavigate();
@@ -19,7 +18,7 @@ const ProductDetails = () => {
 	const { id } = useParams();
 
 	// Fetch product details by ID
-	const selectedProduct = products.find((p) => p.id === id);
+	const selectedProduct = products.find((p) => String(p.id) === id);
 
 	if (productsLoading) return <p>Loading product...</p>;
 	if (productsError) return <p>Something went wrong!</p>;
@@ -46,7 +45,7 @@ const ProductDetails = () => {
 				</div>
 
 				<p className="productDescription">
-					{selectedProduct.description}
+					{selectedProduct.description || "Beskrivning saknas"}
 				</p>
 			</div>
 			<div className="cardButtons productPageButtons">

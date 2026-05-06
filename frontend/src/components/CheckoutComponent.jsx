@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import { postOrders } from "../utils/calls.js";
@@ -12,7 +12,7 @@ import {
 	HomeIcon,
 	ClearListIcon,
 } from "../assets/Icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CheckoutComponent() {
 	const queryClient = useQueryClient();
@@ -21,11 +21,12 @@ function CheckoutComponent() {
 	const [error, setError] = useState("");
 	const [lastOrder, setLastOrder] = useState(null);
 	const { addProduct, addedProducts = [], clearCart, totalPrice } = useShop();
+	const navigate = useNavigate();
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: postOrders,
 		onError: (err) => {
-			setError("Somewthing went wrong, try again");
+			setError("Something went wrong, try again");
 			console.error("Something went wrong:", err);
 		},
 		onSuccess: (data) => {
@@ -33,9 +34,15 @@ function CheckoutComponent() {
 			setLastOrder(data);
 			clearCart();
 			setCustomer("");
+			setError("");
 			setCheckout(true);
 		},
 	});
+
+	useEffect(() => {
+		const img = new Image();
+		img.src = "/food.webp";
+	}, []);
 
 	const placeOrders = async (e) => {
 		e.preventDefault();
@@ -61,28 +68,34 @@ function CheckoutComponent() {
 					<div className="checkedOutInfo">
 						<h2>
 							Tack för din beställning,{" "}
-							{lastOrder.customer.charAt(0).toUpperCase() +
-								lastOrder.customer.slice(1)}
+							<span id="lastOrderCustomer">
+								{lastOrder.customer}
+							</span>
 							!
 						</h2>
 						<p>Ordernummer {lastOrder.orderID}</p>
 						<h3>Produkter:</h3>
-						{lastOrder.items.map((i) => (
-							<li key={i.id}>
-								<div className="checkoutProductInfo">
-									<img
-										src={i.imageUrl}
-										style={{
-											width: "35px",
-											height: "35px",
-										}}
-									/>
-									<span>{i.name} </span>
-									<span>{i.quantity} st</span>
-									<span>{i.price} kr</span>
-								</div>
-							</li>
-						))}
+						<ul>
+							{lastOrder.items.map((i) => (
+								<li key={i.id}>
+									<div className="checkoutProductInfo">
+										<img
+											src={i.imageUrl}
+											style={{
+												width: "35px",
+												height: "35px",
+											}}
+										/>
+										<span>{i.name} </span>
+										<span>{i.quantity} st</span>
+										<span>
+											{i.reducedPrice || i.price} kr
+										</span>
+									</div>
+								</li>
+							))}
+						</ul>
+						<p>Total kostnad: {lastOrder.totalPrice} kr</p>
 						<p>
 							Vi meddelar dig när din beställning är klar för att
 							hämtas!
@@ -94,11 +107,11 @@ function CheckoutComponent() {
 					className="goBackButton"
 					title="Go back"
 					icon={<ReturnIcon />}
-					onClick={() => window.history.back()}
+					onClick={() => navigate("/")}
 				/>
 				<img
 					className="foodPicture"
-					src="/food.png"
+					src="/food.webp"
 					alt="Food illustration"
 				/>
 			</div>
@@ -139,7 +152,7 @@ function CheckoutComponent() {
 								</td>
 								<td className="cart-item-price">
 									<span className="cart-label-price">
-										{`${product.reducedPrice ? product.reducedPrice : product.price} kr`}
+										{`${product.reducedPrice || product.price} kr`}
 									</span>
 								</td>
 								<td className="cartItemControls">
@@ -202,22 +215,25 @@ function CheckoutComponent() {
 			</div>
 
 			<div className="checkoutInfo">
-				<label htmlFor="cart-name-input" className="cartNameLabel">
-					Ditt namn{" "}
-				</label>
-
 				<form onSubmit={placeOrders}>
 					{error && <p className="error-message">{error}</p>}
-					<ItemInput
-						className="cartNameInput"
-						id="cart-name-input"
-						placeholder="Namn..."
-						onChange={(e) => {
-							setCustomer(e.target.value);
-							setError("");
-						}}
-						value={customer}
-					/>
+					<div className="checkoutName">
+						<label
+							htmlFor="cart-name-input"
+							className="cartNameLabel">
+							Ditt namn{" "}
+						</label>
+						<ItemInput
+							className="cartNameInput"
+							id="cart-name-input"
+							placeholder="Namn..."
+							onChange={(e) => {
+								setCustomer(e.target.value);
+								setError("");
+							}}
+							value={customer}
+						/>
+					</div>
 
 					<ItemButton
 						title="Place order"
@@ -232,7 +248,7 @@ function CheckoutComponent() {
 						className="returnBtn"
 						title="Go back"
 						icon={<ReturnIcon />}
-						onClick={() => window.history.back()}
+						onClick={() => navigate("/")}
 					/>
 					<Link to="/">
 						<ItemButton

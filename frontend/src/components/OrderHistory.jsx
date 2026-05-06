@@ -7,11 +7,13 @@ import {
 	EmptyListIcon,
 	SortIcon,
 } from "../assets/Icons.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function OrderHistory() {
 	const queryClient = useQueryClient();
+
+	const navigate = useNavigate();
 
 	const [deletingId, setDeletingId] = useState(null);
 	const [sortCategory, setSortCategory] = useState("orderID");
@@ -67,6 +69,11 @@ function OrderHistory() {
 		setSortCategory(key);
 	};
 
+	const sortIcons = (category, sortCategory, sortAscending) => ({
+		style: { visibility: sortCategory === category ? "visible" : "hidden" },
+		transform: sortAscending ? "" : "rotate(180, 8.5, 5.5)",
+	});
+
 	if (isLoading) return <p>Loading</p>;
 	if (isError) return <p>Error</p>;
 
@@ -80,7 +87,7 @@ function OrderHistory() {
 				<ItemButton
 					title="Go back"
 					icon={<ReturnIcon />}
-					onClick={() => window.history.back()}
+					onClick={() => navigate(-1)}
 				/>
 			</div>
 
@@ -96,17 +103,11 @@ function OrderHistory() {
 								}
 								onClick={() => handleSort("orderID")}>
 								<SortIcon
-									style={{
-										visibility:
-											sortCategory === "orderID"
-												? "visible"
-												: "hidden",
-									}}
-									transform={
-										sortAscending
-											? ""
-											: "rotate(180, 8.5, 5.5)"
-									}
+									{...sortIcons(
+										"orderID",
+										sortCategory,
+										sortAscending,
+									)}
 								/>{" "}
 								Order #
 							</th>
@@ -118,17 +119,11 @@ function OrderHistory() {
 								}
 								onClick={() => handleSort("createdAt")}>
 								<SortIcon
-									style={{
-										visibility:
-											sortCategory === "createdAt"
-												? "visible"
-												: "hidden",
-									}}
-									transform={
-										sortAscending
-											? "rotate(180, 8.5, 5.5)"
-											: ""
-									}
+									{...sortIcons(
+										"createdAt",
+										sortCategory,
+										!sortAscending,
+									)}
 								/>
 								Datum
 							</th>
@@ -140,17 +135,11 @@ function OrderHistory() {
 								}
 								onClick={() => handleSort("customer")}>
 								<SortIcon
-									style={{
-										visibility:
-											sortCategory === "customer"
-												? "visible"
-												: "hidden",
-									}}
-									transform={
-										sortAscending
-											? "rotate(180, 8.5, 5.5)"
-											: ""
-									}
+									{...sortIcons(
+										"customer",
+										sortCategory,
+										!sortAscending,
+									)}
 								/>
 								Kund
 							</th>
@@ -165,20 +154,20 @@ function OrderHistory() {
 								}
 								onClick={() => handleSort("totalPrice")}>
 								<SortIcon
-									style={{
-										visibility:
-											sortCategory === "totalPrice"
-												? "visible"
-												: "hidden",
-									}}
-									transform={
-										sortAscending
-											? ""
-											: "rotate(180, 8.5, 5.5)"
-									}
+									{...sortIcons(
+										"totalPrice",
+										sortCategory,
+										sortAscending,
+									)}
 								/>
 								Total
 							</th>
+							<th
+								className={`${
+									sortCategory === "totalPrice"
+										? "chosen"
+										: "notChosen"
+								} deleteHeader`}></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -196,7 +185,7 @@ function OrderHistory() {
 									isNaN(Date.parse(choiceA))
 								) {
 									// Checks if A is greater than B with support of Swedish Letters
-									return sortAscending
+									const comparison = sortAscending
 										? choiceA.localeCompare(
 												choiceB,
 												"sv-SE",
@@ -205,6 +194,11 @@ function OrderHistory() {
 												choiceA,
 												"sv-SE",
 											);
+
+									// If word starts with identical letters secondary sort by id.
+									return comparison !== 0
+										? comparison
+										: a.id - b.id;
 								}
 
 								// Checks the date if its newer or older.
@@ -282,6 +276,7 @@ function OrderHistory() {
 															mutate(o.id);
 														}
 													}}
+													disabled={isPending}
 												/>
 											</td>
 										)}

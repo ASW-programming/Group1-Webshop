@@ -15,6 +15,18 @@ function ItemHeader() {
 
 	const shopName = "GigaMat";
 
+	const handleSearch = () => {
+		startTransition(() => {
+			selectCategory(null);
+		});
+		navigate(`/?q=${inputValue.trim()}`);
+		setInputValue("");
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") handleSearch();
+	};
+
 	if (
 		location.pathname === "/checkout" ||
 		location.pathname === "/orderHistory"
@@ -28,18 +40,6 @@ function ItemHeader() {
 				</div>
 			</div>
 		);
-
-	const handleSearch = () => {
-		startTransition(() => {
-			selectCategory(null);
-		});
-		navigate(`/?q=${inputValue.trim()}`);
-		setInputValue("");
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key === "Enter") handleSearch();
-	};
 
 	return (
 		<header className="header">
@@ -63,6 +63,7 @@ function ItemHeader() {
 							onKeyDown={handleKeyDown}
 						/>
 						<ItemButton
+							title="Search"
 							className="headerSearchButton"
 							type="button"
 							icon={<SearchIcon />}

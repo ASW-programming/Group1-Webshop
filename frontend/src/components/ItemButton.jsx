@@ -5,7 +5,8 @@ function ItemButton(props) {
 			className={props.className}
 			id={props.id}
 			type={props.type}
-			onClick={props.onClick}>
+			onClick={props.onClick}
+			disabled={props.disabled}>
 			{props.icon}
 			{props.text}
 		</button>

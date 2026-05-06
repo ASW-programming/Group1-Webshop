@@ -7,7 +7,11 @@ const largeHeight = "32px";
 
 export function SearchIcon() {
 	return (
-		<svg width={smallWidth} height={smallHeight} viewBox="0 0 32 32" version="1.1">
+		<svg
+			width={smallWidth}
+			height={smallHeight}
+			viewBox="0 0 32 32"
+			version="1.1">
 			<g
 				id="Page-1"
 				stroke="none"
@@ -31,7 +35,11 @@ export function SearchIcon() {
 }
 export function HamburgerIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
 			<path
 				d="M4 6H20M4 12H20M4 18H20"
 				stroke="#000000"
@@ -58,7 +66,11 @@ export function CancelIcon() {
 
 export function ShoppingCartIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
 			<g id="Interface / Shopping_Cart_01">
 				<path
 					id="Vector"
@@ -75,8 +87,18 @@ export function ShoppingCartIcon() {
 
 export function AddIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
-			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
+			<circle
+				cx="12"
+				cy="12"
+				r="10"
+				stroke="currentColor"
+				strokeWidth="1.5"
+			/>
 			<path
 				d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
 				stroke="currentColor"
@@ -89,17 +111,35 @@ export function AddIcon() {
 
 export function RemoveIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
-			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
-			<path d="M15 12L9 12"
-				stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
+			<circle
+				cx="12"
+				cy="12"
+				r="10"
+				stroke="currentColor"
+				strokeWidth="1.5"
+			/>
+			<path
+				d="M15 12L9 12"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+			/>
 		</svg>
 	);
 }
 
 export function ReturnIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 48 48" fill="none">
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 48 48"
+			fill="none">
 			<path
 				d="M12.9998 8L6 14L12.9998 21"
 				stroke="#000000"
@@ -120,7 +160,11 @@ export function ReturnIcon() {
 
 export function EmptyListIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
 			<path
 				d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17"
 				stroke="#000000"
@@ -134,7 +178,11 @@ export function EmptyListIcon() {
 
 export function ArrowIcon({ transform }) {
 	return (
-		<svg width={largeWidth} height={largeHeight} viewBox="0 0 32 32" version="1.1">
+		<svg
+			width={largeWidth}
+			height={largeHeight}
+			viewBox="0 0 32 32"
+			version="1.1">
 			<defs></defs>
 			<g
 				transform={transform}
@@ -177,7 +225,11 @@ export function EnterIcon() {
 
 export function HomeIcon() {
 	return (
-		<svg width={mediumWidth} height={mediumHeight} viewBox="0 0 24 24" fill="none">
+		<svg
+			width={mediumWidth}
+			height={mediumHeight}
+			viewBox="0 0 24 24"
+			fill="none">
 			<path
 				d="M22 22L2 22"
 				stroke="#1C274C"
@@ -313,7 +365,7 @@ export function SortIcon({ transform, style }) {
 				<path
 					d="M7.96,2.392 C8.541,1.812 9.482,1.812 10.064,2.392 L16.506,8.836 C17.088,9.417 17.345,10.939 15.506,10.939 L2.518,10.939 C0.616,10.939 0.936,9.418 1.517,8.836 L7.96,2.392 L7.96,2.392 Z"
 					fill="#434343"
-					class="si-glyph-fill"></path>
+					className="si-glyph-fill"></path>
 			</g>
 		</svg>
 	);

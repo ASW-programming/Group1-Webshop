@@ -51,8 +51,8 @@ function ShoppingCart() {
 										<img
 											src={product.imageUrl}
 											style={{
-												width: "15px",
-												height: "15px",
+												width: "30px",
+												height: "30px",
 											}}
 										/>
 									</td>
@@ -66,7 +66,7 @@ function ShoppingCart() {
 									<td className="quantityControls">
 										<ItemButton
 											className="removeButton"
-											title="Remove on product"
+											title="Remove one product"
 											icon={<RemoveIcon />}
 											onClick={() =>
 												handleQuantityChange(
@@ -93,8 +93,10 @@ function ShoppingCart() {
 
 					<Link to="/checkout">
 						<ItemButton
+							title="Checkout"
 							text="Checkout"
 							className="checkoutButton"
+							onClick={() => setIsCartOpen(false)}
 						/>
 					</Link>
 					{addedProducts.length > 0 && (

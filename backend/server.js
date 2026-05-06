@@ -45,8 +45,8 @@ app.get("/api/products", async (req, res) => {
 
 		return res.status(200).json(products);
 	} catch (error) {
-		console.log("Fel vid hämtning av todos");
-		res.status(500).send("något gick fel på servern");
+		console.log("Could not fetch products", error);
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
@@ -58,15 +58,17 @@ app.get("/api/products/:id", async (req, res) => {
 		const productSnapshot = await productDoc.get();
 
 		if (!productSnapshot.exists) {
-			return res.status(404).send("There is no product with this id");
+			return res
+				.status(404)
+				.json({ error: "There is no product with this id" });
 		}
 
 		return res
 			.status(200)
 			.json({ id: productSnapshot.id, ...productSnapshot.data() });
 	} catch (error) {
-		console.log("Fel vid hämtning av produkt data");
-		res.status(500).send("Ett fel inträffade");
+		console.log("Fel vid hämtning av produkt data", error);
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
@@ -102,7 +104,7 @@ app.post("/api/addProduct", async (req, res) => {
 		});
 	} catch (error) {
 		console.error("Fel vid tillägg av produkt:", error);
-		res.status(500).json({ error: "Ett internt serverfel uppstod." });
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
@@ -135,7 +137,7 @@ app.post("/api/products/bulk", async (req, res) => {
 		});
 	} catch (error) {
 		console.error("Fel vid batch-tillägg:", error);
-		res.status(500).json({ error: "Ett internt serverfel uppstod." });
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
@@ -153,21 +155,25 @@ app.route("/api/orders")
 				orders.push({
 					id: order.id,
 					...data,
-					createdAt: data.createdAt
-						? data.createdAt.toDate().toISOString()
-						: null,
+					createdAt: data.createdAt?.toDate?.().toISOString() ?? null,
 				});
 			});
 
 			res.status(200).json(orders);
 		} catch (error) {
 			console.log("Something wrong with get-endpoint.", error.message);
-			res.status(500).send("Something wrong in the server.");
+			res.status(500).json({ error: "Internal server error" });
 		}
 	})
 	.post(async (req, res) => {
 		try {
 			const { customer, items, totalPrice } = req.body;
+
+			if (!customer || !items || !totalPrice) {
+				return res
+					.status(400)
+					.json({ error: "customer, items och totalPrice krävs." });
+			}
 
 			// Get latest orderID from DB.
 			const snapshot = await db
@@ -210,7 +216,7 @@ app.route("/api/orders")
 			});
 		} catch (error) {
 			console.log("Fel:", error.message);
-			res.status(500).send("Something wrong in the server.");
+			res.status(500).json({ error: "Internal server error" });
 		}
 	});
 
@@ -224,7 +230,7 @@ app.delete("/api/deleteOrders/:id", async (req, res) => {
 		await db.collection("orders").doc(orderID).delete();
 		res.status(200).json({ message: "Order deleted successfully" });
 	} catch (error) {
-		res.status(500).json({ error: "Something went wrong" });
+		res.status(500).json({ error: "Internal server error" });
 	}
 });
 
