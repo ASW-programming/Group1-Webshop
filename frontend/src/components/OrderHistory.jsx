@@ -249,9 +249,8 @@ function OrderHistory() {
 											{i.quantity} st
 										</td>
 										<td className="orderPrice">
-											{i.reducedPrice
-												? i.reducedPrice
-												: i.price}{" "}
+											{(i.reducedPrice || i.price) *
+												i.quantity}{" "}
 											kr
 										</td>
 										{index === 0 && (

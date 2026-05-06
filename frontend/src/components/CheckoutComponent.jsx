@@ -89,7 +89,9 @@ function CheckoutComponent() {
 										<span>{i.name} </span>
 										<span>{i.quantity} st</span>
 										<span>
-											{i.reducedPrice || i.price} kr
+											{(i.reducedPrice || i.price) *
+												i.quantity}{" "}
+											kr
 										</span>
 									</div>
 								</li>
