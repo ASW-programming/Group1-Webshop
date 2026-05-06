@@ -1,15 +1,17 @@
-import { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { startTransition, useState } from "react";
+import { useSearchParams, useLocation, Link } from "react-router-dom";
 import ItemButton from "./ItemButton";
 import ItemInput from "./ItemInput";
 import HamburgerMenu from "./HamburgerMenu";
 import ShoppingCart from "./ShoppingCart";
 import { SearchIcon } from "../assets/Icons";
+import { useShop } from "../utils/context.jsx";
 
 function ItemHeader() {
 	const [inputValue, setInputValue] = useState("");
-	const navigate = useNavigate();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const location = useLocation();
+	const { selectCategory } = useShop();
 
 	const shopName = "GigaMat";
 
@@ -26,8 +28,10 @@ function ItemHeader() {
 		);
 
 	const handleSearch = () => {
-		const value = inputValue.trim();
-		navigate(`/?q=${encodeURIComponent(value)}`);
+		startTransition(() => {
+			selectCategory(null);
+		});
+		setSearchParams({ q: inputValue.trim() });
 		setInputValue("");
 	};
 
@@ -40,7 +44,7 @@ function ItemHeader() {
 			<div className="headerContainer">
 				<div className="headerTitle">
 					<Link to="/">
-						<h1>GigaMat</h1>
+						<h1>{shopName}</h1>
 					</Link>
 				</div>
 
