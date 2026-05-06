@@ -45,7 +45,7 @@ function ProductCard({ products, activeCategory }) {
 			</select>
 
 			{sortedProducts.length === 0 ? (
-				<p>Inga produkter hittades.</p>
+				<h3 className="errorMessage">Inga produkter hittades.</h3>
 			) : (
 				<ul className="productList">
 					{sortedProducts.map((u) => {
@@ -66,7 +66,7 @@ function ProductCard({ products, activeCategory }) {
 										<span className="productPrice">
 											{priceInfo(u)}
 										</span>
-										<span className="productDescription">
+										<span className="productShortDescription">
 											{u.shortDesc || "Ingen Beskrivning"}
 										</span>
 									</div>

@@ -40,16 +40,14 @@ function LandingComponent() {
 	return (
 		<div className="content">
 			<ScrollBanner slides={slidesData} />
-			{input && filteredProducts.length === 0 && (
-				<p className="statusText">No products found</p>
-			)}
+			
 			<ProductCard
 				products={filteredProducts}
 				activeCategory={activeCategory}
 			/>
 
-			<Link to="/orderHistory" className="orderHistory">
-				<ItemButton title="Order History" text="Order historik" />
+			<Link to="/orderHistory" >
+				<ItemButton title="Order History" text="Order historik" className="orderHistory"/>
 			</Link>
 		</div>
 	);

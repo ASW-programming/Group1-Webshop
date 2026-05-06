@@ -31,7 +31,7 @@ const ProductDetails = () => {
 			<div className="productInfo">
 				<div className="productNameImg">
 					<img
-						className="productImage"
+						className="productDetailsImage"
 						src={selectedProduct.imageUrl}></img>
 					<div className="productNameCategory">
 						<p className="productName">{selectedProduct.name}</p>
@@ -43,10 +43,11 @@ const ProductDetails = () => {
 						</p>
 					</div>
 				</div>
-
+                <div className="productDescriptionContainer">
 				<p className="productDescription">
 					{selectedProduct.description || "Beskrivning saknas"}
 				</p>
+                </div>
 			</div>
 			<div className="cardButtons productPageButtons">
 				{quantity > 0 ? (
