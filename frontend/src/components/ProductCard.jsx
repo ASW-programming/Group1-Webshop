@@ -62,7 +62,7 @@ function ProductCard({ products, activeCategory }) {
 										{priceInfo(u)}
 									</span>
 									<span className="productDescription">
-										{u.description.slice(0, 30)}
+										{u.shortDesc || "Ingen Beskrivning"}
 									</span>
 								</div>
 							</Link>

@@ -15,16 +15,16 @@ function LandingComponent() {
 	// Filters products based on search
 	const filteredProducts = input
 		? products.filter((p) => {
-				const regex = new RegExp(
-					`(^|[^a-zA-Z0-9åäöÅÄÖ])${input}([^a-zA-Z0-9åäöÅÄÖ]|$)`,
-					"i",
-				);
-				return (
-					regex.test(p.tags) ||
-					regex.test(p.name) ||
-					regex.test(p.category)
-				);
-			})
+			const regex = new RegExp(
+				`(^|[^a-zA-Z0-9åäöÅÄÖ])${input}([^a-zA-Z0-9åäöÅÄÖ]|$)`,
+				"i",
+			);
+			return (
+				regex.test(p.tags) ||
+				regex.test(p.name) ||
+				regex.test(p.category)
+			);
+		})
 		: products;
 
 	// Slides
@@ -32,7 +32,7 @@ function LandingComponent() {
 		id: u.id,
 		image: u.imageUrl,
 		title: u.title,
-		subtitle: u.description.slice(0, 100),
+		subtitle: u.shortDesc.slice(0, 100),
 		price: u.reducedPrice,
 		originalPrice: u.price,
 		buttonText: "View",
