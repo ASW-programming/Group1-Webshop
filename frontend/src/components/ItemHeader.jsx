@@ -16,29 +16,6 @@ function ItemHeader() {
 	const shopName = "GigaMat";
 
 	const handleSearch = () => {
-		const value = inputRef.current.trim();
-		if (value) navigate(`/?q=${encodeURIComponent(value)}`);
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key === "Enter") handleSearch();
-	};
-
-	if (
-		location.pathname === "/checkout" ||
-		location.pathname === "/orderHistory"
-	)
-		return (
-			<div className="headerContainer2">
-				<div className="headerTitle">
-					<Link to="/">
-						<h1>{shopName}</h1>
-					</Link>
-				</div>
-			</div>
-		);
-
-	const handleSearch = () => {
 		startTransition(() => {
 			selectCategory(null);
 		});
