@@ -10,8 +10,6 @@
 	--accent-color: #133020;
 	--button-color-1: #e9fcde;
 	--button-color-1-hover: #ccf8b6;
-
-
 }
 
 /* Mobile first*/
@@ -25,7 +23,9 @@ body {
 	color: var(--text-color);
 }
 
-
+button {
+	cursor: pointer;
+}
 
 /* Header */
 .header {
@@ -33,7 +33,11 @@ body {
 	flex-direction: column;
 	position: sticky;
 	top: 0;
-	background: linear-gradient(160deg, var(--primary-color), var(--secondary-color));
+	background: linear-gradient(
+		160deg,
+		var(--primary-color),
+		var(--secondary-color)
+	);
 }
 
 .headerContainer {
@@ -41,19 +45,20 @@ body {
 	flex-direction: column;
 	align-items: stretch;
 	width: 100%;
-
 }
 
 .headerContainer2 {
 	width: 100%;
-	background: linear-gradient(160deg, var(--primary-color), var(--secondary-color));
+	background: linear-gradient(
+		160deg,
+		var(--primary-color),
+		var(--secondary-color)
+	);
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
 	height: 105px;
 }
-
-
 
 .headerTitle {
 	font-size: 20px;
@@ -67,7 +72,6 @@ body {
 	border-radius: 30px;
 	margin-left: 50px;
 	outline: 3px solid var(--accent-color);
-
 }
 
 .headerTitle a {
@@ -78,7 +82,7 @@ body {
 .headerTitle h1 {
 	margin: 0;
 	padding: 10px;
-	font-family: 'Merriweather', sans-serif;
+	font-family: "Merriweather", sans-serif;
 }
 
 .headerNav {
@@ -87,7 +91,6 @@ body {
 	width: 100%;
 	margin-bottom: 10px;
 }
-
 
 .hamburgerBtn {
 	position: sticky;
@@ -135,17 +138,14 @@ body {
 	width: 300px;
 	margin-right: 10px;
 	background-color: var(--background-color);
-
 }
 
 .headerSearchButton {
 	background-color: var(--button-color-1);
 	border-radius: 10px;
-	cursor: pointer;
 	border: solid 1px black;
 	height: 35px;
 	width: 35px;
-
 }
 
 .shoppingcartBtn {
@@ -203,6 +203,10 @@ body {
 	margin: 10px 0;
 }
 
+.columnPrice {
+	white-space: nowrap;
+}
+
 .productTable {
 	display: flex;
 	flex-direction: column;
@@ -251,8 +255,6 @@ body {
 .arrowButton {
 	background-color: transparent;
 	border: none;
-	cursor: pointer;
-
 }
 
 .bannerContent {
@@ -310,8 +312,6 @@ body {
 	font-size: 14px;
 	width: 200px;
 }
-
-
 
 .productList {
 	display: flex;
@@ -374,7 +374,6 @@ body {
 .productDescription {
 	white-space: pre-line;
 	text-align: center;
-
 }
 
 .priceContainer {
@@ -394,11 +393,6 @@ body {
 	color: var(--accent-color);
 	font-weight: bold;
 	font-size: small;
-}
-
-.productNameCategory {
-	display: flex;
-	flex-direction: column;
 }
 
 .cardButtons {
@@ -425,10 +419,8 @@ body {
 	border: none;
 	padding: 5px 20px;
 	border-radius: 5px;
-	cursor: pointer;
 	border: solid 1px black;
 	height: 30px;
-
 }
 
 .buyButton:hover {
@@ -440,7 +432,6 @@ body {
 	border: none;
 	background-color: transparent;
 	color: var(--button-color-2);
-	cursor: pointer;
 	line-height: 1;
 	transition: all 0.3s ease;
 	stroke: var(--button-color-2);
@@ -456,7 +447,6 @@ body {
 
 .removeButton svg circle {
 	fill: var(--button-color-1);
-
 }
 
 .removeButton:hover svg circle {
@@ -502,7 +492,6 @@ body {
 	text-align: center;
 	vertical-align: middle;
 	padding: 10px 15px;
-
 }
 
 .cartTable td {
@@ -524,7 +513,6 @@ body {
 
 .cartDeleteBtn {
 	margin-left: 20px;
-	cursor: pointer;
 	margin-bottom: 20px;
 	width: 100px;
 	border-radius: 20px;
@@ -541,7 +529,6 @@ body {
 
 .checkoutInfo {
 	padding: 10px 10px;
-
 }
 
 .checkoutInfo .navigationBtns {
@@ -559,14 +546,14 @@ body {
 	border-radius: 5px;
 }
 
-.checkoutInfo .returnBtn,
-.checkoutInfo .homeBtn {
+.returnBtn,
+.homeBtn {
 	width: 100px;
 	border-radius: 20px;
 }
 
-.checkoutInfo .returnBtn:hover,
-.checkoutInfo .homeBtn:hover {
+.returnBtn:hover,
+.homeBtn:hover {
 	background-color: var(--button-color-1-hover);
 }
 
@@ -614,8 +601,6 @@ body {
 	background-color: var(--background-color);
 	border: 1px solid black;
 }
-
-
 
 /* Animating delete */
 @keyframes slideOutLeft {
@@ -709,10 +694,83 @@ body {
 	margin-right: 10px;
 }
 
+.checkedOutInfo {
+	background-color: #ffff;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid black;
+	box-shadow: 5px 5px 15px black;
+}
+
 .foodPicture {
 	width: 470px;
 	height: auto;
 	display: block;
 	margin-bottom: 0;
+}
 
+.cartNameInput {
+	height: 30px;
+	border-radius: 5px;
+	border: 1px solid var(--accent-color);
+	width: 300px;
+	margin-right: 10px;
+	background-color: var(--background-color);
+}
+
+.placeOrderBtn {
+	margin-bottom: 20px;
+	margin-top: 10px;
+	margin-left: 0px;
+	width: 100px;
+	height: 30px;
+	border-radius: 20px;
+}
+
+.productDetails {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 25px;
+}
+
+.productInfo {
+	border: 1px solid black;
+	width: 50%;
+	background-color: #ffff;
+	border-radius: 5px;
+}
+
+.productNameImg {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin: 15px;
+}
+
+.productNameCategory {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	justify-content: center;
+}
+
+.productCategory {
+	margin: 0;
+	padding: 0;
+}
+
+.productName {
+	margin: 0;
+	padding: 0;
+}
+
+.productPageButtons {
+	padding: 10px;
 }
